@@ -116,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 CustomBouton(
                   label: "Sign up", 
                   onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => SelectInterestPage()));
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => SelectCountryPage()));
                   },
                 ),
 

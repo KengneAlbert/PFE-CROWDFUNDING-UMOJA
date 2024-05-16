@@ -11,7 +11,7 @@ class ChatPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.green),
           onPressed: () {
-            
+            Navigator.of(context).pop();
           },
         ),
         title: Text('Kathryn Murphy', style: TextStyle(color: Colors.black)),
@@ -22,6 +22,7 @@ class ChatPage extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder:(context) => BlockUserPopup()));
             },
           ),
+          
           IconButton(
             icon: Icon(Icons.more_vert, color: Colors.black),
             onPressed: () {},

@@ -27,8 +27,7 @@ class _SelectCountryPageState extends State<SelectCountryPage> {
       appBar: AppBar(
         title: Text("Select Your Country"),
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -75,7 +74,6 @@ class _SelectCountryPageState extends State<SelectCountryPage> {
             ),
           ],
         ),
-      ),
     );
   }
 }

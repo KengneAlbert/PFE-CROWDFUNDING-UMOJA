@@ -14,17 +14,19 @@ class My_donation_60 extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MyDonationScreen(),
+      home: MyDonationScreen2(),
     );
   }
 }
 
-class MyDonationScreen extends StatefulWidget {
+class MyDonationScreen2 extends StatefulWidget {
+  const MyDonationScreen2({Key? key}) : super(key: key);
+
   @override
   _MyDonationScreenState createState() => _MyDonationScreenState();
 }
 
-class _MyDonationScreenState extends State<MyDonationScreen> {
+class _MyDonationScreenState extends State<MyDonationScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -227,32 +229,7 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.yellow,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.green
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Calendar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'List',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Message',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-      ),
+
     );
   }
 }
@@ -292,7 +269,7 @@ class DonationCard extends StatelessWidget {
                 Image.asset(imageUrl),
                 Icon(
                   Icons.bookmark,
-                  color: Colors.white,
+                  color: Color(0xFF13B156),
                   size: 32,
                 ),
               ],
