@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
 
 import 'sign_in.dart';
 import 'sign_up.dart';
@@ -57,24 +58,13 @@ class SignMethod extends StatelessWidget {
                 ),
               SizedBox(height: 20),
               // Bouton de connexion avec mot de passe
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF13B156), // Green background
-                            minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 
-                                            MediaQuery.of(context).size.height * 0.06), // 80% width, 6% height
-                          ),
-                child: Text(
-                  'Sign in with password',
-                   style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white, 
-                        ),
+              CustomBouton(
+                    label: "Sign in with password", 
+                    onPressed: () {
+                       Navigator.push(context, MaterialPageRoute(builder:(context) => SignInPage()));
+                    },
                   ),
-          
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder:(context) => SignInPage()));
-                },
-              ),
+
               SizedBox(height: 20),
               // Lien d'inscription
               Row(

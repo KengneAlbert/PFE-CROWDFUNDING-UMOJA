@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
 
+import 'reset_password_successful.dart';
 import 'verification_code.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -88,18 +90,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               const SizedBox(height: 20),
 
               // Bouton "Enregistrer"
-              ElevatedButton(
-                onPressed: () {
-                  
-                  // Vérification de la validité du formulaire et action de sauvegarde
-                  if (_formKey.currentState!.validate()) {
-                    // Enregistrer le nouveau mot de passe
-                    // Navigator.push(context, MaterialPageRoute(builder:(context) => VerificationCodePage()));
-                  }
-                  
+              CustomBouton(
+                label: "Save",
+                onPressed:(){
+                  Navigator.push(context, MaterialPageRoute(builder:(context) => ResetPasswordSuccessful()));
                 },
-                child: const Text('Save'),
-              ),
+              )
             ],
           ),
         ),
