@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
 
 import 'carousel_2.dart';
 
@@ -47,7 +48,6 @@ class _OnboardingPageState extends State<OnboardingPageOne> {
               // Buttons
               const SizedBox(height: 30),
               Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
                     onPressed: () {
@@ -61,24 +61,12 @@ class _OnboardingPageState extends State<OnboardingPageOne> {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF13B156), // Green background
-                          minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 
-                                          MediaQuery.of(context).size.height * 0.06), // 80% width, 15% height
-                        ),
-
+                  CustomBouton(
+                    label: "Next", 
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => OnboardingPageTwo()));
+                       Navigator.push(context, MaterialPageRoute(builder:(context) => OnboardingPageTwo()));
                     },
-                    child: const Text(
-                      "Next",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white, 
-                      ),
-                      ),
-                  ),
+                  )
                 ],
               ),
             ],

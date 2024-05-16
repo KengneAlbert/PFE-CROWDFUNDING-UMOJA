@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
 
+import '../account_setup/select_country_page.dart';
+import '../account_setup/select_interest.dart';
 import 'sign_in.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -110,25 +113,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 const SizedBox(height: 20),
                 // Bouton "Sign up"
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF13B156), // Green background
-                          minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 
-                                          MediaQuery.of(context).size.height * 0.06), // 80% width, 15% height
-                        ),
+                CustomBouton(
+                  label: "Sign up", 
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // TODO: Implémenter la logique d'inscription
-                    }
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => SelectInterestPage()));
                   },
-                  child: const Text(
-                    'Sign up',
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white, 
-                      ),
-                    ),
                 ),
+
                 const SizedBox(height: 20),
                 // Texte "or continue with"
                 const Text('or continue with'),

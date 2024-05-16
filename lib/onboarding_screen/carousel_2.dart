@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
 
 import 'carousel_3.dart';
 
@@ -61,24 +62,12 @@ class _OnboardingPageState extends State<OnboardingPageTwo> {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF13B156), // Green background
-                          minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 
-                                          MediaQuery.of(context).size.height * 0.06), // 80% width, 15% height
-                        ),
-
+                  CustomBouton(
+                    label: "Next", 
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => OnboardingPageThree()));
+                       Navigator.push(context, MaterialPageRoute(builder:(context) => OnboardingPageThree()));
                     },
-                    child: const Text(
-                      "Next",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white, 
-                      ),
-                      ),
-                  ),
+                  )
                 ],
               ),
             ],
