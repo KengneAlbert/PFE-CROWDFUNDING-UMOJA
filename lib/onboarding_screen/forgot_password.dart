@@ -99,7 +99,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             ElevatedButton(
               onPressed: () {
                 // Implémenter la logique pour envoyer le code de réinitialisation
-                Navigator.push(context, MaterialPageRoute(builder:(context) => VerificationCodePage('659070872')));
+                Navigator.push(context, MaterialPageRoute(builder:(context) => VerificationCodePage(phoneNumber: '659070872')));
               },
               child: const Text('Continue'),
             ),
