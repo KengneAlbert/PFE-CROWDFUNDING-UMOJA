@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:umoja/inbox/inbox_page.dart';
+import 'package:umoja/my_donation/59_Light_my_donation_empty.dart';
+import 'package:umoja/my_donation/60_Light_my_donation_ist.dart';
 
 // Widgets personnalisés
 
@@ -585,7 +587,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     ),
-    const Center(child: Text('Search Page')),
+    MyDonationScreen2(),
     const Center(child: Text('Calendar Page')),
     const InboxPage(),
     const Center(child: Text('Profile Page')),
@@ -597,7 +599,7 @@ class _HomePageState extends State<HomePage> {
       
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(0.0),
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
           onTap: (index) {
