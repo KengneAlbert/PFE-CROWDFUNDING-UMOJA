@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:umoja/inbox/inbox_page.dart';
 import 'package:umoja/my_donation/59_Light_my_donation_empty.dart';
 import 'package:umoja/my_donation/60_Light_my_donation_ist.dart';
+import 'package:umoja/profile/profile_page.dart';
 
 // Widgets personnalisés
 
@@ -590,7 +591,7 @@ class _HomePageState extends State<HomePage> {
     MyDonationScreen2(),
     const Center(child: Text('Calendar Page')),
     const InboxPage(),
-    const Center(child: Text('Profile Page')),
+    ProfilePage(),
   ];
 
   @override
@@ -608,36 +609,36 @@ class _HomePageState extends State<HomePage> {
             });
           },
           type: BottomNavigationBarType.fixed, // Important for fixed-size items
-          backgroundColor: Colors.white, // Background color of the bar
+          backgroundColor: Color(0xFF13B156), // Background color of the bar
           selectedItemColor: Colors.white, // Selected item text color
           unselectedItemColor: Colors.black, 
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Color(0xFF13B156),),
+              icon: Icon(Icons.home,),
               label: 'Home',
               // Background color for selected item
               backgroundColor: const Color(0xFF13B156), 
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search, color: Color(0xFF13B156),),
+              icon: Icon(Icons.search,),
               label: 'Search',
               // Background color for selected item
               backgroundColor: const Color(0xFF13B156), 
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today, color: Color(0xFF13B156),),
+              icon: Icon(Icons.calendar_today,),
               label: 'Calendar',
               // Background color for selected item
               backgroundColor: const Color(0xFF13B156), 
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.chat, color: Color(0xFF13B156),),
+              icon: Icon(Icons.chat,),
               label: 'Chat',
               // Background color for selected item
               backgroundColor: const Color(0xFF13B156), 
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person, color: Color(0xFF13B156),),
+              icon: Icon(Icons.person,),
               label: 'Profile',
               // Background color for selected item
               backgroundColor: const Color(0xFF13B156), 
@@ -648,22 +649,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Umoja',
-//       theme: ThemeData(
-//         primarySwatch: Colors.green,
-//       ),
-//       home: const HomePage(),
-//     );
-//   }
-// }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/account_setup/select_interest_succes.dart';
-import 'package:umoja/account_setup/select_interest_succes.dart';
-import 'package:umoja/account_setup/select_interest_success.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 
 class CreatePinPage extends StatefulWidget {

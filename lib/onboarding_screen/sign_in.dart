@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/home/home_page.dart';
 
 import 'forgot_password.dart';
 import 'sign_up.dart';
@@ -119,7 +120,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // TODO: Implémenter la logique d'inscription
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => HomePage()));
                     }
                   },
                   child: const Text(
