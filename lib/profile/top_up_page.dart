@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/profile/top_up_method_page.dart';
 
 class TopUpPage extends StatefulWidget {
@@ -70,21 +71,10 @@ class _TopUpPageState extends State<TopUpPage> {
               ],
             ),
             Spacer(),
-            ElevatedButton(
-              onPressed: () {
-               Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage()));
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-                textStyle: TextStyle(fontSize: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32),
-                ),
-              ),
-              child: Text("Continue"),
-            ),
+            CustomBouton(label: "Continue" , onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage()));
+            },),
+           
             SizedBox(height: 16),
           ],
         ),

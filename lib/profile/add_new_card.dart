@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:umoja/account_setup/profile_page.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
+import 'package:umoja/custom_widgets/custom_input.dart';
 
 class AddNewCardPage extends StatefulWidget {
   @override
@@ -25,12 +29,12 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
+        leading: Icon(Icons.arrow_back, color: Colors.green),
         title: Text("Add New Card"),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.qr_code_scanner),
+            icon: Icon(Icons.qr_code_scanner, color: Colors.green),
           ),
         ],
       ),
@@ -42,97 +46,13 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: Colors.green,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Mocard",
-                            style: TextStyle(
-                              color: Colors.yellow,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              for (int i = 0; i < 16; i++)
-                                Text(
-                                  "●",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                            ],
-                          ),
-                          SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                "Card Holder name",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                              Text(
-                                "Expiry date",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 40,
-                                child: Switch(
-                                  value: false,
-                                  onChanged: (value) {},
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Image.asset("assets/amazon.png"),
-                    ),
-                  ],
-                ),
+                Center(child: SvgPicture.asset("assets/images/Card.svg")),
                 SizedBox(height: 24),
-                Text(
-                  "Full Name*",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
-                TextFormField(
+                CustomInput(
+                  label: "Full Name*", 
+                  hintText: "Albert Kengne",
                   controller: _cardHolderNameController,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    hintText: "Adam Smith",
-                  ),
-                  validator: (value) {
+                  validator:(value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter your full name";
                     }
@@ -140,26 +60,11 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                   },
                 ),
                 SizedBox(height: 24),
-                Text(
-                  "Card Number*",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
-                TextFormField(
+                CustomInput(
+                  label: "Card Number*", 
+                  hintText: "4637 2639 4738 4679",
                   controller: _cardNumberController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    hintText: "4637 2639 4738 4679",
-                  ),
+                  icon: Icons.credit_card,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter your card number";
@@ -168,100 +73,50 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                   },
                 ),
                 SizedBox(height: 24),
-                Text(
-                  "Expiry Date*",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _expiryDateController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green, width: 2),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          hintText: "02/30",
+                
+                        CustomInput(
+                          label: "Expiry Date*", 
+                          hintText: "02/30", 
+                          controller: _expiryDateController,
+                          validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter the expiry date";
+                                }
+                                return null;
+                              },
+                          icon: IconButton(
+                              onPressed: () {
+                                // Show a date picker
+                                // ...
+                              },
+                              icon: Icon(Icons.calendar_today),
+                            ),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter the expiry date";
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    SizedBox(width: 16),
-                    IconButton(
-                      onPressed: () {
-                        // Show a date picker
-                        // ...
-                      },
-                      icon: Icon(Icons.calendar_today),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 24),
-                Text(
-                  "CVV*",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _cvvController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.green, width: 2),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                        SizedBox(width: 24),
+                        CustomInput(
+                          label: "CVV*", 
                           hintText: "180",
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Please enter the CVV";
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                          controller: _cvvController,
+                          validator: (value) {
+                            if(value == null || value.isEmpty){
+                              return "Please enter the CVV";
+                            }
+                            return null;
+                          },
+                        ),  
+                
                 SizedBox(height: 32),
-                ElevatedButton(
+                
+                CustomBouton(
+                  label: "Add New Card", 
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // Process the form data and add the new card
                       // ...
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-                    textStyle: TextStyle(fontSize: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                  ),
-                  child: Text("Add New Card"),
+                    };
+                  }
                 ),
+
                 SizedBox(height: 16),
               ],
             ),

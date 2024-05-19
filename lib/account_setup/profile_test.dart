@@ -67,7 +67,7 @@ class _FillProfilePageState extends State<FillProfilePage> {
                 SizedBox(height: 32),
         
                 // Champ Nom Complet
-                InputWidget(
+                CustomInput(
                   label: 'Full Name',
                   controller: _fullNameController,
                   validator: (value) {
@@ -79,7 +79,7 @@ class _FillProfilePageState extends State<FillProfilePage> {
                 ),
         
                 // Champ Email
-                InputWidget(
+                CustomInput(
                   label: 'Email',
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -95,7 +95,7 @@ class _FillProfilePageState extends State<FillProfilePage> {
                 ),
         
                 // Champ Numéro de Téléphone
-                InputWidget(
+                CustomInput(
                   label: 'Phone Number',
                   controller: _phoneNumberController,
                   keyboardType: TextInputType.phone,
@@ -137,7 +137,7 @@ class _FillProfilePageState extends State<FillProfilePage> {
                 ),
         
                 // Champ Ville
-                InputWidget(
+                CustomInput(
                   label: 'City',
                   controller: _cityController,
                   icon: Icons.location_on,

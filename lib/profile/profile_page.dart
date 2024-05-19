@@ -177,7 +177,8 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 8),
-              Expanded(
+              SizedBox(
+                height: 150,
                 child: Wrap(
                   spacing: 8,
                   runSpacing: 8,
