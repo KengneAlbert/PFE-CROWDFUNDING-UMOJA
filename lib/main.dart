@@ -8,6 +8,8 @@ import 'onboarding_screen/carousel_1.dart';
 import 'onboarding_screen/carousel_2.dart';
 import 'onboarding_screen/carousel_3.dart';
 
+import 'homepage/HomePage.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -20,7 +22,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: HomePage(),
+      //SplashScreen()
     );
   }
 }
