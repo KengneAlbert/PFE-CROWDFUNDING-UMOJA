@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
 
 import 'reset_password.dart';
 import 'verification_code.dart';
@@ -96,13 +97,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
             const SizedBox(height: 30),
 
-            ElevatedButton(
+            CustomBouton(
+              label: "Continue",
               onPressed: () {
-                // Implémenter la logique pour envoyer le code de réinitialisation
                 Navigator.push(context, MaterialPageRoute(builder:(context) => VerificationCodePage(phoneNumber:'659070872')));
               },
-              child: const Text('Continue'),
-            ),
+            )
           ],
         ),
       ),

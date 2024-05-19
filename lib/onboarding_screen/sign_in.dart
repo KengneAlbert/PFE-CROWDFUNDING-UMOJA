@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/account_setup/select_country_page.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
+import 'package:umoja/home/home_page.dart';
 
-import 'forgot_password.dart';
+import '../forgot_reset_password/forgot_password.dart';
 import 'sign_up.dart';
 
 class SignInPage extends StatefulWidget {
@@ -111,25 +114,17 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const SizedBox(height: 20),
                 // Bouton "Sign up"
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF13B156), // Green background
-                          minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 
-                                          MediaQuery.of(context).size.height * 0.06), // 80% width, 15% height
-                        ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                CustomBouton(
+                    label: "Sign In", 
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
                       // TODO: Implémenter la logique d'inscription
-                    }
-                  },
-                  child: const Text(
-                    'Sign In',
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white, 
-                      ),
-                    ),
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => HomePage()));
+                      }
+                       
+                    },
                 ),
+
                 const SizedBox(height: 20),
                  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
