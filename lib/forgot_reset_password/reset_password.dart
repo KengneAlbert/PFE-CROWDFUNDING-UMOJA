@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 
 import 'reset_password_successful.dart';
-import 'verification_code.dart';
+//import 'verification_code.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);

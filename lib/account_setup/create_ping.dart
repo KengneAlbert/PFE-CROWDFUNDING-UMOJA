@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/account_setup/select_interest_success.dart';
+//import 'package:umoja/account_setup/select_interest_success.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 
 class CreatePinPage extends StatefulWidget {
@@ -32,7 +32,7 @@ class _CreatePinPageState extends State<CreatePinPage> {
   void _createPin() {
     if (_formKey.currentState!.validate()) {
       // TODO: Submit the PIN to your backend
-      Navigator.push(context, MaterialPageRoute(builder: (context) => SelectInterestPage()));
+      //Navigator.push(context, MaterialPageRoute(builder: (context) => SelectInterestPage()));
     }
   }
 
