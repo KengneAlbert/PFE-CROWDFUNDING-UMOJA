@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/search/SearchPageContaint.dart';
 import '../generalLayouts/ContainerBottom.dart';
-import 'NotifcationPageNotFound.dart';
-import 'NotificationPageContaint.dart';
 
-class NotificationPage extends StatelessWidget{
-  const NotificationPage({Key? key}) : super(key: key);
+
+
+class SearchPage extends StatelessWidget{
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class NotificationPage extends StatelessWidget{
           size: 24,
         ),
         title: Text(
-          'Notification',
+          'Search',
           style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.w600
@@ -33,8 +34,8 @@ class NotificationPage extends StatelessWidget{
         ],
       ),
       
-      body:NotificationPageContaint() ,
-      //NotifcationPageNotFound(),
+      body: SearchPageContaint(),
+      //SearchPageNotFound() ,
 
       bottomNavigationBar: ContainerBottom(),
       

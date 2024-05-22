@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TopUpSuccess extends StatelessWidget {
+class DonationCanceled extends StatelessWidget {
   final String title;
   final String containt;
 
 
-  const TopUpSuccess({
+  const DonationCanceled({
       required this.title,
       required this.containt,
   });
@@ -26,7 +26,7 @@ class TopUpSuccess extends StatelessWidget {
             Container(
               width: 80,
               height: 80,
-              child: Image.asset("assets/images/SuccessNot.png"),
+              child: Image.asset("assets/images/CancelNot.png"),
             ),
             SizedBox(width: 16),
             Expanded(

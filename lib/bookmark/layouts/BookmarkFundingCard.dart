@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-class FundingCard extends StatelessWidget {
+class BookmarkFundingCard extends StatelessWidget {
   final String ImagePath;
   final String Title;
   final String TitleFunding;
@@ -10,7 +10,7 @@ class FundingCard extends StatelessWidget {
   final String NumberDonation;
   final String Day;
 
-     const FundingCard(
+     const BookmarkFundingCard(
       {
          required this.ImagePath,
          required this.Title, 
@@ -25,7 +25,7 @@ class FundingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
                             child: Container(
-                                width: 290,
+                                width: 370,
                                 height: 300,
                                 child:Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +42,7 @@ class FundingCard extends StatelessWidget {
                                         child:Image.asset(
                                           ImagePath,
                                           height: 160,
-                                          width: 290,
+                                          width: 370,
                                           fit: BoxFit.cover,
                                         ),
                                       ),

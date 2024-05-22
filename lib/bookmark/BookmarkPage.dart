@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../generalLayouts/ContainerBottom.dart';
-import 'NotifcationPageNotFound.dart';
-import 'NotificationPageContaint.dart';
+import 'BookmarkPageNotFound.dart';
+import 'BookmarkPageContaint.dart';
 
-class NotificationPage extends StatelessWidget{
-  const NotificationPage({Key? key}) : super(key: key);
+
+class BookmarkPage extends StatelessWidget{
+  const BookmarkPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class NotificationPage extends StatelessWidget{
           size: 24,
         ),
         title: Text(
-          'Notification',
+          'Bookmark',
           style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.w600
@@ -33,7 +34,7 @@ class NotificationPage extends StatelessWidget{
         ],
       ),
       
-      body:NotificationPageContaint() ,
+      body:BookmarkPageContaint() ,
       //NotifcationPageNotFound(),
 
       bottomNavigationBar: ContainerBottom(),

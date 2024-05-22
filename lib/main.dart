@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 
 import 'homepage/HomePage.dart';
 import 'notification/NotificationPage.dart';
+import 'bookmark/BookmarkPage.dart';
+import 'search/SearchPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +26,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) { 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: NotificationPage(),
+      home: SearchPage(),
+      //BookmarkPage(),
+      //HomePage(),
+      //NotificationPage(),
       //SplashScreen()
     );
   }
