@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
-import 'package:umoja/home/home_page.dart';
+import 'package:umoja/home/page.dart';
 
 class SelectInterestPage extends StatefulWidget {
   const SelectInterestPage({Key? key}) : super(key: key);

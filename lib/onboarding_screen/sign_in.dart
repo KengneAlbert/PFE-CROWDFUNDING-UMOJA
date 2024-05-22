@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/home/home_page.dart';
+import 'package:umoja/home/page.dart';
 
 import 'forgot_password.dart';
 import 'sign_up.dart';

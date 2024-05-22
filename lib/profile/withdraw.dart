@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/profile/top_up_method_page.dart';
+import 'package:umoja/profile/withdraw_method_page.dart';
 
-class TopUpPage extends StatefulWidget {
+class WithdrawPage extends StatefulWidget {
   @override
-  _TopUpPageState createState() => _TopUpPageState();
+  _WithdrawPageState createState() => _WithdrawPageState();
 }
 
-class _TopUpPageState extends State<TopUpPage> {
-  int _selectedAmount = 100; // Default amount
+class _WithdrawPageState extends State<WithdrawPage> {
+  int _selectedAmount = 300; // Default amount
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class _TopUpPageState extends State<TopUpPage> {
           Navigator.pop(context);
         },
         ),
-        title: Text("Top up"),
+        title: Text("Withdraw"),
         actions: [
           Icon(Icons.more_vert, color: Color(0xFF13B156)),
         ],
@@ -68,11 +69,12 @@ class _TopUpPageState extends State<TopUpPage> {
                 buildAmountButton(50),
                 buildAmountButton(100),
                 buildAmountButton(200),
+                buildAmountButton(300),
               ],
             ),
             Spacer(),
             CustomBouton(label: "Continue" , onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => WithdrawMethodPage()));
             },),
            
             SizedBox(height: 16),

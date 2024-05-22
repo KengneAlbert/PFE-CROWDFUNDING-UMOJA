@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/custom_widgets/custom_select_items.dart';
+import 'package:umoja/profile/enter_ping_code.dart';
 
 class TopUpMethodPage extends StatefulWidget {
   const TopUpMethodPage({Key? key}) : super(key: key);
@@ -19,13 +21,13 @@ class _TopUpMethodPageState extends State<TopUpMethodPage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156),),
         ),
-        title: const Text('Top up'),
+        title: const Text('Top up', style: TextStyle(color: Color(0xFF13B156)),),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.qr_code_scanner),
+            icon: const Icon(Icons.qr_code_scanner, color: Color(0xFF13B156)),
           ),
         ],
       ),
@@ -98,10 +100,12 @@ class _TopUpMethodPageState extends State<TopUpMethodPage> {
               },
             ),
             const Spacer(),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Continue'),
-            ),
+            CustomBouton(
+              label: "Continu",
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => EnterPinPage()));
+              },
+              ),
           ],
         ),
       ),

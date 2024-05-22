@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
+import 'package:umoja/custom_widgets/custom_input.dart';
+import 'package:umoja/profile/enter_ping_code.dart';
 
 class WithdrawConfirmPage extends StatefulWidget {
   @override
@@ -19,8 +22,13 @@ class _WithdrawConfirmPageState extends State<WithdrawConfirmPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
-        title: Text("Withdraw"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156),),
+        ),
+        title: Text("Withdraw", style: TextStyle(color: Color(0xFF13B156),),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -32,30 +40,14 @@ class _WithdrawConfirmPageState extends State<WithdrawConfirmPage> {
               children: [
                 SizedBox(height: 40),
                 Center(
-                  child: Image.asset("assets/email_icon.png"),
+                  child: Image.asset("assets/images/Check_mail.png"),
                 ),
                 SizedBox(height: 32),
-                Text(
-                  "PayPal Email*",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
-                TextFormField(
+                CustomInput(
+                  label: "PayPal Email", 
                   controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 2),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    hintText: "adam.smith@yourdomain.com",
-                    suffixIcon: Icon(Icons.email),
-                  ),
+                  hintText: "adam.smith@yourdomain.com",
+                  icon: Icon(Icons.email),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter your email";
@@ -67,23 +59,13 @@ class _WithdrawConfirmPageState extends State<WithdrawConfirmPage> {
                   },
                 ),
                 SizedBox(height: 40),
-                ElevatedButton(
+                CustomBouton(
+                  label: "Continue",
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Process the form data and confirm the withdrawal
-                      // ...
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => EnterPinPage()));
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-                    textStyle: TextStyle(fontSize: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                  ),
-                  child: Text("Continue"),
                 ),
                 SizedBox(height: 16),
               ],

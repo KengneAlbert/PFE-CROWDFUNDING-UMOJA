@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:umoja/homepage/HomePage.dart';
 import 'package:umoja/inbox/inbox_page.dart';
 import 'package:umoja/my_donation/59_Light_my_donation_empty.dart';
 import 'package:umoja/my_donation/60_Light_my_donation_ist.dart';
@@ -572,22 +573,23 @@ class _HomePageState extends State<HomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     // Utilisez les widgets personnalisés pour chaque section
-    Scaffold(
-      appBar: const UmojaAppBar(), 
-      body:  SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
-              UrgentFundraisingSection(),
-              ComingToEndSection(),
-              WatchImpactSection(),
-              PrayersFromGoodPeopleSection(),
-            ],
-          ),
-        ),
-      ),
-    ),
+    // Scaffold(
+    //   appBar: const UmojaAppBar(), 
+    //   body:  SingleChildScrollView(
+    //     child: Center(
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.start,
+    //         children: const [
+    //           UrgentFundraisingSection(),
+    //           ComingToEndSection(),
+    //           WatchImpactSection(),
+    //           PrayersFromGoodPeopleSection(),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // ),
+    Home(),
     MyDonationScreen2(),
     const Center(child: Text('Calendar Page')),
     const InboxPage(),

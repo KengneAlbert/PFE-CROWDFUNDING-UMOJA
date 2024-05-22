@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:umoja/profile/settings_page.dart';
 import 'package:umoja/profile/wallet_center_page.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -17,9 +18,12 @@ class ProfilePage extends StatelessWidget {
                   ),
         title: Text("Profile"),
         actions: [
-          Icon(Icons.settings, color: Colors.green),
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()));
+          }, icon: Icon(Icons.settings, color: Color(0xFF13B156))),
           SizedBox(width: 16),
-          Icon(Icons.more_vert,  color: Colors.green),
+          Icon(Icons.more_vert,  color: Color(0xFF13B156)),
         ],
       ),
       body: SingleChildScrollView(
@@ -104,7 +108,7 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.account_balance_wallet, color: Colors.green),
+                        Icon(Icons.account_balance_wallet, color: Color(0xFF13B156)),
                         SizedBox(width: 8),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -132,11 +136,11 @@ class ProfilePage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        foregroundColor: Colors.green,
+                        foregroundColor: Color(0xFF13B156),
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         textStyle: TextStyle(fontSize: 16),
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.green, width: 2),
+                          side: BorderSide(color: Color(0xFF13B156), width: 2),
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
@@ -169,7 +173,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                  SizedBox(width: 8,),
                  IconButton(
-                  icon: Icon(Icons.edit, color: Colors.green),
+                  icon: Icon(Icons.edit, color: Color(0xFF13B156)),
                   onPressed: () {
         
                   },
@@ -186,7 +190,7 @@ class ProfilePage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Color(0xFF13B156),
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         textStyle: TextStyle(fontSize: 16),
@@ -199,7 +203,7 @@ class ProfilePage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Color(0xFF13B156),
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         textStyle: TextStyle(fontSize: 16),
@@ -212,7 +216,7 @@ class ProfilePage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Color(0xFF13B156),
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         textStyle: TextStyle(fontSize: 16),
@@ -225,7 +229,7 @@ class ProfilePage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Color(0xFF13B156),
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         textStyle: TextStyle(fontSize: 16),
@@ -238,7 +242,7 @@ class ProfilePage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Color(0xFF13B156),
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         textStyle: TextStyle(fontSize: 16),
@@ -251,7 +255,7 @@ class ProfilePage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Color(0xFF13B156),
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         textStyle: TextStyle(fontSize: 16),
@@ -264,7 +268,7 @@ class ProfilePage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Color(0xFF13B156),
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         textStyle: TextStyle(fontSize: 16),
@@ -307,7 +311,7 @@ class WithdrawSuccessPopup extends StatelessWidget {
                 height: 100,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.green[400],
+                  color: Color(0xFF13B156).withOpacity(0.4),
                 ),
               ),
               Icon(
@@ -323,7 +327,7 @@ class WithdrawSuccessPopup extends StatelessWidget {
                   height: 10,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.green[300],
+                    color: Color(0xFF13B156).withOpacity(0.3),
                   ),
                 ),
               ),
@@ -335,7 +339,7 @@ class WithdrawSuccessPopup extends StatelessWidget {
                   height: 15,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.green[300],
+                    color: Color(0xFF13B156).withOpacity(0.3),
                   ),
                 ),
               ),
@@ -347,7 +351,7 @@ class WithdrawSuccessPopup extends StatelessWidget {
                   height: 10,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.green[300],
+                    color: Color(0xFF13B156).withOpacity(0.3),
                   ),
                 ),
               ),
@@ -359,7 +363,7 @@ class WithdrawSuccessPopup extends StatelessWidget {
                   height: 20,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.green[300],
+                    color: Color(0xFF13B156).withOpacity(0.3),
                   ),
                 ),
               ),
@@ -384,7 +388,7 @@ class WithdrawSuccessPopup extends StatelessWidget {
               Navigator.of(context).pop();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green[400],
+              backgroundColor: Color(0xFF13B156).withOpacity(0.4),
               padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
               textStyle: TextStyle(fontSize: 16, color: Colors.white),
               shape: RoundedRectangleBorder(

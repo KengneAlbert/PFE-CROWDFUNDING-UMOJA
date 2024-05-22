@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
+import 'package:umoja/custom_widgets/custom_select_items.dart';
+import 'package:umoja/profile/enter_ping_code.dart';
+import 'package:umoja/profile/withdraw_confirm_page.dart';
 
 class WithdrawMethodPage extends StatefulWidget {
+  const WithdrawMethodPage({Key? key}) : super(key: key);
+
   @override
-  _WithdrawMethodPageState createState() => _WithdrawMethodPageState();
+  State<WithdrawMethodPage> createState() => _WithdrawMethodPageState();
 }
 
 class _WithdrawMethodPageState extends State<WithdrawMethodPage> {
-  int _selectedMethod = -1; // No method selected initially
+  int? _selectedPaymentMethod;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
-        title: Text("Withdraw"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156),),
+        ),
+        title: const Text('Withdraw', style: TextStyle(color: Color(0xFF13B156)),),
         actions: [
-          TextButton(
+          IconButton(
             onPressed: () {},
-            child: Text(
-              "Add New Card",
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            icon: const Icon(Icons.qr_code_scanner, color: Color(0xFF13B156)),
           ),
         ],
       ),
@@ -32,84 +37,77 @@ class _WithdrawMethodPageState extends State<WithdrawMethodPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Select Withdraw Method",
+            const Text(
+              'Select Withdraw Method',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
-            buildPaymentMethodCard(
-              icon: Image.asset("assets/paypal.png"),
-              title: "PayPal",
+            const SizedBox(height: 16),
+            SelectItems(
+              icon: const Icon(Icons.payment),
+              title: 'PayPal',
               value: 0,
+              isSelected: _selectedPaymentMethod == 0,
+              onChanged: (value) {
+                setState(() {
+                  _selectedPaymentMethod = value;
+                });
+              },
             ),
-            buildPaymentMethodCard(
-              icon: Image.asset("assets/google_pay.png"),
-              title: "Google Pay",
+            const SizedBox(height: 16),
+            SelectItems(
+              icon: const Icon(Icons.account_balance_wallet),
+              title: 'Google Pay',
               value: 1,
+              isSelected: _selectedPaymentMethod == 1,
+              onChanged: (value) {
+                setState(() {
+                  _selectedPaymentMethod = value;
+                });
+              },
             ),
-            buildPaymentMethodCard(
-              icon: Image.asset("assets/apple_pay.png"),
-              title: "Apple Pay",
+            const SizedBox(height: 16),
+            SelectItems(
+              icon: const Icon(Icons.apple),
+              title: 'Apple Pay',
               value: 2,
+              isSelected: _selectedPaymentMethod == 2,
+              onChanged: (value) {
+                setState(() {
+                  _selectedPaymentMethod = value;
+                });
+              },
             ),
-            SizedBox(height: 16),
-            Text(
-              "Pay with Debit/Credit Card",
+            const SizedBox(height: 16),
+            const Text(
+              'Pay with Debit/Credit Card',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
-            buildPaymentMethodCard(
-              icon: Image.asset("assets/visa.png"),
-              title: "•••• •••• •••• 4679",
+            const SizedBox(height: 16),
+            SelectItems(
+              icon: const Icon(Icons.credit_card),
+              title: '•••• •••• •••• 4679',
               value: 3,
-            ),
-            Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                // Handle continue button press
-                // ...
+              isSelected: _selectedPaymentMethod == 3,
+              onChanged: (value) {
+                setState(() {
+                  _selectedPaymentMethod = value;
+                });
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-                textStyle: TextStyle(fontSize: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32),
-                ),
-              ),
-              child: Text("Continue"),
             ),
-            SizedBox(height: 16),
+            const Spacer(),
+            CustomBouton(
+              label: "Continue",
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => WithdrawConfirmPage()));
+              },
+              ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildPaymentMethodCard({
-    required Widget icon,
-    required String title,
-    required int value,
-  }) {
-    return Card(
-      child: ListTile(
-        leading: icon,
-        title: Text(title),
-        trailing: Radio<int>(
-          value: value,
-          groupValue: _selectedMethod,
-          onChanged: (int? newValue) {
-            setState(() {
-              _selectedMethod = newValue!;
-            });
-          },
         ),
       ),
     );

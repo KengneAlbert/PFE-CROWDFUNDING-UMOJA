@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:umoja/home/page.dart';
 import 'onboarding_screen/sign_method.dart';
 import 'onboarding_screen/sign_up.dart';
 import 'onboarding_screen/splash_screen.dart';

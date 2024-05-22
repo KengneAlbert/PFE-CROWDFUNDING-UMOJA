@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:umoja/profile/top_up_page.dart';
+import 'package:umoja/profile/withdraw.dart';
 
 class WalletCenterPage extends StatelessWidget {
   @override
@@ -8,14 +9,14 @@ class WalletCenterPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.green),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156)),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Text("Wallet Center"),
         actions: [
-          Icon(Icons.more_vert, color: Colors.green),
+          Icon(Icons.more_vert, color: Color(0xFF13B156)),
         ],
       ),
       body: SingleChildScrollView(
@@ -29,7 +30,7 @@ class WalletCenterPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: Colors.green,
+                      color: Color(0xFF13B156),
                       width: 2,
                     ),
                   ),
@@ -58,7 +59,7 @@ class WalletCenterPage extends StatelessWidget {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpPage()));
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Color(0xFF13B156),
                       foregroundColor: Colors.white,
                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       textStyle: TextStyle(fontSize: 16),
@@ -76,9 +77,11 @@ class WalletCenterPage extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => WithdrawPage()));
+                    },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Color(0xFF13B156),
                       foregroundColor: Colors.white,
                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       textStyle: TextStyle(fontSize: 16),

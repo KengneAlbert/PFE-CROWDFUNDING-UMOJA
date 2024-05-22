@@ -29,12 +29,12 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back, color: Colors.green),
+        leading: Icon(Icons.arrow_back, color: Color(0xFF13B156)),
         title: Text("Add New Card"),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.qr_code_scanner, color: Colors.green),
+            icon: Icon(Icons.qr_code_scanner, color: Color(0xFF13B156)),
           ),
         ],
       ),
