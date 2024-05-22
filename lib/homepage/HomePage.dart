@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'ContainerBody.dart';
+import 'ContainerBottom.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  const Home({Key? key}) : super(key: key);
 
 
   @override
@@ -79,6 +80,9 @@ class Home extends StatelessWidget {
       ),
 
       body: ContainerBody(),
+
+      bottomNavigationBar: ContainerBottom(),
+
     );
   }
 }

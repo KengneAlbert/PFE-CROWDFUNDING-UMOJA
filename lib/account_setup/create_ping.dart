@@ -32,7 +32,7 @@ class _CreatePinPageState extends State<CreatePinPage> {
   void _createPin() {
     if (_formKey.currentState!.validate()) {
       // TODO: Submit the PIN to your backend
-      Navigator.push(context, MaterialPageRoute(builder: (context) => SelectInterestPage()));
+      //Navigator.push(context, MaterialPageRoute(builder: (context) => SelectInterestPage()));
     }
   }
 

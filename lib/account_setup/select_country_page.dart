@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:umoja/account_setup/profile_test.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 
-import 'select_interest.dart';
+//import 'select_interest.dart';
 
 class SelectCountryPage extends StatefulWidget {
   @override

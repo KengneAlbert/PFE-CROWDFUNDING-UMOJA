@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 
-import 'reset_password.dart';
+//import 'reset_password.dart';
 import 'verification_code.dart';
 
 class ForgotPasswordPage extends StatefulWidget {

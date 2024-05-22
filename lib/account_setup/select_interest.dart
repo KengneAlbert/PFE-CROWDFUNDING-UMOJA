@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 
 import 'create_ping.dart';
-import 'profile_test.dart'; // Assurez-vous que votre fichier 'profile_test.dart' est correct
+//import 'profile_test.dart'; // Assurez-vous que votre fichier 'profile_test.dart' est correct
 
 class SelectInterestPage extends StatefulWidget {
   const SelectInterestPage({Key? key}) : super(key: key);
