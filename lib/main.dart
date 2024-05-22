@@ -10,6 +10,8 @@ import 'my_donation/59_Light_my_donation_empty.dart';
 import 'my_donation/60_Light_my_donation_ist.dart';
 
 
+import 'homepage/HomePage.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -23,7 +25,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: HomePage(),
+      //SplashScreen()
     );
   }
 }
