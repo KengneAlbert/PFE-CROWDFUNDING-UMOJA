@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/custom_widgets/custom_select_items.dart';
+import 'package:umoja/profile/add_new_card.dart';
 import 'package:umoja/profile/enter_ping_code.dart';
 
 class TopUpMethodPage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _TopUpMethodPageState extends State<TopUpMethodPage> {
           },
           icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156),),
         ),
-        title: const Text('Top up', style: TextStyle(color: Color(0xFF13B156)),),
+        title: const Text('Top up'),
         actions: [
           IconButton(
             onPressed: () {},
@@ -36,12 +37,23 @@ class _TopUpMethodPageState extends State<TopUpMethodPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Select Top up Method',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Select Top up Method',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewCardPage()));
+                  }, 
+                  child: Text("Add new card", style: TextStyle(color: Color(0xFF13B156)),),
+                )
+              ],
             ),
             const SizedBox(height: 16),
             SelectItems(

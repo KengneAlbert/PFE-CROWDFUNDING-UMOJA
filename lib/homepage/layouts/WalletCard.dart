@@ -11,7 +11,7 @@ class WalletCard extends StatelessWidget{
                       child: ListTile(
                         leading: Icon(
                           Icons.account_balance_wallet,
-                          color: Colors.green,
+                          color: Color(0xFF13B156),
                           
                         ),
                         title: Text(

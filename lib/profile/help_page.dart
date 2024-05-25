@@ -151,7 +151,7 @@ class SocialMediaButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 100,
-      width: 200,
+      width: 150,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

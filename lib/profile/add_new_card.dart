@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:umoja/account_setup/profile_page.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/custom_widgets/custom_input.dart';
+import 'package:umoja/profile/top_up_method_page.dart';
 
 class AddNewCardPage extends StatefulWidget {
   @override
@@ -29,7 +30,12 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back, color: Color(0xFF13B156)),
+        leading: IconButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Color(0xFF13B156)),
+        ),
         title: Text("Add New Card"),
         actions: [
           IconButton(
@@ -113,6 +119,7 @@ class _AddNewCardPageState extends State<AddNewCardPage> {
                     if (_formKey.currentState!.validate()) {
                       // Process the form data and add the new card
                       // ...
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage()));
                     };
                   }
                 ),

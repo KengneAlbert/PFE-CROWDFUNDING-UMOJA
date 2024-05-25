@@ -64,7 +64,7 @@ class WalletCenterPage extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       textStyle: TextStyle(fontSize: 16),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                     ),
                     child: Row(
@@ -86,7 +86,7 @@ class WalletCenterPage extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       textStyle: TextStyle(fontSize: 16),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                     ),
                     child: Row(

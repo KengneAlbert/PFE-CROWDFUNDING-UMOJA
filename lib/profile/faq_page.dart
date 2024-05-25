@@ -23,7 +23,7 @@ class _FAQPageState extends State<FAQPage> {
       'Is there a free tips to use this app',
       'Is WeCare free to use?',
     ],
-    'Wecare': [
+    'Umoja': [
       'How to make offer on WeCare?',
     ],
   };
@@ -47,7 +47,7 @@ class _FAQPageState extends State<FAQPage> {
           children: [
             // Category Buttons (Scrollable)
             SizedBox(
-              height: 35, // Adjust height as needed
+              height: 50, // Adjust height as needed
               child: ListView(
                 scrollDirection: Axis.horizontal, // Make it horizontal
                 children: [

@@ -10,10 +10,15 @@ class NotificationPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back,
-          color: Colors.green,
-          size: 24,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.green,
+            size: 24,
+          ),
         ),
         title: Text(
           'Notification',
@@ -36,7 +41,7 @@ class NotificationPage extends StatelessWidget{
       body:NotificationPageContaint() ,
       //NotifcationPageNotFound(),
 
-      bottomNavigationBar: ContainerBottom(),
+      // bottomNavigationBar: ContainerBottom(),
       
     );
   }

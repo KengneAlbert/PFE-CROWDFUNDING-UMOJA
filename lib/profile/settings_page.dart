@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/profile/edit_profile.dart';
 import 'package:umoja/profile/help_page.dart';
+import 'package:umoja/profile/invite-friends.dart';
 import 'package:umoja/profile/notification_page.dart';
 import 'package:umoja/profile/security_page.dart';
 
@@ -101,7 +102,7 @@ class SettingsPage extends StatelessWidget {
             icon: Icons.person_add,
             title: 'Invite Friends',
             trailing: Icon(Icons.arrow_forward_ios,color: Color(0xFF13B156)),
-            // onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => ));},
+            onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => InviteFriendsPage()));},
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),

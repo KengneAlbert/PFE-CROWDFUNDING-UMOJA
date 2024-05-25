@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:umoja/notification/NotificationPage.dart';
 import 'ContainerBody.dart';
 import 'ContainerBottom.dart';
 
@@ -46,7 +47,9 @@ class Home extends StatelessWidget {
           SizedBox(width: 4),
 
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage()));
+            },
             child: SvgPicture.asset(
               'assets/icons/svg/notifications.svg',
               width: 24,

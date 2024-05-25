@@ -80,7 +80,7 @@ class InboxItem extends StatelessWidget {
                     vertical: 4.0,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: Color(0xFF13B156),
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   child: Text(
@@ -173,7 +173,7 @@ class _InboxPageState extends State<InboxPage> {
       appBar: AppBar(
         leading: const Icon(
           Icons.people,
-          color: Colors.green,
+          color: Color(0xFF13B156),
           size: 32,
         ),
         title: const Text(
@@ -187,7 +187,7 @@ class _InboxPageState extends State<InboxPage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.more_vert, color: Colors.green),
+            icon: const Icon(Icons.more_vert, color: Color(0xFF13B156)),
           ),
         ],
       ),

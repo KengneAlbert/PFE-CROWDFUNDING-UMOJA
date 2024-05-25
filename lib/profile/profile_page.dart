@@ -111,12 +111,12 @@ class ProfilePage extends StatelessWidget {
                         Icon(Icons.account_balance_wallet, color: Color(0xFF13B156)),
                         SizedBox(width: 8),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "\$349",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 23,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -141,7 +141,7 @@ class ProfilePage extends StatelessWidget {
                         textStyle: TextStyle(fontSize: 16),
                         shape: RoundedRectangleBorder(
                           side: BorderSide(color: Color(0xFF13B156), width: 2),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(50),
                         ),
                       ),
                       child: Text("Top up"),
