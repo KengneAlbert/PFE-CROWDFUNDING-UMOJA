@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:umoja/search/layouts/FundingCardSearch.dart';
 import '../generalLayouts/LineCathegoryButton.dart';
-import 'layouts/SearchBar.dart';
-import 'layouts/LineInfos.dart';
-import 'SectionFundingCardSearch.dart';
+import '../generalLayouts/SearchBar.dart';
+import '../generalLayouts/LineInfos.dart';
+import '../generalLayouts/SectionFundingCardSearch.dart';
 
 
-class SearchPageContaint extends StatelessWidget {
-    const SearchPageContaint({Key? key}) : super(key: key);
+class UrgentFundraisingContaint extends StatelessWidget {
+    const UrgentFundraisingContaint({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

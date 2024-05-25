@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/search/SearchPageContaint.dart';
 import '../generalLayouts/ContainerBottom.dart';
-import 'SearchPageNotFound.dart';
+import 'UrgentFundraisingContaint.dart';
 
 
 
-class SearchPage extends StatelessWidget{
-  const SearchPage({Key? key}) : super(key: key);
+class UrgentFundraisingPage extends StatelessWidget{
+  const UrgentFundraisingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class SearchPage extends StatelessWidget{
           size: 24,
         ),
         title: Text(
-          'Search',
+          'Urgent Fundraising',
           style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.w600
@@ -35,8 +34,8 @@ class SearchPage extends StatelessWidget{
         ],
       ),
       
-      body: SearchPageContaint(),
-            //SearchPageNotFound() ,
+      body: UrgentFundraisingContaint(),
+            
       
 
       bottomNavigationBar: ContainerBottom(),
