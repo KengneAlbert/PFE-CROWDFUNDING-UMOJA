@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:umoja/notification/NotificationPage.dart';
 import 'ContainerBody.dart';
-import 'ContainerBottom.dart';
+import '../generalLayouts/ContainerBottom.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

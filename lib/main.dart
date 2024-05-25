@@ -13,6 +13,12 @@ import 'my_donation/60_Light_my_donation_ist.dart';
 
 import 'homepage/HomePage.dart';
 import 'notification/NotificationPage.dart';
+import 'bookmark/BookmarkPage.dart';
+import 'search/SearchPage.dart';
+import 'UrgentFundraising/UrgentFundraisingPage.dart';
+import 'ComingToAnEnd/ComingToAnEndPage.dart';
+import 'WatchImpact/WatchImpact.dart';
+import 'videoscreenpage/VideoScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +33,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: WatchImpact(),
+      //VideoScreen(),
+      //WatchImpact(),
+      //ComingToAnEndPage(),
+      //UrgentFundraisingPage(),
+      //SearchPage(),
+      //BookmarkPage(),
+      //HomePage(),
+      //NotificationPage(),
       //SplashScreen()
     );
   }

@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 import '../generalLayouts/ContainerBottom.dart';
-import 'NotifcationPageNotFound.dart';
-import 'NotificationPageContaint.dart';
+import 'UrgentFundraisingContaint.dart';
 
-class NotificationPage extends StatelessWidget{
-  const NotificationPage({Key? key}) : super(key: key);
+
+
+class UrgentFundraisingPage extends StatelessWidget{
+  const UrgentFundraisingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.green,
-            size: 24,
-          ),
+        leading: Icon(
+          Icons.arrow_back,
+          color: Colors.green,
+          size: 24,
         ),
         title: Text(
-          'Notification',
+          'Urgent Fundraising',
           style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.w600
@@ -38,10 +34,11 @@ class NotificationPage extends StatelessWidget{
         ],
       ),
       
-      body:NotificationPageContaint() ,
-      //NotifcationPageNotFound(),
+      body: UrgentFundraisingContaint(),
+            
+      
 
-      // bottomNavigationBar: ContainerBottom(),
+      bottomNavigationBar: ContainerBottom(),
       
     );
   }
