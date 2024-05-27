@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:table_calendar/table_calendar.dart';
+// import 'pages/basics_example.dart';
+// import 'pages/complex_example.dart';
+// import 'pages/events_example.dart';
+// import 'pages/multi_example.dart';
+// import 'pages/range_example.dart';
 // void main() {
 //   runApp(MyApp());
 // }
@@ -39,6 +44,8 @@ class _MyDonationScreenState extends State<MyDonationScreen> {
           ),
         ],
       ),
+
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
