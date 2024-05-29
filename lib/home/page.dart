@@ -4,7 +4,12 @@ import 'package:umoja/homepage/HomePage.dart';
 import 'package:umoja/inbox/inbox_page.dart';
 import 'package:umoja/my_donation/59_Light_my_donation_empty.dart';
 import 'package:umoja/my_donation/60_Light_my_donation_ist.dart';
+<<<<<<< HEAD:lib/home/page.dart
 import 'package:umoja/profile/profile_page.dart';
+=======
+import 'package:umoja/my_fundraising/62_Light_my_fundraising_ongoing.dart';
+
+>>>>>>> d20ece46874c60ff7bc3bcaf14fe512212afdac2:lib/home/home_page.dart
 
 // Widgets personnalisés
 
@@ -591,7 +596,7 @@ class _HomePageState extends State<HomePage> {
     // ),
     Home(),
     MyDonationScreen2(),
-    const Center(child: Text('Calendar Page')),
+    MyFundraising62(),
     const InboxPage(),
     ProfilePage(),
   ];

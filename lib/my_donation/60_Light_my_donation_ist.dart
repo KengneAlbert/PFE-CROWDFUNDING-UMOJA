@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -38,6 +40,7 @@ class _MyDonationScreenState extends State<MyDonationScreen2> {
           Icon(Icons.account_balance_wallet),
         ],
       ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -45,143 +48,13 @@ class _MyDonationScreenState extends State<MyDonationScreen2> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Calendar
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'December 2023',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.arrow_back_ios),
-                                onPressed: () {},
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.arrow_forward_ios),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Table(
-                        defaultColumnWidth: FixedColumnWidth(40.0),
-                        children: [
-                          TableRow(
-                            children: [
-                              Text('Mo'),
-                              Text('Tu'),
-                              Text('We'),
-                              Text('Th'),
-                              Text('Fr'),
-                              Text('Sa'),
-                              Text('Su'),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              Text('1'),
-                              Text('2'),
-                              Text('3'),
-                              Text('4'),
-                              Text('5'),
-                              Text('6'),
-                              Text('7'),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              Text('8'),
-                              Text('9'),
-                              Text('10'),
-                              Text('11'),
-                              Text('12'),
-                              Text('13'),
-                              Text('14'),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              Text('15'),
-                              Text('16'),
-                              Text('17'),
-                              Text('18'),
-                              Text('19'),
-                              Text('20'),
-                              Text('21'),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              Text('22'),
-                              Text('23'),
-                              Text('24'),
-                              Text('25'),
-                              Text('26'),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 8,
-                                  horizontal: 12,
-                                ),
-                                child: Text(
-                                  '27',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Text('28'),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              Text('29'),
-                              Text('30'),
-                              Text('31'),
-                              Text('1'),
-                              Text('2'),
-                              Text('3'),
-                              Text('5'),
-
-
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              TableCalendar(
+                // locale: 'fr_FR', 
+                firstDay: DateTime.utc(2010, 10, 16),
+                lastDay: DateTime.utc(2030, 3, 14),
+                focusedDay: DateTime.now(),
               ),
+              
               SizedBox(height: 16),
               Text(
                 'My Donation (7)',
@@ -198,7 +71,7 @@ class _MyDonationScreenState extends State<MyDonationScreen2> {
                   child: Text(
                     'See all',
                     style: TextStyle(
-                      color: Colors.green,
+                      color: Color.fromARGB(255, 48, 182, 86),
                     ),
                   ),
                 ),

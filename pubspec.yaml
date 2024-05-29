@@ -38,9 +38,13 @@ dependencies:
   flutter_svg: ^2.0.10+1
   font_awesome_flutter: ^10.7.0
   table_calendar: ^3.1.1
+<<<<<<< HEAD
   another_carousel_pro : ^1.0.0
   video_player: ^2.8.2
   flick_video_player: ^0.8.0
+=======
+  calendar_date_picker2: ^1.0.2
+>>>>>>> d20ece46874c60ff7bc3bcaf14fe512212afdac2
 
 dev_dependencies:
   flutter_test:
