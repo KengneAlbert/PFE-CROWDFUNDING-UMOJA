@@ -8,6 +8,7 @@ import 'layouts/LineInfos.dart';
 import '../generalLayouts/LineCathegoryButton.dart';
 import 'layouts/FundingCard.dart';
 import 'SectionFundingCard.dart';
+import 'SectionCardVideo.dart';
 
 class ContainerBody extends StatelessWidget {
   const ContainerBody({super.key});
@@ -108,7 +109,21 @@ class ContainerBody extends StatelessWidget {
 
               SizedBox(height: 20,),
 
-              CardVideo(),
+              SectionCardVideo(
+                cardVideo: [
+
+                  CardVideo(
+                    pathMiniature:'assets/images/téléchargement (5).jfif',
+                  ),
+
+                  SizedBox(width: 20,),
+
+                  CardVideo(
+                    pathMiniature:'assets/images/téléchargement (5).jfif',
+                  )
+
+                ],
+              ),
 
               SizedBox(height: 20,),
             

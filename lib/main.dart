@@ -16,7 +16,8 @@ import 'search/SearchPage.dart';
 import 'UrgentFundraising/UrgentFundraisingPage.dart';
 import 'ComingToAnEnd/ComingToAnEndPage.dart';
 import 'WatchImpact/WatchImpact.dart';
-import 'videoscreenpage/VideoScreen.dart';
+import 'bookmark/BookmarkPageContaintDetail.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -30,14 +31,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) { 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WatchImpact(),
+      home: BookmarkPageContaintDetail(),
+      //HomePage(),
+      //BookmarkPage(),
+      //WatchImpact(),
       //VideoScreen(),
       //WatchImpact(),
       //ComingToAnEndPage(),
       //UrgentFundraisingPage(),
       //SearchPage(),
-      //BookmarkPage(),
-      //HomePage(),
       //NotificationPage(),
       //SplashScreen()
     );
