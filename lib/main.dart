@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 //import 'onboarding_screen/sign_method.dart';
 //import 'onboarding_screen/sign_up.dart';
-//import 'onboarding_screen/splash_screen.dart';
+import 'onboarding_screen/splash_screen.dart';
 //import 'onboarding_screen/carousel_1.dart';
 //import 'onboarding_screen/carousel_2.dart';
 //import 'onboarding_screen/carousel_3.dart';
@@ -30,18 +30,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) { 
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue
+      ),
       debugShowCheckedModeBanner: false,
-      home: BookmarkPageContaintDetail(),
-      //HomePage(),
-      //BookmarkPage(),
+      home:  HomePage(),
+      //UrgentFundraisingPage(),
+      //SplashScreen()
+      //WatchImpact(),
+      //BookmarkPageContaintDetail(),
       //WatchImpact(),
       //VideoScreen(),
-      //WatchImpact(),
       //ComingToAnEndPage(),
-      //UrgentFundraisingPage(),
-      //SearchPage(),
       //NotificationPage(),
-      //SplashScreen()
+      
     );
   }
 }
