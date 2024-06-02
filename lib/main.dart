@@ -1,50 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:umoja/home/page.dart';
-import 'onboarding_screen/sign_method.dart';
-import 'onboarding_screen/sign_up.dart';
-import 'onboarding_screen/splash_screen.dart';
-import 'onboarding_screen/carousel_1.dart';
-import 'onboarding_screen/carousel_2.dart';
-import 'onboarding_screen/carousel_3.dart';
-import 'my_donation/59_Light_my_donation_empty.dart';
-import 'my_donation/60_Light_my_donation_ist.dart';
+import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:umoja/constant/constant.dart';
+import 'package:umoja/onboarding_screen/Auth/Auth.dart';
+import 'package:umoja/onboarding_screen/sign_in.dart';
+import 'package:umoja/onboarding_screen/sign_up.dart';
+import 'package:umoja/onboarding_screen/splash_screen.dart';
 
 
-import 'homepage/HomePage.dart';
-import 'notification/NotificationPage.dart';
-import 'bookmark/BookmarkPage.dart';
-import 'search/SearchPage.dart';
-import 'UrgentFundraising/UrgentFundraisingPage.dart';
-import 'ComingToAnEnd/ComingToAnEndPage.dart';
-import 'WatchImpact/WatchImpact.dart';
-import 'videoscreenpage/VideoScreen.dart';
-
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthService>(
+          create: (_) => AuthService(),
+        ),
+      ],
+      child: MyApp(),
+    ), 
+  );
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
-
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WatchImpact(),
-      //VideoScreen(),
-      //WatchImpact(),
-      //ComingToAnEndPage(),
-      //UrgentFundraisingPage(),
-      //SearchPage(),
-      //BookmarkPage(),
-      //HomePage(),
-      //NotificationPage(),
-      //SplashScreen()
+      home: SignUpPage(),
     );
   }
 }
+
+
 
 

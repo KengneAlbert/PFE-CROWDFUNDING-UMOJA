@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:umoja/account_setup/select_country_page.dart';
-import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/home/page.dart';
+import 'package:umoja/homepage/HomePage.dart';
+import 'package:umoja/onboarding_screen/Auth/Auth.dart';
 
 import 'forgot_password.dart';
 import 'sign_up.dart';
@@ -20,7 +22,8 @@ class _SignInPageState extends State<SignInPage> {
   final _passwordController = TextEditingController();
   bool _rememberMe = false;
   bool _emailInvalid = false;
-
+  bool _obscureText = true;
+  
   @override
   void dispose() {
     _emailController.dispose();
@@ -28,8 +31,17 @@ class _SignInPageState extends State<SignInPage> {
     super.dispose();
   }
 
+  
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -77,12 +89,14 @@ class _SignInPageState extends State<SignInPage> {
                 // Champ Mot de passe
                 TextFormField(
                   controller: _passwordController,
-                  obscureText: true,
+                  obscureText: _obscureText,
                   decoration: InputDecoration(
                     labelText: 'Password *',
                     suffixIcon: IconButton(
-                      icon: const Icon(Icons.remove_red_eye),
-                      onPressed: () {}, // TODO: Implementer la fonctionnalité pour afficher/masquer le mot de passe
+                       icon: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: _togglePasswordVisibility,
                     ),
                     // Bordure lorsque les conditions sont respectées
                     focusedBorder: OutlineInputBorder(
@@ -120,9 +134,21 @@ class _SignInPageState extends State<SignInPage> {
                           minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 
                                           MediaQuery.of(context).size.height * 0.06), // 80% width, 15% height
                         ),
-                  onPressed: () {
+                  onPressed: () async{
                     if (_formKey.currentState!.validate()) {
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => HomePage()));
+                      final bool result = await authService.signInWithEmailAndPassword(
+                              _emailController.text,
+                              _passwordController.text,
+                          );
+                        if(result){
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          );
+                        }
+                     
                     }
                   },
                   child: const Text(
@@ -159,11 +185,27 @@ class _SignInPageState extends State<SignInPage> {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.facebook),
-                      onPressed: () {}, // TODO: Implementer la connexion avec Facebook
+                      onPressed: () async {
+                        bool result = await authService.signInWithFacebook();
+                        if (result) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        }
+                      },
                     ),
                     IconButton(
                       icon: const Icon(Icons.facebook), // Remplacez par le chemin de votre logo Google
-                      onPressed: () {}, // TODO: Implementer la connexion avec Google
+                      onPressed: () async {
+                        bool result = await authService.signInWithGoogle();
+                        if (result) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        }
+                      }, // TODO: Implementer la connexion avec Google
                     ),
                     IconButton(
                       icon: const Icon(Icons.apple),
@@ -198,3 +240,4 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
+

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
-
+import 'package:provider/provider.dart';
+import 'package:umoja/onboarding_screen/Auth/Auth.dart';
 import 'reset_password_successful.dart';
 //import 'verification_code.dart';
 
@@ -27,6 +28,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Reset Password'),
@@ -92,7 +94,22 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               // Bouton "Enregistrer"
               CustomBouton(
                 label: "Save",
-                onPressed:(){
+                onPressed:()async{
+                  // if (_formKey.currentState!.validate()) {
+                  //     final bool result = await authService.signInWithEmailAndPassword(
+                  //             _emailController.text,
+                  //             _passwordController.text,
+                  //         );
+                  //       if(result){
+                  //         Navigator.pushReplacement(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //             builder: (context) => SelectCountryPage(),
+                  //           ),
+                  //         );
+                  //       }
+                     
+                  //   }
                   Navigator.push(context, MaterialPageRoute(builder:(context) => ResetPasswordSuccessful()));
                 },
               )

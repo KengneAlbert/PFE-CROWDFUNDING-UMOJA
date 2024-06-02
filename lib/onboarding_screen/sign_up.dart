@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
-
+import 'package:umoja/onboarding_screen/Auth/Auth.dart';
 import '../account_setup/select_country_page.dart';
-import '../account_setup/select_interest.dart';
+import 'package:provider/provider.dart';
 import 'sign_in.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -19,6 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _passwordController = TextEditingController();
   bool _rememberMe = false;
   bool _emailInvalid = false;
+  bool _obscureText = true;
 
   @override
   void dispose() {
@@ -27,8 +28,42 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
+   void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  String? _validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a password';
+    }
+    if (value.length < 8) {
+      return 'Password must be at least 8 characters long';
+    }
+    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+      return 'Password must contain at least one uppercase letter';
+    }
+    if (!RegExp(r'[0-9]').hasMatch(value)) {
+      return 'Password must contain at least one digit';
+    }
+    return null;
+  }
+
+   String? _validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter an email';
+    }
+    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+      return 'Please enter a valid email';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
+    
+    final authService = Provider.of<AuthService>(context, listen: false);
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -59,41 +94,27 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty || !value.contains('@')) {
-                      setState(() {
-                        _emailInvalid = true;
-                      });
-                      return 'Please enter a valid email';
-                    }
-                    setState(() {
-                      _emailInvalid = false;
-                    });
-                    return null;
-                  },
+                  validator: _validateEmail,
                 ),
                 const SizedBox(height: 20),
                 // Champ Mot de passe
                 TextFormField(
                   controller: _passwordController,
-                  obscureText: true,
+                  obscureText: _obscureText,
                   decoration: InputDecoration(
                     labelText: 'Password *',
                     suffixIcon: IconButton(
-                      icon: const Icon(Icons.remove_red_eye),
-                      onPressed: () {}, // TODO: Implementer la fonctionnalité pour afficher/masquer le mot de passe
+                      icon: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: _togglePasswordVisibility,
                     ),
                     // Bordure lorsque les conditions sont respectées
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF13B156)),
                     ),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a password';
-                    }
-                    return null;
-                  },
+                  validator: _validatePassword,
                 ),
                 const SizedBox(height: 10),
                 // Checkbox "Remember me"
@@ -115,8 +136,21 @@ class _SignUpPageState extends State<SignUpPage> {
                 // Bouton "Sign up"
                 CustomBouton(
                   label: "Sign up", 
-                  onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => SelectCountryPage()));
+                  onPressed: () async {
+                      if(_formKey.currentState!.validate()){
+                         final bool result = await authService.signUpWithEmailAndPassword(
+                              _emailController.text,
+                              _passwordController.text,
+                          );
+                          if(result){
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SelectCountryPage(),
+                              ),
+                           );
+                          }
+                      }
                   },
                 ),
 
@@ -130,16 +164,46 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.facebook),
-                      onPressed: () {}, // TODO: Implementer la connexion avec Facebook
+                      onPressed: () async {
+                        bool result = await authService.signInWithFacebook();
+                        if (result) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SelectCountryPage(),
+                            ),
+                          );
+                        }
+                      },
                     ),
                     IconButton(
                       icon: const Icon(Icons.facebook), // Remplacez par le chemin de votre logo Google
-                      onPressed: () {}, // TODO: Implementer la connexion avec Google
+                      onPressed: () async {
+                        bool result = await authService.signInWithGoogle();
+                        if (result) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SelectCountryPage(),
+                            ),
+                          );
+                        }
+                      }, 
                     ),
                     IconButton(
                       icon: const Icon(Icons.apple),
-                      onPressed: () {}, // TODO: Implementer la connexion avec Apple
-                    ),
+                      onPressed: () async {
+                        bool result = await authService.signInWithApple();
+                        if (result) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SelectCountryPage(),
+                            ),
+                          );
+                        }
+                      }
+                    )
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -157,7 +221,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: TextStyle(
                           color: Color(0xFF13B156), 
                         ),
-                        ),
+                      ),
                     ),
                   ],
                 ),
