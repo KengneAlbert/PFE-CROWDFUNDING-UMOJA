@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/account_setup/select_country_page.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
-import 'package:umoja/home/page.dart';
+import '../homepage/HomePage.dart';
 
 import '../forgot_reset_password/forgot_password.dart';
 import 'sign_up.dart';

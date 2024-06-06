@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/projetdetail/ProjetDetailPage.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:umoja/inbox/inbox_chat.dart';
 
@@ -17,6 +18,7 @@ import 'UrgentFundraising/UrgentFundraisingPage.dart';
 import 'ComingToAnEnd/ComingToAnEndPage.dart';
 import 'WatchImpact/WatchImpact.dart';
 import 'bookmark/BookmarkPageContaintDetail.dart';
+import 'prayers/PrayersPage.dart';
 
 
 void main() {
@@ -34,11 +36,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue
       ),
       debugShowCheckedModeBanner: false,
-      home:  HomePage(),
+      home: ProjetDetailPage(),
+      //HomePage(),
+      
+      //PrayersPage(),
+      
+      
+      //SplashScreen() ,
       //UrgentFundraisingPage(),
-      //SplashScreen()
       //WatchImpact(),
-      //BookmarkPageContaintDetail(),
       //WatchImpact(),
       //VideoScreen(),
       //ComingToAnEndPage(),

@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
+        backgroundColor: Colors.white,
         leading: SvgPicture.asset(
           'assets/icons/svg/Group.svg',
           width: 36,
