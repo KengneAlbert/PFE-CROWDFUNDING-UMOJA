@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:umoja/services/auth_service.dart';
-import 'package:umoja/viewmodels/user_viewModel.dart';
-import 'package:umoja/views/account_setup/profile_page.dart';
+import 'package:umoja/viewmodels/auth_viewModel.dart';
+import 'package:umoja/views/account_setup/profile.dart';
 import 'package:umoja/views/profile/profile_page.dart';
 import '../account_setup/select_country_page.dart';
 import 'package:provider/provider.dart';
@@ -143,53 +143,31 @@ class _SignUpPageState extends State<SignUpPage> {
                   onPressed: () async {
                       final email = _emailController.text;
                       final password = _passwordController.text;
-                      final authViewModel = Provider.of<AuthViewModel>(context, listen: false);
-                      
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                      );
-                      
-                      try {
-                          await authViewModel.signUp(email, password);
-                          Navigator.pop(context); // Remove the loading indicator
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => FillProfilePage()),
-                          );
-                        } catch (e) {
-                          Navigator.pop(context); // Remove the loading indicator
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Erreur lors de l\'inscription: $e')),
-                          );
-                        }
-                      
-
-                      // if(_formKey.currentState!.validate()){
-                      //   await Provider.of<AuthViewModel>(context, listen: false)
-                      //     .signUp(_emailController.text, _passwordController.text);
-                      //    final User? result = await authService.signUpWithEmailAndPassword(
-                      //         _emailController.text,
-                      //         _passwordController.text,
-                      //     );
-                      //     if(result != null){
-                      //       Navigator.pushReplacement(
-                      //         context,
-                      //         MaterialPageRoute(
-                      //           builder: (context) => SelectCountryPage(),
-                      //         ),
-                      //      );
-                      //     }else{
-                      //       // Afficher le message d'erreur à l'utilisateur
-                      //       // print(result);
-                      //       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result!)));
-                      //     }
-                      // }
+                      final authViewModel = Provider.of<AuthViewModel>(context, listen: false); 
+                      if(_formKey.currentState!.validate()){
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        );
+                        try {
+                            await authViewModel.signUp(email, password);
+                            Navigator.pop(context); // Remove the loading indicator
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => FillProfilePage()),
+                            );
+                          } catch (e) {
+                            Navigator.pop(context); // Remove the loading indicator
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Erreur lors de l\'inscription: $e')),
+                            );
+                          }
+                      }
                     
                   },
                 ),

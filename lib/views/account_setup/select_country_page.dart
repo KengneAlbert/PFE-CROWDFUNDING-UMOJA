@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/views/account_setup/profile_test.dart';
+import 'package:umoja/views/account_setup/profile.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 
 //import 'select_interest.dart';

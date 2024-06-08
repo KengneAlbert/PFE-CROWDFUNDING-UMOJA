@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:umoja/viewmodels/user_viewModel.dart';
+import 'package:umoja/viewmodels/auth_viewModel.dart';
 import 'package:umoja/views/account_setup/select_country_page.dart';
 import 'package:umoja/views/home/page.dart';
 import 'package:umoja/views/homepage/HomePage.dart';
@@ -137,7 +137,7 @@ class _SignInPageState extends State<SignInPage> {
                                           MediaQuery.of(context).size.height * 0.06), // 80% width, 15% height
                         ),
                   onPressed: () async{
-                    final email = _emailController.text;
+                      final email = _emailController.text;
                       final password = _passwordController.text;
                       final authViewModel = Provider.of<AuthViewModel>(context, listen: false);
 
@@ -154,14 +154,11 @@ class _SignInPageState extends State<SignInPage> {
                       try {
                           await authViewModel.signIn(email, password);
                           Navigator.pop(context); // Remove the loading indicator
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
+                          Navigator.restorablePushReplacementNamed( context,'/home',);
                         } catch (e) {
                           Navigator.pop(context); // Remove the loading indicator
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Erreur lors de l\'inscription: $e')),
+                            SnackBar(content: Text('Erreur lors de la cconnexion: $e')),
                           );
                         }
                       

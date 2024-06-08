@@ -45,7 +45,7 @@ class AuthService extends  ChangeNotifier {
       notifyListeners();
       return response.user;
     }on AuthException catch (error) {
-      throw Exception('Erreur lors de la connexion : ${error.message}');   
+      throw Exception('Erreur lors de la creation de compte : ${error.message}');   
       // Gérer les erreurs d'authentification
     //  String errorMessage = 'Erreur d\'inscription.';
     //     switch (error.statusCode) {

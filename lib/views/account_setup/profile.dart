@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:umoja/viewmodels/user_viewModel.dart';
 import 'package:umoja/views/account_setup/select_interest.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 
@@ -154,8 +156,11 @@ class _FillProfilePageState extends State<FillProfilePage> {
                 CustomBouton(
                   label: "Continue",
                   onPressed: () {
+                    final userviewModel = Provider.of<UserViewModel>(context);
                     if (_formKey.currentState!.validate()) {
-                      // Traitement des données du formulaire
+                      // userviewModel.addProjet(
+
+                      // );
                       Navigator.push(context, MaterialPageRoute(builder: (context) => SelectInterestPage()));
                     }
                   },

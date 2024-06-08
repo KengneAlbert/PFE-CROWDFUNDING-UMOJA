@@ -1,59 +1,61 @@
+import 'dart:io';
 import 'package:hive/hive.dart';
 
-// part 'user_profile.g.dart';
+// part "user_service.g.dart";
+
 
 @HiveType(typeId: 0)
-class UserProfile {
+class UserProfile  {
   @HiveField(0)
-  final String userId;
+  final String? supabase_id;
 
   @HiveField(1)
-  final String email;
+  final String? email;
 
   @HiveField(2)
-  final String name;
+  final String? name;
 
   @HiveField(3)
-  final String phone;
+  final String? phone;
 
   @HiveField(4)
-  final String country;
+  final String? country;
 
   @HiveField(5)
-  final String gender;
+  final String? gender;
 
   @HiveField(6)
-  final int age;
+  final int? age;
 
   @HiveField(7)
-  final String location;
+  final String? location;
 
   @HiveField(8)
-  final String profilePicture;
+  final String? profile_picture;
 
   @HiveField(9)
-  final List<String> interests;
+  final List<String>? interests;
 
   @HiveField(10)
-  final String pinCode;
+  final int? pin_code;
 
   UserProfile({
-    required this.userId,
-    required this.email,
-    required this.name,
-    required this.phone,
-    required this.country,
-    required this.gender,
-    required this.age,
-    required this.location,
-    required this.profilePicture,
-    required this.interests,
-    required this.pinCode,
+     this.supabase_id,
+     this.email,
+     this.name,
+     this.phone,
+     this.country,
+     this.gender,
+     this.age,
+     this.location,
+     this.profile_picture,
+     this.interests,
+     this.pin_code,
   });
 
   factory UserProfile.fromMap(Map<String, dynamic> map) {
     return UserProfile(
-      userId: map['user_id'],
+      supabase_id: map['user_id'],
       email: map['email'],
       name: map['name'],
       phone: map['phone'],
@@ -61,15 +63,15 @@ class UserProfile {
       gender: map['gender'],
       age: map['age'],
       location: map['location'],
-      profilePicture: map['profile_picture'],
+      profile_picture: map['profile_picture'],
       interests: List<String>.from(map['interests']),
-      pinCode: map['pin_code'],
+      pin_code: map['pin_code'],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'user_id': userId,
+      'supabase_id': supabase_id,
       'email': email,
       'name': name,
       'phone': phone,
@@ -77,9 +79,31 @@ class UserProfile {
       'gender': gender,
       'age': age,
       'location': location,
-      'profile_picture': profilePicture,
+      'profile_picture': profile_picture,
       'interests': interests,
-      'pin_code': pinCode,
+      'pin_code': pin_code,
     };
+  }
+}
+
+class UserProfileAdapter extends TypeAdapter<UserProfile> {
+  @override
+  final int typeId = 0;
+
+  @override
+  UserProfile read(BinaryReader reader) {
+    final name = reader.read();
+    final age = reader.read();
+    final supabase_id = reader.read();
+    final email = reader.read();
+     return UserProfile(supabase_id: supabase_id, email: email, name: name,age: age);
+  }
+
+  @override
+  void write(BinaryWriter writer, UserProfile obj) {
+    writer.write(obj.supabase_id);
+    writer.write(obj.email);
+    writer.write(obj.name);
+    writer.write(obj.age);
   }
 }

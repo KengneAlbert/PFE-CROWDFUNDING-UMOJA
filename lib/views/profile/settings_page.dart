@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/viewmodels/user_viewModel.dart';
+import 'package:umoja/viewmodels/auth_viewModel.dart';
 import 'package:umoja/views/onboarding_screen/sign_up.dart';
 import 'package:umoja/views/profile/edit_profile.dart';
 import 'package:umoja/views/profile/help_page.dart';
