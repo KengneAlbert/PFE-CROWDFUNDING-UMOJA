@@ -8,10 +8,11 @@ class WalletCard extends StatelessWidget{
                 children: [
                   Expanded(
                       child:Card(
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.account_balance_wallet,
-                          color: Color(0xFF13B156),
+                        color: Colors.white,
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.account_balance_wallet,
+                            color: Colors.green,
                           
                         ),
                         title: Text(

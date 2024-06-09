@@ -145,28 +145,28 @@ class _SignUpPageState extends State<SignUpPage> {
                       final password = _passwordController.text;
                       final authViewModel = Provider.of<AuthViewModel>(context, listen: false); 
                       if(_formKey.currentState!.validate()){
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                        );
-                        try {
-                            await authViewModel.signUp(email, password);
-                            Navigator.pop(context); // Remove the loading indicator
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => FillProfilePage()),
-                            );
-                          } catch (e) {
-                            Navigator.pop(context); // Remove the loading indicator
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Erreur lors de l\'inscription: $e')),
-                            );
-                          }
+                        // showDialog(
+                        //   context: context,
+                        //   barrierDismissible: false,
+                        //   builder: (BuildContext context) {
+                        //     return Center(
+                        //       child: CircularProgressIndicator(),
+                        //     );
+                        //   },
+                        // );
+                        // try {
+                        //     await authViewModel.signUp(email, password);
+                        //     Navigator.pop(context); // Remove the loading indicator
+                        //     Navigator.pushReplacement(
+                        //       context,
+                        //       MaterialPageRoute(builder: (context) => FillProfilePage()),
+                        //     );
+                        //   } catch (e) {
+                        //     Navigator.pop(context); // Remove the loading indicator
+                        //     ScaffoldMessenger.of(context).showSnackBar(
+                        //       SnackBar(content: Text('Erreur lors de l\'inscription: $e')),
+                        //     );
+                        //   }
                       }
                     
                   },
@@ -183,7 +183,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     IconButton(
                       icon: const Icon(Icons.facebook),
                       onPressed: () async {
-                        final result = await authService.signInWithOAuth(OAuthProvider.facebook);
+                        // final result = await authService.signInWithOAuth(OAuthProvider.facebook);
                         // if (result) {
                         //   Navigator.pushReplacement(
                         //     context,
@@ -197,7 +197,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     IconButton(
                       icon: const Icon(Icons.facebook), // Remplacez par le chemin de votre logo Google
                       onPressed: () async {
-                        final result = await authService.signInWithOAuth(OAuthProvider.google);
+                        // final result = await authService.signInWithOAuth(OAuthProvider.google);
                         // if (result) {
                         //   Navigator.pushReplacement(
                         //     context,

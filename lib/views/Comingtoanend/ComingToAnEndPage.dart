@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/views/home/page.dart';
 import '../../generalLayouts/ContainerBottom.dart';
 import 'ComingToAnEndContaint.dart';
 
@@ -11,10 +12,20 @@ class ComingToAnEndPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back,
-          color: Colors.green,
-          size: 24,
+        leading: GestureDetector(
+          onTap: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) =>  HomePage()
+                )
+              );
+            },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.green,
+            size: 24,
+          ),
         ),
         title: Text(
           'Coming to an end',
@@ -24,11 +35,27 @@ class ComingToAnEndPage extends StatelessWidget{
           ),
         ),
         actions: [
-          ElevatedButton(
-            onPressed: () {}, 
-            child: Icon(
-              Icons.more_vert,
-              color: Colors.green,
+          Padding(
+            padding: EdgeInsets.all(5),
+            child: GestureDetector(
+              onTap: () {
+               
+              },
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Color(0xFF13B156).withOpacity(0.1), // Couleur de fond
+                  borderRadius: BorderRadius.circular(12), // Bordure arrondie
+                ),
+                child: SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: Icon(
+                    Icons.more_vert,
+                    color: Colors.green,
+                  ), 
+                ),
+              ),
             ),
           )
         ],

@@ -1,52 +1,43 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:umoja/services/auth_service.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:umoja/viewmodels/auth_viewModel.dart';
 
-class MockSupabaseClient extends Mock implements SupabaseClient {}
+class MockAuthService extends Mock implements AuthService {}
 
 void main() {
-  late AuthService authService;
-  late MockSupabaseClient mockSupabase;
+  group('AuthViewModel Tests', () {
+    late AuthViewModel authViewModel;
+    late MockAuthService mockAuthService;
 
-  setUp(() {
-    mockSupabase = MockSupabaseClient();
-    authService = AuthService(supabase: mockSupabase);
+    setUp(() {
+      mockAuthService = MockAuthService();
+      authViewModel = AuthViewModel(authService: mockAuthService);
+    });
+
+    test('initial state is correct', () {
+      expect(authViewModel.isLoading, false);
+      expect(authViewModel.isAuthenticated, false);
+    });
+
+    test('signIn updates state correctly on success', () async {
+      // when(mockAuthService.signIn(any, any))
+      //     .thenAnswer((_) async => true);
+
+      await authViewModel.signIn('email', 'password');
+
+      expect(authViewModel.isAuthenticated, true);
+      verify(mockAuthService.signIn('email', 'password')).called(1);
+    });
+
+    test('signIn updates state correctly on failure', () async {
+      // when(mockAuthService.signIn(any, any))
+      //     .thenAnswer((_) async => false);
+
+      await authViewModel.signIn('email', 'password');
+
+      expect(authViewModel.isAuthenticated, false);
+      verify(mockAuthService.signIn('email', 'password')).called(1);
+    });
   });
-
-  test('signInWithEmailAndPassword signs in user successfully', () async {
-    // Arrange
-    final email = 'test@example.com';
-    final password = 'password123';
-    when(mockSupabase.auth.signInWithPassword(email: email, password: password))
-        .thenAnswer((_) async => AuthResponse(
-              // user: User(email: email),
-              session: null,
-            ));
-
-    // Act
-    final user = await authService.signInWithEmailAndPassword(email, password);
-
-    // Assert
-    // expect(user.email, email);
-  });
-
-  test('signUpWithEmailAndPassword signs up user successfully', () async {
-    // Arrange
-    final email = 'test@example.com';
-    final password = 'password123';
-    when(mockSupabase.auth.signUp(email: email, password: password))
-        .thenAnswer((_) async => AuthResponse(
-              // user: User(email: email),
-              session: null,
-            ));
-
-    // Act
-    final user = await authService.signUpWithEmailAndPassword(email, password);
-
-    // Assert
-    // expect(user.email, email);
-  });
-
-  // Ajoutez d'autres tests pour les méthodes de réinitialisation de mot de passe et de connexion avec OAuth.
 }

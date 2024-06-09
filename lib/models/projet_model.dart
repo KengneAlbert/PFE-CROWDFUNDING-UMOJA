@@ -1,28 +1,15 @@
-import 'package:hive/hive.dart';
-
-@HiveType(typeId: 1)
 class Projet {
-  @HiveField(0)
-  final int id;
-  @HiveField(1)
-  final String Titre;
-  @HiveField(2)
-  final String Description;
-  @HiveField(3)
-  final int Montant_Total;
-  @HiveField(4)
-  final DateTime Date_debut_collecte;
-  @HiveField(5)
-  final DateTime Date_fin_collecte;
-  @HiveField(6)
-  final String? Histoire;
-  @HiveField(7)
-  final int Montant_Obtenu;
-  @HiveField(8)
-  final int Categorie_id;
-  @HiveField(9)
-  final int User_id;
-  @HiveField(10)
+    final int id;
+    final String Titre;
+    final String Description;
+    final int Montant_Total;
+    final DateTime Date_debut_collecte;
+    final DateTime Date_fin_collecte;
+    final String? Histoire;
+    final int Montant_Obtenu;
+    final int Categorie_id;
+    final int User_id;
+  
   final DateTime createdAt;
 
   Projet({
@@ -72,39 +59,4 @@ class Projet {
   }
 }
 
-class ProjetAdapter extends TypeAdapter<Projet> {
-  @override
-  final int typeId = 1;
 
-  @override
-  Projet read(BinaryReader reader) {
-    return Projet(
-      id: reader.read(),
-      Titre: reader.read(),
-      Description: reader.read(),
-      Montant_Total: reader.read(),
-      Date_debut_collecte: DateTime.parse(reader.read()),
-      Date_fin_collecte: DateTime.parse(reader.read()),
-      Histoire: reader.read(),
-      Montant_Obtenu: reader.read(),
-      Categorie_id: reader.read(),
-      User_id: reader.read(),
-      createdAt: DateTime.parse(reader.read()),
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, Projet obj) {
-    writer.write(obj.id);
-    writer.write(obj.Titre);
-    writer.write(obj.Description);
-    writer.write(obj.Montant_Total);
-    writer.write(obj.Date_debut_collecte.toIso8601String());
-    writer.write(obj.Date_fin_collecte.toIso8601String());
-    writer.write(obj.Histoire);
-    writer.write(obj.Montant_Obtenu);
-    writer.write(obj.Categorie_id);
-    writer.write(obj.User_id);
-    writer.write(obj.createdAt.toIso8601String());
-  }
-}

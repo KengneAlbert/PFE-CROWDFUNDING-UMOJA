@@ -1,44 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/views/home/page.dart';
-import '../../generalLayouts/ContainerBottom.dart';
-import 'NotifcationPageNotFound.dart';
+import 'BookmarkPageNotFound.dart';
+import 'BookmarkPageContaint.dart';
+import 'layouts/ContainerBottomBooKmarkDetail.dart';
+import 'layouts/BookmarkPageContaintDetailBody.dart';
 
-class NotificationPage extends StatelessWidget{
-  const NotificationPage({Key? key}) : super(key: key);
+
+class BookmarkPageContaintDetail extends StatelessWidget{
+  const BookmarkPageContaintDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) =>  HomePage()
-                )
-              );
-            },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.green,
-            size: 24,
-          ),
+        leading: Icon(
+          Icons.arrow_back,
+          color: Colors.green,
+          size: 24,
         ),
         title: Text(
-          'Notification',
+          'Bookmark',
           style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.w600
           ),
         ),
         actions: [
-          
-          Padding(
+         
+         Padding(
             padding: EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
-              
+               
               },
               child: Container(
                 padding: EdgeInsets.all(10),
@@ -57,15 +49,12 @@ class NotificationPage extends StatelessWidget{
               ),
             ),
           )
-
         ],
       ),
       
-      body: NotifcationPageNotFound(),
-      //NotificationPageContaint() ,
-      
+      body:BookmarkPageContaintDetailBody() ,
 
-      bottomNavigationBar: ContainerBottom(),
+      bottomNavigationBar: ContainerBottomBooKmarkDetail(),
       
     );
   }

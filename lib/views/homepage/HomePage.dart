@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:umoja/generalLayouts/ContainerBottom.dart';
 import 'package:umoja/views/notification/NotificationPage.dart';
 import 'ContainerBody.dart';
-import '../../generalLayouts/ContainerBottom.dart';
+
+import '../search/SearchPage.dart';
+import '../notification/NotificationPage.dart';
+import '../bookmark/BookmarkPage.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,6 +18,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
+        backgroundColor: Colors.white,
         leading: SvgPicture.asset(
           'assets/icons/svg/Group.svg',
           width: 36,
@@ -29,56 +34,80 @@ class Home extends StatelessWidget {
           ),
         ), 
         actions:[
-          ElevatedButton(
-            onPressed: () {},
-            child: SvgPicture.asset(
-              'assets/icons/svg/search.svg',
-              width: 24,
-              height: 24,
-            ),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: EdgeInsets.all(10.0),
-            ),
-          ),
 
-          SizedBox(width: 4),
-
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage()));
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) =>  SearchPage()
+                )
+              );
             },
-            child: SvgPicture.asset(
-              'assets/icons/svg/notifications.svg',
-              width: 24,
-              height: 24,
-            ),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Color(0xFF13B156).withOpacity(0.1), // Couleur de fond
+                borderRadius: BorderRadius.circular(12), // Bordure arrondie
               ),
-              padding: EdgeInsets.all(10.0),
+              child: SizedBox(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset('assets/icons/svg/search.svg'), // Image SVG
+              ),
             ),
           ),
 
-          SizedBox(width: 4),
+          SizedBox(width: 15),
 
-          ElevatedButton(
-            onPressed: () {},
-            child: SvgPicture.asset(
-              'assets/icons/svg/bookmark.svg',
-              width: 24,
-              height: 24,
-            ),
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) =>   NotificationPage()
+                )
+              );
+            },
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Color(0xFF13B156).withOpacity(0.1), // Couleur de fond
+                borderRadius: BorderRadius.circular(12), // Bordure arrondie
               ),
-              padding: EdgeInsets.all(10.0),
+              child: SizedBox(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset('assets/icons/svg/notifications.svg'), // Image SVG
+              ),
             ),
           ),
+
+          SizedBox(width: 15),
+
+           GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) =>   BookmarkPage(),
+                )
+              );
+            },
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Color(0xFF13B156).withOpacity(0.1), // Couleur de fond
+                borderRadius: BorderRadius.circular(12), // Bordure arrondie
+              ),
+              child: SizedBox(
+                width: 24,
+                height: 24,
+                child: SvgPicture.asset('assets/icons/svg/bookmark.svg'), // Image SVG
+              ),
+            ),
+          )
+
         ], 
       ),
 

@@ -8,6 +8,10 @@ import 'layouts/LineInfos.dart';
 import '../../generalLayouts/LineCathegoryButton.dart';
 import 'layouts/FundingCard.dart';
 import 'SectionFundingCard.dart';
+import 'SectionCardVideo.dart';
+import '../urgentFundraising/UrgentFundraisingPage.dart';
+import '../Comingtoanend/ComingToAnEndPage.dart';
+import '../watchImpact/WatchImpact.dart';
 
 class ContainerBody extends StatelessWidget {
   const ContainerBody({super.key});
@@ -35,6 +39,7 @@ class ContainerBody extends StatelessWidget {
               LineInfos(
                 label: "Urgent Fundraising",
                 label2: "See all",
+                page: UrgentFundraisingPage(),
               ),
 
               SizedBox(height: 20),
@@ -71,6 +76,7 @@ class ContainerBody extends StatelessWidget {
              LineInfos(
                 label: "Coming to an end",
                 label2: "See all",
+                page: ComingToAnEndPage(),
               ),
 
 
@@ -104,11 +110,26 @@ class ContainerBody extends StatelessWidget {
               LineInfos(
                 label: "Watch the Impact of Your Donation",
                 label2: "See all",
+                page: WatchImpact(),
               ),
 
               SizedBox(height: 20,),
 
-              CardVideo(),
+              SectionCardVideo(
+                cardVideo: [
+
+                  CardVideo(
+                    pathMiniature:'assets/images/téléchargement (5).jfif',
+                  ),
+
+                  SizedBox(width: 20,),
+
+                  CardVideo(
+                    pathMiniature:'assets/images/téléchargement (5).jfif',
+                  )
+
+                ],
+              ),
 
               SizedBox(height: 20,),
             

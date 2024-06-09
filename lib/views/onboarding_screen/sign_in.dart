@@ -1,55 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/viewmodels/auth_viewModel.dart';
+import 'package:umoja/viewmodels/password_visibility_viewModel.dart';
 import 'package:umoja/views/account_setup/select_country_page.dart';
+import 'package:umoja/views/forgot_reset_password/forgot_password.dart';
 import 'package:umoja/views/home/page.dart';
 import 'package:umoja/views/homepage/HomePage.dart';
 import 'package:umoja/services/auth_service.dart';
+import 'package:umoja/views/onboarding_screen/sign_up.dart';
 
-import 'forgot_password.dart';
-import 'sign_up.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
-
+class SignInPage extends ConsumerStatefulWidget {
+  
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
-  // Variables pour gérer l'état du formulaire
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+class _SignInPageState extends ConsumerState<SignInPage> {
+  final formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   bool _rememberMe = false;
   bool _emailInvalid = false;
-  bool _obscureText = true;
-  
+
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
-
   
-  void _togglePasswordVisibility() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final authViewModel = ref.watch(authViewModelProvider.notifier);
+    final isLoading = authViewModel.isLoading;
+    final passwordVisibility = ref.watch(passwordVisibilityProvider);
+    final passwordVisibilityNotifier = ref.watch(passwordVisibilityProvider.notifier);
 
-    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -64,7 +59,7 @@ class _SignInPageState extends State<SignInPage> {
                 const SizedBox(height: 30),
                 // Champ Email
                 TextFormField(
-                  controller: _emailController,
+                  controller: emailController,
                   decoration: InputDecoration(
                     labelText: 'Email *',
                     errorText: _emailInvalid ? 'Invalid email' : null,
@@ -90,21 +85,21 @@ class _SignInPageState extends State<SignInPage> {
                 const SizedBox(height: 20),
                 // Champ Mot de passe
                 TextFormField(
-                  controller: _passwordController,
-                  obscureText: _obscureText,
+                  controller: passwordController,
                   decoration: InputDecoration(
                     labelText: 'Password *',
                     suffixIcon: IconButton(
                        icon: Icon(
-                        _obscureText ? Icons.visibility : Icons.visibility_off,
-                      ),
-                      onPressed: _togglePasswordVisibility,
+                          passwordVisibility.obscureText ? Icons.visibility : Icons.visibility_off,
+                        ),
+                        onPressed: passwordVisibilityNotifier.togglePasswordVisibility,
                     ),
                     // Bordure lorsque les conditions sont respectées
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF13B156)),
                     ),
                   ),
+                  obscureText: passwordVisibility.obscureText,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a password';
@@ -130,31 +125,28 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const SizedBox(height: 20),
                 // Bouton "Sign up"
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF13B156), // Green background
-                          minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 
-                                          MediaQuery.of(context).size.height * 0.06), // 80% width, 15% height
-                        ),
+                isLoading
+                ? CircularProgressIndicator():
+                CustomBouton(
+                  label: 'Sign In',
                   onPressed: () async{
-                      final email = _emailController.text;
-                      final password = _passwordController.text;
-                      final authViewModel = Provider.of<AuthViewModel>(context, listen: false);
-
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                      );
-                      
+                    final email = emailController.text;
+                    final password = passwordController.text;
+                      // showDialog(
+                      //   context: context,
+                      //   barrierDismissible: false,
+                      //   builder: (BuildContext context) {
+                      //     return Center(
+                      //       child: CircularProgressIndicator(),
+                      //     );
+                      //   },
+                      // );
                       try {
-                          await authViewModel.signIn(email, password);
-                          Navigator.pop(context); // Remove the loading indicator
-                          Navigator.restorablePushReplacementNamed( context,'/home',);
+                          if (formKey.currentState!.validate()) {
+                              await authViewModel.signIn(email, password);
+                              // Navigator.pop(context); // Remove the loading indicator
+                              Navigator.restorablePushReplacementNamed( context,'/home',);
+                            }
                         } catch (e) {
                           Navigator.pop(context); // Remove the loading indicator
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -162,8 +154,21 @@ class _SignInPageState extends State<SignInPage> {
                           );
                         }
                       
+                  },
+                ),
+                // ElevatedButton(
+                //   style: ElevatedButton.styleFrom(
+                //           backgroundColor: Color(0xFF13B156), // Green background
+                //           minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 
+                //                           MediaQuery.of(context).size.height * 0.06), // 80% width, 15% height
+                //         ),
+                //   onPressed: () async{
+                //       ;
+                      
+                      
+                      
                     // if (_formKey.currentState!.validate()) {
-                    //   final User? result = await authService.signInWithEmailAndPassword(
+                    //   final User? result = await authViewModel.signInWithEmailAndPassword(
                     //           _emailController.text,
                     //           _passwordController.text,
                     //       );
@@ -180,15 +185,15 @@ class _SignInPageState extends State<SignInPage> {
                     //     }
                      
                     // }
-                  },
-                  child: const Text(
-                    'Sign In',
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white, 
-                      ),
-                    ),
-                ),
+                //   },
+                //   child: const Text(
+                //     'Sign In',
+                //     style: TextStyle(
+                //         fontSize: 14,
+                //         color: Colors.white, 
+                //       ),
+                //     ),
+                // ),
                 const SizedBox(height: 20),
                  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -216,7 +221,7 @@ class _SignInPageState extends State<SignInPage> {
                     IconButton(
                       icon: const Icon(Icons.facebook),
                       onPressed: () async {
-                        final result = await authService.signInWithOAuth(OAuthProvider.facebook);
+                        // final result = await authViewModel.signInWithOAuth(OAuthProvider.facebook);
                         // if (result) {
                         //   Navigator.pushReplacement(
                         //     context,
@@ -229,7 +234,7 @@ class _SignInPageState extends State<SignInPage> {
                       icon: const Icon(Icons.facebook), // Remplacez par le chemin de votre logo Google
 
                       onPressed: () async {
-                        final result = await authService.signInWithOAuth(OAuthProvider.google);
+                        // final result = await authViewModel.signInWithOAuth(OAuthProvider.google);
                          
                         // if (result) {
                         //   Navigator.pushReplacement(
