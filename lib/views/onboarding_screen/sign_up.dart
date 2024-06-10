@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:umoja/services/auth_service.dart';
 import 'package:umoja/viewmodels/auth_viewModel.dart';
 import 'package:umoja/views/account_setup/profile.dart';
-import 'package:umoja/views/profile/profile_page.dart';
-import '../account_setup/select_country_page.dart';
-import 'package:provider/provider.dart';
+import 'package:umoja/views/account_setup/select_country_page.dart';
 import 'sign_in.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends ConsumerStatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  ConsumerState<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  // Variables pour gérer l'état du formulaire
+class _SignUpPageState extends ConsumerState<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -32,7 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-   void _togglePasswordVisibility() {
+  void _togglePasswordVisibility() {
     setState(() {
       _obscureText = !_obscureText;
     });
@@ -54,7 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return null;
   }
 
-   String? _validateEmail(String? value) {
+  String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter an email';
     }
@@ -66,8 +62,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    
-    final authService = Provider.of<AuthService>(context, listen: false);
+    final authViewModel = ref.read(authViewModelProvider.notifier);
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -77,22 +73,18 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo UMOJA
-                Image.asset('assets/images/logo_mini.png'), 
+                Image.asset('assets/images/logo_mini.png'),
                 const SizedBox(height: 20),
-                // Titre "Sign up for free"
                 const Text(
                   'Sign up for free',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 30),
-                // Champ Email
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
                     labelText: 'Email *',
                     errorText: _emailInvalid ? 'Invalid email' : null,
-                    // Bordure lorsque les conditions sont respectées
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF13B156)),
                     ),
@@ -101,7 +93,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   validator: _validateEmail,
                 ),
                 const SizedBox(height: 20),
-                // Champ Mot de passe
                 TextFormField(
                   controller: _passwordController,
                   obscureText: _obscureText,
@@ -113,7 +104,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       onPressed: _togglePasswordVisibility,
                     ),
-                    // Bordure lorsque les conditions sont respectées
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF13B156)),
                     ),
@@ -121,7 +111,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   validator: _validatePassword,
                 ),
                 const SizedBox(height: 10),
-                // Checkbox "Remember me"
                 Row(
                   children: [
                     Checkbox(
@@ -137,107 +126,117 @@ class _SignUpPageState extends State<SignUpPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                // Bouton "Sign up"
                 CustomBouton(
-                  label: "Sign up", 
+                  label: "Sign up",
                   onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
                       final email = _emailController.text;
                       final password = _passwordController.text;
-                      final authViewModel = Provider.of<AuthViewModel>(context, listen: false); 
-                      if(_formKey.currentState!.validate()){
-                        // showDialog(
-                        //   context: context,
-                        //   barrierDismissible: false,
-                        //   builder: (BuildContext context) {
-                        //     return Center(
-                        //       child: CircularProgressIndicator(),
-                        //     );
-                        //   },
-                        // );
-                        // try {
-                        //     await authViewModel.signUp(email, password);
-                        //     Navigator.pop(context); // Remove the loading indicator
-                        //     Navigator.pushReplacement(
-                        //       context,
-                        //       MaterialPageRoute(builder: (context) => FillProfilePage()),
-                        //     );
-                        //   } catch (e) {
-                        //     Navigator.pop(context); // Remove the loading indicator
-                        //     ScaffoldMessenger.of(context).showSnackBar(
-                        //       SnackBar(content: Text('Erreur lors de l\'inscription: $e')),
-                        //     );
-                        //   }
+
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
+
+                      try {
+                        await authViewModel.signUp(email, password);
+                        Navigator.pop(context); // Remove the loading indicator
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => FillProfilePage()),
+                        );
+                      } catch (e) {
+                        Navigator.pop(context); // Remove the loading indicator
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Erreur lors de l\'inscription: $e')),
+                        );
                       }
-                    
+                    }
                   },
                 ),
-
                 const SizedBox(height: 20),
-                // Texte "or continue with"
                 const Text('or continue with'),
                 const SizedBox(height: 20),
-                // Boutons Facebook, Google, Apple
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
                       icon: const Icon(Icons.facebook),
                       onPressed: () async {
-                        // final result = await authService.signInWithOAuth(OAuthProvider.facebook);
-                        // if (result) {
-                        //   Navigator.pushReplacement(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => SelectCountryPage(),
-                        //     ),
-                        //   );
-                        // }
+                        try {
+                          await authViewModel.signInWithFacebook();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SelectCountryPage(),
+                            ),
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Failed to sign in with Facebook: $e')),
+                          );
+                        }
                       },
                     ),
                     IconButton(
-                      icon: const Icon(Icons.facebook), // Remplacez par le chemin de votre logo Google
+                      icon: Icon(Icons.verified_user), // Update this to the correct icon for Google
                       onPressed: () async {
-                        // final result = await authService.signInWithOAuth(OAuthProvider.google);
-                        // if (result) {
-                        //   Navigator.pushReplacement(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => SelectCountryPage(),
-                        //     ),
-                        //   );
-                        // }
-                      }, 
+                        try {
+                          await authViewModel.signInWithGoogle();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SelectCountryPage(),
+                            ),
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Failed to sign in with Google: $e')),
+                          );
+                        }
+                      },
                     ),
                     IconButton(
                       icon: const Icon(Icons.apple),
                       onPressed: () async {
-                        // bool result = await authService.signInWithApple();
-                        // if (result) {
-                        //   Navigator.pushReplacement(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => SelectCountryPage(),
-                        //     ),
-                        //   );
-                        // }
-                      }
-                    )
+                        try {
+                          await authViewModel.signInWithApple();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SelectCountryPage(),
+                            ),
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Failed to sign in with Apple: $e')),
+                          );
+                        }
+                      },
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
-                // Lien "Already have an account?"
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text('Already have an account?'),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => SignInPage()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignInPage()),
+                        );
                       },
                       child: const Text(
                         'Sign in',
                         style: TextStyle(
-                          color: Color(0xFF13B156), 
+                          color: Color(0xFF13B156),
                         ),
                       ),
                     ),

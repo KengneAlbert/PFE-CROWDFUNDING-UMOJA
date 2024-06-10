@@ -27,14 +27,7 @@ Future<void> main() async {
 
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
-  runApp(
-    MultiProvider(
-      providers: [
-              
-              ],
-      child: Umoja(),
-    ), 
-  );
+  runApp(Umoja());
 }
 
 
