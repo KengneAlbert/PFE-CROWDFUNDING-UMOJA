@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:umoja/views/onboarding_screen/sign_up.dart';
 import 'firebase_options.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +12,6 @@ import 'package:umoja/models/projet_model.dart';
 import 'package:umoja/models/user_model.dart';
 import 'package:umoja/services/auth_service.dart';
 import 'package:umoja/services/projet_service.dart';
-import 'package:umoja/services/user_service.dart';
 import 'package:umoja/viewmodels/auth_viewModel.dart';
 import 'package:umoja/services/initializeData.dart';
 import 'package:umoja/viewmodels/projet_viewModel.dart';
@@ -25,9 +26,11 @@ Future<void> main() async {
       options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final FirebaseFirestore db = FirebaseFirestore.instance;
-
-  runApp(Umoja());
+  runApp(
+    ProviderScope(
+      child: Umoja(),
+    ),
+  );
 }
 
 
@@ -41,8 +44,8 @@ class Umoja extends StatelessWidget {
         primarySwatch: Colors.blue
       ),
       debugShowCheckedModeBanner: false,
-      // home: SignUpPage(),
-      initialRoute: AppRoutes.FirsRoute,
+      home: SignUpPage(),
+      // initialRoute: AppRoutes.FirsRoute,
       routes: AppRoutes.routes,
     );
   }

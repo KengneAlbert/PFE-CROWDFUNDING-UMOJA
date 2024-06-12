@@ -4,11 +4,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  Stream<User?> get userStream => _firebaseAuth.authStateChanges();
 
   Future<UserCredential> signIn(String email, String password) async {
    try {
       final credential = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
+        email: email.trim(),
         password: password
       );
       return credential;
@@ -51,6 +52,8 @@ class AuthService {
       }
   }
 
+
+
   Future<UserCredential> signInWithGoogle() async {
   // Trigger the authentication flow
   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -67,6 +70,7 @@ class AuthService {
   // Once signed in, return the UserCredential
   return await _firebaseAuth.signInWithCredential(credential);
 }
+
 
 Future<UserCredential> signInWithFacebook() async {
   // Déclencher le flux de connexion
@@ -100,6 +104,23 @@ Future<UserCredential> signInWithApple() async {
   await _firebaseAuth.revokeTokenWithAuthorizationCode(authCode!);
   return userCredential;
 }
+
+Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      throw Exception('error.${e.toString()}');
+    }
+  }
+
+  Future<void> confirmResetPassword(String code, String newPassword) async {
+    try {
+      await FirebaseAuth.instance
+          .confirmPasswordReset(code: code, newPassword: newPassword);
+    } catch (e) {
+      throw Exception('error.${e.toString()}');
+    }
+  }
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();

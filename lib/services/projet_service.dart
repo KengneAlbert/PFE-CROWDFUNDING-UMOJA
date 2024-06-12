@@ -43,30 +43,30 @@ class ProjetService extends ChangeNotifier {
   //   }
   // }
 
-  Future<void> addProjet(Projet projet) async {
-    final response = await _supabase.from('projets').insert(projet.toMap());
-    if (response.error == null) {
-    } else {
-      throw Exception('Erreur lors de la création du projet : ${response.error!.message}');
-    }
-  }
+  // Future<void> addProjet(Projet projet) async {
+  //   final response = await _supabase.from('projets').insert(projet.toMap());
+  //   if (response.error == null) {
+  //   } else {
+  //     throw Exception('Erreur lors de la création du projet : ${response.error!.message}');
+  //   }
+  // }
 
-  Future<Projet> updateProjet(Projet projet) async {
+  // Future<Projet> updateProjet(Projet projet) async {
 
-    final response = await _supabase
-        .from('projets')
-        .update(projet.toMap())
-        .eq('id', projet.id);
-    if (response.error != null) {
-      throw Exception('Erreur lors de la mise à jour du projet : ${response.error!.message}');
-    }
-    return projet;
-  }
+  //   final response = await _supabase
+  //       .from('projets')
+  //       .update(projet.toMap())
+  //       .eq('id', projet.id);
+  //   if (response.error != null) {
+  //     throw Exception('Erreur lors de la mise à jour du projet : ${response.error!.message}');
+  //   }
+  //   return projet;
+  // }
 
-   Future<void> deleteProjet(String projetId) async {
-    final response = await _supabase.from('projects').delete().eq('id', projetId);
-    if (response.error != null) {
-      throw Exception('Erreur lors de la suppression du projet : ${response.error!.message}');
-    }
-  }
+  //  Future<void> deleteProjet(String projetId) async {
+  //   final response = await _supabase.from('projects').delete().eq('id', projetId);
+  //   if (response.error != null) {
+  //     throw Exception('Erreur lors de la suppression du projet : ${response.error!.message}');
+  //   }
+  // }
 }

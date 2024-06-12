@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/viewmodels/auth_viewModel.dart';
 import 'package:umoja/viewmodels/password_visibility_viewModel.dart';
-import 'package:umoja/views/account_setup/select_country_page.dart';
 import 'package:umoja/views/forgot_reset_password/forgot_password.dart';
-import 'package:umoja/views/home/page.dart';
-import 'package:umoja/views/homepage/HomePage.dart';
-import 'package:umoja/services/auth_service.dart';
 import 'package:umoja/views/onboarding_screen/sign_up.dart';
 
 

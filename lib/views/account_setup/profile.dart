@@ -156,7 +156,6 @@ class _FillProfilePageState extends State<FillProfilePage> {
                 CustomBouton(
                   label: "Continue",
                   onPressed: () {
-                    final userviewModel = Provider.of<UserViewModel>(context);
                     if (_formKey.currentState!.validate()) {
                       // userviewModel.addProjet(
 

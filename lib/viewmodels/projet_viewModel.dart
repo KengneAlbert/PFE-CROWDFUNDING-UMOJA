@@ -1,53 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/models/projet_model.dart';
-import 'package:umoja/services/projet_service.dart';
+import 'package:umoja/services/database_service.dart';
 
-class ProjetViewModel extends ChangeNotifier {
-  final ProjetService projetService;
-
-  ProjetViewModel({required this.projetService});
-  List<Projet> _projets = [];
+class ProjetViewModel extends StateNotifier<List<ProjetModel?>>{
+  final DatabaseService projetService;
   bool _isLoading = false;
 
-  List<Projet> get projets => _projets;
+  ProjetViewModel({required this.projetService}):super([]);
+  
   bool get isLoading => _isLoading;
 
-  // Future<void> fetchProjets() async {
-  //   _isLoading = true;
-  //   notifyListeners();
+  Future<void> setProjet(String titre, String description, int montantTotal, DateTime dateDebutCollecte, DateTime dateFinCollecte, String? histoire, int montantObtenu, int CategorieId, int userId, DateTime createdAt)async{
+    _isLoading = true;
+    state = [...state];
+    try{
+        final ProjetModel projetModel = ProjetModel(titre: titre, description: description, montantTotal: montantTotal, dateDebutCollecte: dateDebutCollecte, dateFinCollecte: dateFinCollecte, montantObtenu: montantObtenu, CategorieId: CategorieId, userId: userId, createdAt: createdAt);
+        await projetService.update("Projets", projetModel.toMap());
+        await fetchAllProjets();
+    }catch (e){
+      print(e);
+    } finally {
+      _isLoading = false;
+    }
+  }
 
-  //   try {
-  //     _projets = await _projetService.fetchProjets();
-  //   } catch (e) {
-  //     print('Erreur lors de la récupération des projets : $e');
-  //   } finally {
-  //     _isLoading = false;
-  //     notifyListeners();
-  //   }
-  // }
-
-  Future<void> addProjet(Projet projet) async {
+  Future<void> fetchAllProjets() async {
+    _isLoading = true;
+    state = [...state];
     try {
-      await projetService.addProjet(projet);
-      _projets.add(projet);
-      notifyListeners();
+      final projets = await projetService.fetchAll('Projets');
+      state = projets.map((e) => e != null ? ProjetModel.fromMap(e) : null ).toList();
     } catch (e) {
-      print('Erreur lors de l\'ajout du projet : $e');
+      print(e);
+    } finally {
+      _isLoading = false;
     }
   }
 
-   Future<void> updateProjet(Projet projet) async {
-    await projetService.updateProjet(projet);
-    final index = _projets.indexWhere((p) => p.id == projet.id);
-    if (index != -1) {
-      _projets[index] = projet;
+
+  Future<void> fetchProjetsByCategorie(int categorieId) async {
+    _isLoading = true;
+    state = [...state];
+    try {
+      final projets = await projetService.fetchByCategorie('Projets', categorieId);
+      state = projets.map((e) => e != null ? ProjetModel.fromMap(e) : null).toList();
+    } catch (e) {
+      print(e);
+    } finally {
+      _isLoading = false;
     }
-    notifyListeners();
   }
 
-  Future<void> deleteProjet(String projetId) async {
-    await projetService.deleteProjet(projetId);
-    _projets.removeWhere((projet) => projet.id == projetId);
-    notifyListeners();
+
+  Future<void> updateProjet(String id, ProjetModel projet) async {
+    _isLoading = true;
+    state = [...state];
+    try {
+      await projetService.update('Projets/$id', projet.toMap());
+      await fetchAllProjets();
+    } catch (e) {
+      print(e);
+    } finally {
+      _isLoading = false;
+    }
   }
+
+  Future<void> deleteProjet(String id) async {
+    _isLoading = true;
+    state = [...state];
+    try {
+      await projetService.delete('Projets/$id');
+      await fetchAllProjets();
+    } catch (e) {
+      print(e);
+    } finally {
+      _isLoading = false;
+    }
+  }
+
 }
