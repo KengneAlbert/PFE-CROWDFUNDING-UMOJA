@@ -1,22 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:umoja/models/projet_model.dart';
+import 'package:umoja/services/database_service.dart';
+import 'package:umoja/viewmodels/projet_viewModel.dart';
+import 'package:umoja/viewmodels/user_viewModel.dart';
 import 'package:umoja/views/onboarding_screen/sign_up.dart';
 import 'firebase_options.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:umoja/app/routes.dart';
-import 'package:umoja/constant/constant.dart';
-import 'package:umoja/models/projet_model.dart';
-import 'package:umoja/models/user_model.dart';
-import 'package:umoja/services/auth_service.dart';
-import 'package:umoja/services/projet_service.dart';
-import 'package:umoja/viewmodels/auth_viewModel.dart';
-import 'package:umoja/services/initializeData.dart';
-import 'package:umoja/viewmodels/projet_viewModel.dart';
-// import 'bookmark/BookmarkPageContaintDetail.dart';
-import 'prayers/PrayersPage.dart';
 
 
 Future<void> main() async {
@@ -33,6 +27,16 @@ Future<void> main() async {
   );
 }
 
+final firestoreProvider = Provider<FirebaseFirestore>((ref) => FirebaseFirestore.instance);
+final firebaseStorageProvider = Provider<FirebaseStorage>((ref) => FirebaseStorage.instance);
+final firebaseAuthProvider = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
+final databaseServiceProvider = Provider<DatabaseService>((ref) => DatabaseService());
+
+final projetViewModelProvider = StateNotifierProvider<ProjetViewModel, List<ProjetModel?>>((ref) {
+  return ProjetViewModel(projetService: ref.read(databaseServiceProvider));
+});
+final userServiceProvider = Provider((ref) => UserService(ref.read(firestoreProvider), ref.read(firebaseStorageProvider)));
+
 
 class Umoja extends StatelessWidget {
   const Umoja({super.key});
@@ -44,8 +48,8 @@ class Umoja extends StatelessWidget {
         primarySwatch: Colors.blue
       ),
       debugShowCheckedModeBanner: false,
-      home: SignUpPage(),
-      // initialRoute: AppRoutes.FirsRoute,
+      // home: SignUpPage(),
+      initialRoute: AppRoutes.FirsRoute,
       routes: AppRoutes.routes,
     );
   }

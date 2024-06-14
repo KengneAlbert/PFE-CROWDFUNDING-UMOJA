@@ -162,7 +162,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // Traitement des données du formulaire
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SelectInterestPage()));
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SelectInterestPage()));
                     }
                   },
                 )
