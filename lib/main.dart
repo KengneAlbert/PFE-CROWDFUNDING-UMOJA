@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/models/projet_model.dart';
+import 'package:umoja/models/user_model.dart';
 import 'package:umoja/services/database_service.dart';
+import 'package:umoja/viewmodels/auth_viewModel.dart';
 import 'package:umoja/viewmodels/projet_viewModel.dart';
 import 'package:umoja/viewmodels/user_viewModel.dart';
 import 'package:umoja/views/onboarding_screen/sign_up.dart';
@@ -35,7 +37,8 @@ final databaseServiceProvider = Provider<DatabaseService>((ref) => DatabaseServi
 final projetViewModelProvider = StateNotifierProvider<ProjetViewModel, List<ProjetModel?>>((ref) {
   return ProjetViewModel(projetService: ref.read(databaseServiceProvider));
 });
-final userServiceProvider = Provider((ref) => UserService(ref.read(firestoreProvider), ref.read(firebaseStorageProvider)));
+final userServiceProvider = Provider((ref) => UserService());
+final authViewModelProvider = StateNotifierProvider<AuthViewModel, UserModel?>((ref) => AuthViewModel());
 
 
 class Umoja extends StatelessWidget {

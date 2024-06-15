@@ -14,18 +14,18 @@ class NotifierModel{
  factory NotifierModel.fromMap(Map<String,dynamic> map){
   return NotifierModel(
       id: map['id'], 
-      userId : map['userId'], 
-      notificationId : map['notificationId'],
-      dateAjout : DateTime.parse(map['dateAjout']) 
+      userId : map['user_id'], 
+      notificationId : map['notification_id'],
+      dateAjout : DateTime.parse(map['date_ajout']) 
     );
  }
 
  Map<String,dynamic> toMap(){
   return{
     'id' : id,
-    'userId' : userId,
-    'notificationId' : notificationId,
-    'dateAjout' : dateAjout
+    'user_id' : userId,
+    'notification_id' : notificationId,
+    'date_ajout' : dateAjout
   };
  }
 

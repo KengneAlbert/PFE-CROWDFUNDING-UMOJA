@@ -3,11 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/viewmodels/registration_notifier.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/viewmodels/user_viewModel.dart';
+import 'package:umoja/views/home/page.dart';
 
 class SetPinCodePage extends ConsumerWidget {
-   final UserService userService;
-
-  const SetPinCodePage({super.key, required this.userService});
+   static UserService userService = UserService();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -59,8 +58,22 @@ class SetPinCodePage extends ConsumerWidget {
               label: "Finish",
               onPressed: () async {
                 if (pinController.text.length == 4) {
-                  registrationNotifier.updateData('pinCode', int.parse(pinController.text));
-                  await userService.createUserInFirestore(ref.read as WidgetRef, registrationState);
+                  registrationNotifier.updateData('pin_code', int.parse(pinController.text));
+                  showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                    );
+                  await userService.createUserInFirestore(ref,  ref.read(registrationProvider));
+                  Navigator.pop(context); // Remove the loading indicator
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
                 }
               },
             ),

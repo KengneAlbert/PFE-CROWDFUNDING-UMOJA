@@ -1,30 +1,32 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:umoja/main.dart';
 import 'package:umoja/models/document_projet_model.dart';
 import 'package:umoja/services/database_service.dart';
 
 class DocumentProjetViewModel extends StateNotifier<List<DocumentProjetModel?>> {
- final DatabaseService databaseService;
- final String projetId;
+  final DatabaseService databaseService;
+  final String projetId;
   bool _isLoading = false;
 
-  DocumentProjetViewModel(this.projetId, {required this.databaseService}):super([]);
+  DocumentProjetViewModel(this.projetId, {required this.databaseService}) : super([]);
 
   bool get isLoading => _isLoading;
 
-  Future<void> setDocumentProjet(String typeDocument, String urlDocument)async{
+  // Function to add a document to a project
+  Future<void> setDocumentProjet(String typeDocument, String urlDocument) async {
     _isLoading = true;
     state = [...state];
-    try{
-        final  projetMap = { 'typeDocument' : typeDocument, 'urlDocument' : urlDocument};
-        await databaseService.update("Projets/$projetId/DocumentProjet", projetMap);
-        await fetchAllDocumentProjets();
-    }catch (e){
+    try {
+      await databaseService.create('Projets/$projetId/DocumentProjet', {'typeDocument': typeDocument, 'urlDocument': urlDocument});
+      await fetchAllDocumentProjets();
+    } catch (e) {
       print(e);
     } finally {
       _isLoading = false;
     }
   }
 
+  // Function to fetch all documents for a project
   Future<void> fetchAllDocumentProjets() async {
     _isLoading = true;
     state = [...state];
@@ -38,7 +40,7 @@ class DocumentProjetViewModel extends StateNotifier<List<DocumentProjetModel?>> 
     }
   }
 
-
+  // Function to update a document for a project
   Future<void> updateDocumentProjet(String id, DocumentProjetModel projet) async {
     _isLoading = true;
     state = [...state];
@@ -52,6 +54,7 @@ class DocumentProjetViewModel extends StateNotifier<List<DocumentProjetModel?>> 
     }
   }
 
+  // Function to delete a document from a project
   Future<void> deleteProjet(String id) async {
     _isLoading = true;
     state = [...state];
@@ -65,3 +68,7 @@ class DocumentProjetViewModel extends StateNotifier<List<DocumentProjetModel?>> 
     }
   }
 }
+
+final documentProjetViewModelProvider = StateNotifierProvider.family<DocumentProjetViewModel, List<DocumentProjetModel?>, String>(
+  (ref, projetId) => DocumentProjetViewModel(projetId, databaseService: ref.watch(databaseServiceProvider)),
+);

@@ -1,7 +1,7 @@
 class MediaProjetModel{
  final String id;
  final String typeMedia;
- final String urlMedia;
+ final List<String> urlMedia;
 
  MediaProjetModel({
     required this.id,
@@ -12,16 +12,16 @@ class MediaProjetModel{
  factory MediaProjetModel.fromMap(Map<String,dynamic> map){
   return MediaProjetModel(
       id: map['id'], 
-      typeMedia : map['typeMedia'], 
-      urlMedia : map['urlMedia']
+      typeMedia : map['type_media'], 
+      urlMedia : map['url_media']
     );
  }
 
  Map<String,dynamic> toMap(){
   return{
     'id' : id,
-    'typeMedia' : typeMedia,
-    'urlMedia' : urlMedia
+    'type_media' : typeMedia,
+    'url_media' : urlMedia
   };
  }
 

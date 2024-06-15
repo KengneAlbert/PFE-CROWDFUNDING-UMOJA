@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:umoja/custom_widgets/custom_bouton.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart'as bouton;
 import 'package:umoja/custom_widgets/custom_input.dart';
 import 'package:umoja/main.dart';
 import 'package:umoja/viewmodels/registration_notifier.dart';
@@ -160,10 +160,10 @@ class _FillProfilePageState extends ConsumerState<FillProfilePage> {
                       ref.read(registrationProvider.notifier).updateData('gender', _gender);
                       ref.read(registrationProvider.notifier).updateData('location', _cityController.text);
 
-                      final userService = ref.read(userServiceProvider);
-                      await userService.createUserInFirestore(ref, ref.read(registrationProvider));
+                      // final userService = ref.read(userServiceProvider);
+                      // await userService.createUserInFirestore(ref, ref.read(registrationProvider));
 
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SelectInterestPage(userService)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SelectInterestPage()));
                     }
                   },
                 )

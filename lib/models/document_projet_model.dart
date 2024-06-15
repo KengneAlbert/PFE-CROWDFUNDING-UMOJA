@@ -12,16 +12,16 @@ class DocumentProjetModel{
  factory DocumentProjetModel.fromMap(Map<String,dynamic> map){
   return DocumentProjetModel(
       id: map['id'], 
-      typeDocument : map['typeDocument'], 
-      urlDocument : map['urlDocument']
+      typeDocument : map['type_document'], 
+      urlDocument : map['url_document']
     );
  }
 
  Map<String,dynamic> toMap(){
   return{
     'id' : id,
-    'typeDocument' : typeDocument,
-    'urlDocument' : urlDocument
+    'type_document' : typeDocument,
+    'url_document' : urlDocument
   };
  }
 

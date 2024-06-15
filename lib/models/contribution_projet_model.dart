@@ -19,10 +19,10 @@ class ContributionProjetModel{
   return ContributionProjetModel(
       id: map['id'], 
       montant: map['montant'],
-      userId : map['userId'], 
+      userId : map['user_id'], 
       projetId : map['projetId'],
-      dateContribution : DateTime.parse(map['dateContribution']),
-      moyenPaiement: map['moyenPaiement']
+      dateContribution : DateTime.parse(map['date_contribution']),
+      moyenPaiement: map['moyen_paiement']
     );
  }
 

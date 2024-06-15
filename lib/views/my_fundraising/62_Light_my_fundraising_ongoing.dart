@@ -225,10 +225,10 @@ class FundraisingList extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
            // Naviguer vers la page du formulaire d'ajoute de fundraising
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => CreateNewFundraisingPage()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CreateNewFundraisingPage()),
+            );
           },
           child: Icon(Icons.add),
            backgroundColor: Colors.green,

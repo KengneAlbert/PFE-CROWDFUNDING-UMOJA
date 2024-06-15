@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:umoja/main.dart';
 import 'package:umoja/views/profile/settings_page.dart';
 import 'package:umoja/views/profile/wallet_center_page.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
-
+  
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(authViewModelProvider);
     return Scaffold(
       appBar: AppBar(
         leading: SvgPicture.asset(
@@ -37,7 +40,7 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     CircleAvatar(
                           radius: 60,
-                          backgroundImage: AssetImage('assets/images/logo_mini.png'), // Remplacez par l'image par défaut souhaitée
+                          backgroundImage: user?.profile_picture != null  ? Image.network(user!.profile_picture!).image : AssetImage('assets/images/logo_mini.png'), // Remplacez par l'image par défaut souhaitée
                         ),
                         Positioned(
                           bottom: 0,
@@ -62,7 +65,7 @@ class ProfilePage extends StatelessWidget {
               SizedBox(height: 16),
               Center(
                 child: Text(
-                  "Adam Smith",
+                  "${user?.name}",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -183,103 +186,105 @@ class ProfilePage extends StatelessWidget {
               SizedBox(height: 8),
               SizedBox(
                 height: 150,
-                child: Wrap(
+                child: user?.interests != null ? Wrap(
                   spacing: 8,
                   runSpacing: 8,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF13B156),
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        textStyle: TextStyle(fontSize: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                    for (var i in user!.interests!)
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF13B156),
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                          textStyle: TextStyle(fontSize: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
+                        child: Text("${i}"),
                       ),
-                      child: Text("Medical"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF13B156),
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        textStyle: TextStyle(fontSize: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text("Disaster"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF13B156),
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        textStyle: TextStyle(fontSize: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text("Education"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF13B156),
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        textStyle: TextStyle(fontSize: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text("Social"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF13B156),
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        textStyle: TextStyle(fontSize: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text("Orphanage"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF13B156),
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        textStyle: TextStyle(fontSize: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text("Humanity"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF13B156),
-                        foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        textStyle: TextStyle(fontSize: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text("Environment"),
-                    ),
+                    
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   style: ElevatedButton.styleFrom(
+                    //     backgroundColor: Color(0xFF13B156),
+                    //     foregroundColor: Colors.white,
+                    //     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    //     textStyle: TextStyle(fontSize: 16),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(8),
+                    //     ),
+                    //   ),
+                    //   child: Text("Disaster"),
+                    // ),
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   style: ElevatedButton.styleFrom(
+                    //     backgroundColor: Color(0xFF13B156),
+                    //     foregroundColor: Colors.white,
+                    //     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    //     textStyle: TextStyle(fontSize: 16),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(8),
+                    //     ),
+                    //   ),
+                    //   child: Text("Education"),
+                    // ),
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   style: ElevatedButton.styleFrom(
+                    //     backgroundColor: Color(0xFF13B156),
+                    //     foregroundColor: Colors.white,
+                    //     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    //     textStyle: TextStyle(fontSize: 16),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(8),
+                    //     ),
+                    //   ),
+                    //   child: Text("Social"),
+                    // ),
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   style: ElevatedButton.styleFrom(
+                    //     backgroundColor: Color(0xFF13B156),
+                    //     foregroundColor: Colors.white,
+                    //     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    //     textStyle: TextStyle(fontSize: 16),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(8),
+                    //     ),
+                    //   ),
+                    //   child: Text("Orphanage"),
+                    // ),
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   style: ElevatedButton.styleFrom(
+                    //     backgroundColor: Color(0xFF13B156),
+                    //     foregroundColor: Colors.white,
+                    //     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    //     textStyle: TextStyle(fontSize: 16),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(8),
+                    //     ),
+                    //   ),
+                    //   child: Text("Humanity"),
+                    // ),
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   style: ElevatedButton.styleFrom(
+                    //     backgroundColor: Color(0xFF13B156),
+                    //     foregroundColor: Colors.white,
+                    //     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    //     textStyle: TextStyle(fontSize: 16),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(8),
+                    //     ),
+                    //   ),
+                    //   child: Text("Environment"),
+                    // ),
                   ],
-                ),
+                ): Text('Aucun centre d\'interet!'),
               ),
             ],
           ),

@@ -21,11 +21,11 @@ class NotificationModel{
   return NotificationModel(
       id: map['id'], 
       contenu: map['contenu'],
-      statutNotification : map['statutNotification'], 
-      typeNotification : map['typeNotification'],
-      dateNotification : DateTime.parse(map['dateNotification']),
-      createdAt:  DateTime.parse(map['createdAt']),
-      updateAt:  DateTime.parse(map['updateAt']),
+      statutNotification : map['statut_notification'], 
+      typeNotification : map['type_notification'],
+      dateNotification : DateTime.parse(map['date_notification']),
+      createdAt:  DateTime.parse(map['created_at']),
+      updateAt:  DateTime.parse(map['update_at']),
     );
  }
 
@@ -33,11 +33,11 @@ class NotificationModel{
   return{
     'id' : id,
     'contenu' : contenu,
-    'statutNotification' : statutNotification,
-    'typeNotification' : typeNotification,
-    'dateNotification' : dateNotification,
-    'createAt' : createdAt,
-    'updateAt' : updateAt,
+    'statut_notification' : statutNotification,
+    'type_notification' : typeNotification,
+    'date_notification' : dateNotification,
+    'create_at' : createdAt,
+    'update_at' : updateAt,
   };
  }
 }

@@ -14,7 +14,7 @@ class ContributionProjetViewModel extends StateNotifier<List<ContributionProjetM
     _isLoading = true;
     state = [...state];
     try{
-        final  contributionMap = { 'projetId' : projetId, 'userId' : userId, 'montant' : montant, 'dateContribution' : dateContribution, 'moyenPaiement' : moyenPaiement};
+        final  contributionMap = { 'projet_id' : projetId, 'user_id' : userId, 'montant' : montant, 'date_contribution' : dateContribution, 'moyen_paiement' : moyenPaiement};
         await databaseService.update("Contribution", contributionMap);
         await fetchAllContributionProjets();
     }catch (e){

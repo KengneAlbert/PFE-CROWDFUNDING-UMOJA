@@ -22,7 +22,7 @@ class UserModel {
     this.age, 
     this.location, 
     this.profile_picture, 
-    this.interests, 
+    this.interests = const [], 
     this.pin_code, 
     
   });
@@ -38,7 +38,7 @@ class UserModel {
       age: map['age'],
       location: map['location'],
       profile_picture: map['profile_picture'],
-      interests: List<String>.from(map['interests']),
+      interests: map.containsKey('interests')? map['interests'].map<String>((value) => value.toString()).toList() : <String>[],
       pin_code: map['pin_code'],
     );
   }

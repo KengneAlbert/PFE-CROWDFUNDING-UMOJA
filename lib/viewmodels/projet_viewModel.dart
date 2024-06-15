@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:umoja/main.dart';
 import 'package:umoja/models/projet_model.dart';
 import 'package:umoja/services/database_service.dart';
 import 'package:umoja/services/storage_service.dart';
@@ -14,7 +16,7 @@ class ProjetViewModel extends StateNotifier<List<ProjetModel?>>{
   ProjetViewModel({required this.projetService}):super([]);
   
   bool get isLoading => _isLoading;
-
+  String uid = FirebaseAuth.instance.currentUser!.uid;
   //   Future<void> setProjet({
   //   required String titre,
   //   required String description,
@@ -82,47 +84,65 @@ class ProjetViewModel extends StateNotifier<List<ProjetModel?>>{
   //   }
   // }
 
+  // Function to create a new project
   Future<void> setProjet({
-  required String titre,
-  required String description,
-  required int montantTotal,
-  required DateTime dateDebutCollecte,
-  required DateTime dateFinCollecte,
-  required String histoire,
-  required int montantObtenu,
-  required String categorieId,
-  required String userId,
-  required DateTime createdAt,
-  required List<String> imageUrls,  // Modifié
-  String? proposalDocumentUrl,
-  String? medicalDocumentUrl,
-}) async {
-  _isLoading = true;
-  state = [...state];
-  try {
-    final ProjetModel projetModel = ProjetModel(
-      titre: titre,
-      description: description,
-      montantTotal: montantTotal,
-      dateDebutCollecte: dateDebutCollecte,
-      dateFinCollecte: dateFinCollecte,
-      montantObtenu: montantObtenu,
-      categorieId: categorieId,
-      userId: userId,
-      createdAt: createdAt,
-      imageUrls: imageUrls,  // Modifié
-      proposalDocumentUrl: proposalDocumentUrl,
-      medicalDocumentUrl: medicalDocumentUrl, 
-      histoire: '',
-    );
-    await projetService.update("Projets", projetModel.toMap());
-    await fetchAllProjets();
-  } catch (e) {
-    print(e);
-  } finally {
-    _isLoading = false;
+    required String titre,
+    required String description,
+    required int montantTotal,
+    required DateTime dateDebutCollecte,
+    required DateTime dateFinCollecte,
+    required String histoire,
+    required int montantObtenu,
+    required String categorieId,
+    required DateTime createdAt,
+    required List<String> imageUrls,
+    String? proposalDocumentUrl,
+    String? medicalDocumentUrl,
+  }) async {
+    _isLoading = true;
+    state = [...state];
+    try {
+      final projetModel = ProjetModel(
+        titre: titre,
+        description: description,
+        montantTotal: montantTotal,
+        dateDebutCollecte: dateDebutCollecte,
+        dateFinCollecte: dateFinCollecte,
+        histoire: histoire,
+        montantObtenu: montantObtenu,
+        categorieId: categorieId,
+        userId: uid,
+        createdAt: createdAt,
+        imageUrls: imageUrls,
+        proposalDocumentUrl: proposalDocumentUrl,
+        medicalDocumentUrl: medicalDocumentUrl,
+      );
+
+      // Add the project to Firestore
+      final docRef = await projetService.create('Projets', projetModel.toMap());
+      final projectId = docRef.id;
+
+      // Add media and document to the project subcollections
+      if (imageUrls.isNotEmpty) {
+        for (final imageUrl in imageUrls) {
+          await projetService.create('Projets/$projectId/MediaProjet', {'typeMedia': 'image', 'urlMedia': imageUrl});
+        }
+      }
+      if (proposalDocumentUrl != null) {
+        await projetService.create('Projets/$projectId/DocumentProjet', {'typeDocument': 'proposal', 'urlDocument': proposalDocumentUrl});
+      }
+      if (medicalDocumentUrl != null) {
+        await projetService.create('Projets/$projectId/DocumentProjet', {'typeDocument': 'medical', 'urlDocument': medicalDocumentUrl});
+      }
+
+      // Update the state with the new project
+      await fetchAllProjets();
+    } catch (e) {
+      print(e);
+    } finally {
+      _isLoading = false;
+    }
   }
-}
 
 
   // Future<void> setProjet(String titre, String description, int montantTotal, DateTime dateDebutCollecte, DateTime dateFinCollecte, String? histoire, int montantObtenu, String CategorieId, int userId, DateTime createdAt)async{
@@ -194,3 +214,8 @@ class ProjetViewModel extends StateNotifier<List<ProjetModel?>>{
   }
 
 }
+
+final projetViewModelProvider = StateNotifierProvider<ProjetViewModel, List<ProjetModel?>>(
+  (ref) => ProjetViewModel(projetService: ref.watch(databaseServiceProvider)),
+);
+

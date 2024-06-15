@@ -48,6 +48,7 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Image Picker
                   GestureDetector(
                     onTap: () async {
                       final picker = ImagePicker();
@@ -77,12 +78,14 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     ),
                   ),
                   SizedBox(height: 16),
+                  // Project Title
                   TextFormField(
                     controller: _titreController,
                     decoration: InputDecoration(labelText: 'Title'),
                     validator: (value) => value!.isEmpty ? 'Please enter a title' : null,
                   ),
                   SizedBox(height: 16),
+                  // Category Dropdown
                   categorieProviderValue.when(
                     data: (categories) => DropdownButtonFormField<String>(
                       value: _category,
@@ -95,6 +98,7 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     error: (error, stack) => Text('Error: $error'),
                   ),
                   SizedBox(height: 16),
+                  // Total Donation Amount
                   TextFormField(
                     controller: _montantTotalController,
                     decoration: InputDecoration(labelText: 'Total Donation Required'),
@@ -102,6 +106,7 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     validator: (value) => value!.isEmpty ? 'Please enter a total donation amount' : null,
                   ),
                   SizedBox(height: 16),
+                  // Donation Start Date Picker
                   GestureDetector(
                     onTap: () async {
                       DateTime? pickedDate = await showDatePicker(
@@ -125,6 +130,7 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     ),
                   ),
                   SizedBox(height: 16),
+                  // Donation Expiration Date Picker
                   GestureDetector(
                     onTap: () async {
                       DateTime? pickedDate = await showDatePicker(
@@ -148,6 +154,7 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     ),
                   ),
                   SizedBox(height: 16),
+                  // Project Description
                   TextFormField(
                     controller: _descriptionController,
                     decoration: InputDecoration(labelText: 'Fund Usage Plan'),
@@ -155,12 +162,14 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     validator: (value) => value!.isEmpty ? 'Please enter a fund usage plan' : null,
                   ),
                   SizedBox(height: 16),
+                  // Name of Recipients
                   TextFormField(
                     controller: _recipientsNameController,
                     decoration: InputDecoration(labelText: 'Name of Recipients (People/Organization)'),
                     validator: (value) => value!.isEmpty ? 'Please enter the name of recipients' : null,
                   ),
                   SizedBox(height: 16),
+                  // Donation Proposal Document Picker
                   GestureDetector(
                     onTap: () async {
                       final result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['pdf']);
@@ -180,6 +189,7 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     ),
                   ),
                   SizedBox(height: 16),
+                  // Medical Documents Picker
                   GestureDetector(
                     onTap: () async {
                       final result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['pdf']);
@@ -199,6 +209,7 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     ),
                   ),
                   SizedBox(height: 16),
+                  // Project Story
                   TextFormField(
                     controller: _histoireController,
                     decoration: InputDecoration(labelText: 'Story'),
@@ -206,6 +217,7 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     validator: (value) => value!.isEmpty ? 'Please enter the story of donation recipients' : null,
                   ),
                   SizedBox(height: 16),
+                  // Terms and Conditions Checkbox
                   Row(
                     children: [
                       Checkbox(value: true, onChanged: (value) {}),
@@ -213,6 +225,7 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                     ],
                   ),
                   SizedBox(height: 16),
+                  // Create & Submit Button
                   Row(
                     children: [
                       ElevatedButton(
@@ -245,9 +258,8 @@ class _CreateNewFundraisingPageState extends ConsumerState<CreateNewFundraisingP
                                 histoire: _histoireController.text,
                                 montantObtenu: 0, // montantObtenu initially 0
                                 categorieId: _category!, // CategorieId from dropdown
-                                userId: '1', // userId hardcoded for now
-                                createdAt: DateTime.now(), 
-                                imageUrls: imageUrls,  // Utilisation de imageUrls
+                                createdAt: DateTime.now(),
+                                imageUrls: imageUrls,
                                 proposalDocumentUrl: proposalDocumentUrl,
                                 medicalDocumentUrl: medicalDocumentUrl,
                               );

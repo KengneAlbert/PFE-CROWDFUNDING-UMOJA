@@ -7,10 +7,9 @@ import 'package:umoja/models/user_model.dart';
 import 'package:umoja/viewmodels/registration_notifier.dart';
 
 class UserService {
-  final FirebaseFirestore _firestore;
-  final FirebaseStorage _firebaseStorage;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
-  UserService(this._firestore, this._firebaseStorage);
 
   Future<void> createUserInFirestore(WidgetRef ref, Map<String, dynamic> registrationData) async {
     try {
@@ -22,11 +21,11 @@ class UserService {
         File profileImage = registrationData['profileImage'];
         TaskSnapshot snapshot = await _firebaseStorage
             .ref()
-            .child('profileImages/$uid')
+            .child('profile_picture/$uid')
             .putFile(profileImage);
 
         String profileImageUrl = await snapshot.ref.getDownloadURL();
-        registrationData['profileImageUrl'] = profileImageUrl;
+        registrationData['profile_picture'] = profileImageUrl;
       }
 
       // Create user model from registrationData

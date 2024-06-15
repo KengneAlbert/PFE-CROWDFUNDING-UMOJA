@@ -5,12 +5,12 @@ import 'package:umoja/services/auth_service.dart';
 import 'package:umoja/services/database_service.dart';
 
 class AuthViewModel extends StateNotifier<UserModel?> {
-  final AuthService _authService;
+  static final AuthService _authService = AuthService();
   static final DatabaseService _databaseService = DatabaseService();
 
-   AuthViewModel(this._authService) : super(null) {
+   AuthViewModel() : super(null) {
    _authService.userStream.listen((user) =>
-    user !=null ? _databaseService.fetchOne("users/${user.uid}").then((value) => state = UserModel.fromMap(value!) ): state = null);
+    user !=null ? _databaseService.fetchOne("users/${user.uid}").then((value) => state = value !=null? UserModel.fromMap(value) : null ): state = null);
   }
 
   bool isLoading = false;
@@ -89,5 +89,5 @@ class AuthViewModel extends StateNotifier<UserModel?> {
 
 final authServiceProvider = Provider((ref) => AuthService());
 final authViewModelProvider = StateNotifierProvider<AuthViewModel, UserModel?>(
-  (ref) => AuthViewModel(ref.read(authServiceProvider)),
+  (ref) => AuthViewModel(),
 );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:umoja/custom_widgets/custom_bouton.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart'as bouton;
 import 'package:umoja/custom_widgets/custom_input.dart';
 import 'package:umoja/views/profile/top_up_method_page.dart';
 

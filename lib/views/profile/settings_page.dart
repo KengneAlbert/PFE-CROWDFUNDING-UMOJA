@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/viewmodels/auth_viewModel.dart';
 import 'package:umoja/views/onboarding_screen/sign_up.dart';
 import 'package:umoja/views/profile/edit_profile.dart';
@@ -6,15 +7,13 @@ import 'package:umoja/views/profile/help_page.dart';
 import 'package:umoja/views/profile/invite-friends.dart';
 import 'package:umoja/views/profile/notification_page.dart';
 import 'package:umoja/views/profile/security_page.dart';
-import 'package:provider/provider.dart';
 import 'package:umoja/services/auth_service.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends ConsumerWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -124,7 +123,7 @@ class SettingsPage extends StatelessWidget {
             title: Text('Logout'),
             trailing: SizedBox.shrink(),
             onTap: ()async{
-                await Provider.of<AuthViewModel>(context, listen: false).signOut();
+                await AuthViewModel().signOut();
                 Navigator.pushReplacement(context,  MaterialPageRoute(builder: (context) => SignUpPage()));
             },
           ),
