@@ -4,6 +4,7 @@ import 'package:umoja/views/homepage/HomePage.dart';
 import 'package:umoja/views/inbox/inbox_page.dart';
 import 'package:umoja/views/my_donation/59_Light_my_donation_empty.dart';
 import 'package:umoja/views/my_donation/60_Light_my_donation_ist.dart';
+import 'package:umoja/views/my_fundraising/ai_check.dart';
 import 'package:umoja/views/profile/profile_page.dart';
 import 'package:umoja/views/my_fundraising/62_Light_my_fundraising_ongoing.dart';
 
