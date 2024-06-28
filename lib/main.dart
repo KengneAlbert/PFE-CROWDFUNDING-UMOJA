@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:umoja/constant/constant.dart';
 import 'package:umoja/models/projet_model.dart';
 import 'package:umoja/models/user_model.dart';
 import 'package:umoja/services/database_service.dart';
@@ -13,8 +14,10 @@ import 'package:umoja/viewmodels/auth_viewModel.dart';
 import 'package:umoja/viewmodels/projet_viewModel.dart';
 import 'package:umoja/viewmodels/user_viewModel.dart';
 import 'package:umoja/views/onboarding_screen/sign_up.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'firebase_options.dart';
 import 'package:umoja/app/routes.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 
 Future<void> main() async {
@@ -23,7 +26,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
   );
+   Stripe.publishableKey = stripePublishableKey;
 
+  
+  await Stripe.instance.applySettings();
   runApp(
     ProviderScope(
       child: Umoja(),

@@ -1,0 +1,639 @@
+je veux integrer les moyens de paiement suivant dans mon application flutter a traver stipe (card de credit, google pay, apple pay, paypal). voici les différents etapes a suivre pour effectuer le payment dans mon application flutter:
+
+1- portefeuille de l'utilisateur. ici on voit le montant que l'utilisateur a dans son compte. cela doit etre dynamique quand l'utilisateur recharge ou vide son compte.
+
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:umoja/views/profile/top_up_page.dart';
+import 'package:umoja/views/profile/withdraw.dart';
+
+class WalletCenterPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156)),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text("Wallet Center"),
+        actions: [
+          Icon(Icons.more_vert, color: Color(0xFF13B156)),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+               Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: Color(0xFF13B156),
+                      width: 2,
+                    ),
+                  ),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          "\$349",
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text("Balance"),
+                      ],
+                    ),
+                  ),
+                ),
+              SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpPage()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF13B156),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      textStyle: TextStyle(fontSize: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.upload),
+                        SizedBox(width: 8),
+                        Text("Top Up"), 
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => WithdrawPage()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF13B156),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      textStyle: TextStyle(fontSize: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.download),
+                        SizedBox(width: 8),
+                        Text("Withdraw"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 24),
+              Text(
+                "Activity",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 16),
+              Text("Today, December 25 2023"),
+              SizedBox(height: 16),
+              ActivityItem(
+                image: Image.asset("assets/images/Check.png"),
+                title: "Top up Successful!",
+                description:
+                    "You have successfully top up your wallet in the amount of \$100",
+              ),
+              SizedBox(height: 16),
+              ActivityItem(
+                image: Image.asset("assets/images/Cancel.png"),
+                title: "Donation Canceled!",
+                description:
+                    "You cancel donations for victims of natural disasters",
+              ),
+              SizedBox(height: 16),
+              Text("Yesterday, December 24 2023"),
+              SizedBox(height: 16),
+              ActivityItem(
+                image: Image.asset("assets/images/Check.png"),
+                title: "Top up Successful!",
+                description:
+                    "You have successfully top up your wallet in the amount of \$120",
+              ),
+              SizedBox(height: 16),
+              ActivityItem(
+                image: Image.asset("assets/images/Cancel.png"),
+                title: "Donation Canceled!",
+                description:
+                    "You cancel donations for victims of natural disasters",
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ActivityItem extends StatelessWidget {
+  final Image image;
+  final String title;
+  final String description;
+
+  const ActivityItem({
+    Key? key,
+    required this.image,
+    required this.title,
+    required this.description,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: Colors.grey[300]!,
+          width: 1,
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          image,
+          SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+ 
+2- nous allons commencer par la recharge du compte. l'utilisateur selectionne un montant qu'il souhaite recharger
+import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
+import 'package:umoja/views/profile/top_up_method_page.dart';
+
+class TopUpPage extends StatefulWidget {
+  @override
+  _TopUpPageState createState() => _TopUpPageState();
+}
+
+class _TopUpPageState extends State<TopUpPage> {
+  int _selectedAmount = 100; // Default amount
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156)), 
+          onPressed: () {
+          Navigator.pop(context);
+        },
+        ),
+        title: Text("Top up"),
+        actions: [
+          Icon(Icons.more_vert, color: Color(0xFF13B156)),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Enter the Amount",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 16),
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: Color(0xFF13B156),
+                  width: 2,
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  "\$ $_selectedAmount",
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 24),
+            Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              children: [
+                buildAmountButton(5),
+                buildAmountButton(10),
+                buildAmountButton(25),
+                buildAmountButton(50),
+                buildAmountButton(100),
+                buildAmountButton(200),
+              ],
+            ),
+            Spacer(),
+            CustomBouton(label: "Continue" , onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage()));
+            },),
+           
+            SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildAmountButton(int amount) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          _selectedAmount = amount;
+        });
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: _selectedAmount == amount ? Color(0xFF13B156) : Colors.white,
+        foregroundColor: _selectedAmount == amount ? Colors.white : Color(0xFF13B156),
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        textStyle: TextStyle(fontSize: 16),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Color(0xFF13B156), width: 2),
+          borderRadius: BorderRadius.circular(24),
+        ),
+      ),
+      child: Text("\$$amount"),
+    );
+  }
+}
+
+3- l'utilisateur choisi un moyen de recharge. je veux utiliser stripe pour gerer ces moyen de paiement
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
+import 'package:umoja/custom_widgets/custom_select_items.dart';
+import 'package:umoja/viewmodels/finance/stripe_payment_viewModel.dart';
+import 'package:umoja/viewmodels/finance/top_up_method_payment_viewModel.dart';
+import 'package:umoja/views/profile/add_new_card.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:umoja/services/payment_service.dart';
+import 'package:umoja/views/profile/enter_ping_code.dart';
+
+class TopUpMethodPage extends StatefulWidget {
+  const TopUpMethodPage({Key? key}) : super(key: key);
+
+  @override
+  State<TopUpMethodPage> createState() => _TopUpMethodPageState();
+}
+
+class _TopUpMethodPageState extends State<TopUpMethodPage> {
+  int? _selectedPaymentMethod;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156),),
+        ),
+        title: const Text('Top up'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.qr_code_scanner, color: Color(0xFF13B156)),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Select Top up Method',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewCardPage()));
+                  }, 
+                  child: Text("Add new card", style: TextStyle(color: Color(0xFF13B156)),),
+                )
+              ],
+            ),
+            const SizedBox(height: 16),
+            SelectItems(
+              icon: const Icon(Icons.payment),
+              title: 'PayPal',
+              value: 0,
+              isSelected: _selectedPaymentMethod == 0,
+              onChanged: (value) {
+                setState(() {
+                  _selectedPaymentMethod = value;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            
+            SelectItems(
+              icon: const Icon(Icons.account_balance_wallet),
+              title: 'Google Pay',
+              value: 1,
+              isSelected: _selectedPaymentMethod == 1,
+              onChanged: (value) {
+                setState(() {
+                  _selectedPaymentMethod = value;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            SelectItems(
+              icon: const Icon(Icons.apple),
+              title: 'Apple Pay',
+              value: 2,
+              isSelected: _selectedPaymentMethod == 2,
+              onChanged: (value){
+                setState(() {
+                  _selectedPaymentMethod = value;
+                });
+                
+              },
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Pay with Debit/Credit Card',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            SelectItems(
+              icon: const Icon(Icons.credit_card),
+              title: '•••• •••• •••• 4679',
+              value: 3,
+              isSelected: _selectedPaymentMethod == 3,
+              onChanged: (value) {
+                setState(() {
+                  _selectedPaymentMethod = value;
+                });
+              },
+            ),
+            const Spacer(),
+            CustomBouton(
+              label: "Continu",
+              onPressed: () async{
+                Navigator.push(context, MaterialPageRoute(builder: (context) => EnterPinPage()));
+              },
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+4- avant de lancer l'operation de recharge l'utilisateur doit entrer son code pin ( il s'agit d'un code creer lors de son inscription). si le code correspond au code de l'utilisateur courant dans Firestore, alors l'operation de recharge est lance. et ci cela reussie alors un pop up de felicitation est renvoye a l'utilisateur et le montant de son portefeuille est mis a jour dans l'application.
+
+import 'package:flutter/material.dart';
+import 'package:umoja/custom_widgets/custom_bouton.dart';
+
+class EnterPinPage extends StatefulWidget {
+  @override
+  _EnterPinPageState createState() => _EnterPinPageState();
+}
+
+class _EnterPinPageState extends State<EnterPinPage> {
+  List<bool> _pinDots = List.filled(5, false); // Track filled dots
+  String _enteredPin = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156),),
+        ),
+        title: const Text('Enter PIN', style: TextStyle(color: Color(0xFF13B156)),),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Please enter your PIN",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                5,
+                (index) => Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8),
+                  width: 16,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _pinDots[index] ? Color(0xFF13B156) : Colors.grey[300],
+                  ),
+                ),
+              ),
+            ),
+            Spacer(),
+            CustomBouton(
+              label: "Confirm",
+              onPressed: () {
+                WithdrawSuccessPopup();
+              },
+            ),
+            SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class WithdrawSuccessPopup extends StatelessWidget {
+  const WithdrawSuccessPopup({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 24),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xFF13B156).withOpacity(0.4),
+                ),
+              ),
+              Icon(
+                Icons.check,
+                size: 40,
+                color: Colors.white,
+              ),
+              Positioned(
+                top: 10,
+                left: 10,
+                child: Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF13B156).withOpacity(0.3),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 40,
+                right: 10,
+                child: Container(
+                  width: 15,
+                  height: 15,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF13B156).withOpacity(0.3),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 10,
+                left: 50,
+                child: Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF13B156).withOpacity(0.3),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 40,
+                right: 50,
+                child: Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF13B156).withOpacity(0.3),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 24),
+          Text(
+            "Withdraw Successful!",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 12),
+          Text(
+            "You have successfully withdraw from your wallet for \$300",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 24),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFF13B156).withOpacity(0.4),
+              padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
+              textStyle: TextStyle(fontSize: 16, color: Colors.white),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: Text("OK"),
+          ),
+          SizedBox(height: 24),
+        ],
+      ),
+    );
+  }
+}
+
+instructions: 
+- optimise ce code en suivant l'architecture mvvm 
+- il faut gerer les etats de l'application avec riverpod
+- integre Stripe pour la gestion des transaction en respectant les etape fournies plus haut

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProjetModel {
+  final String id;
   final String titre;
   final String description;
   final int montantTotal;
@@ -12,10 +13,12 @@ class ProjetModel {
   final String userId;
   final DateTime createdAt;
   final List<String> imageUrls;
-  final String? proposalDocumentUrl;
-  final String? medicalDocumentUrl;
+  final String? businessModelDocumentUrl;
+  final String? businessPlanDocumentUrl;
+  final String? videoUrl;
 
   ProjetModel({
+    required this.id,
     required this.titre,
     required this.description,
     required this.montantTotal,
@@ -27,43 +30,74 @@ class ProjetModel {
     required this.userId,
     required this.createdAt,
     required this.imageUrls,
-    this.proposalDocumentUrl,
-    this.medicalDocumentUrl,
+    this.businessModelDocumentUrl,
+    this.businessPlanDocumentUrl,
+    this.videoUrl,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'titre': titre,
       'description': description,
       'montant_total': montantTotal,
-      'date_debut_collecte': dateDebutCollecte,
-      'date_fin_collecte': dateFinCollecte,
+      'date_debut_collecte': dateDebutCollecte.toIso8601String(),
+      'date_fin_collecte': dateFinCollecte.toIso8601String(),
       'histoire': histoire,
       'montant_obtenu': montantObtenu,
       'categorie_id': categorieId,
       'user_id': userId,
-      'created_at': createdAt,
+      'created_at': createdAt.toIso8601String(),
       'imageUrls': imageUrls,
-      'proposalDocumentUrl': proposalDocumentUrl,
-      'medicalDocumentUrl': medicalDocumentUrl,
+      'businessModelDocumentUrl': businessModelDocumentUrl,
+      'businessPlanDocumentUrl': businessPlanDocumentUrl,
+      'videoUrl': videoUrl,
     };
   }
 
   factory ProjetModel.fromMap(Map<String, dynamic> map) {
+    // Ajouter ce log pour vérifier les données
+    print('Raw data from Firestore: $map'); 
+
+    // Convertir DocumentReference en String pour les champs user_id et categorie_id
+    String userId = '';
+    if (map['user_id'] is DocumentReference) {
+      userId = (map['user_id'] as DocumentReference).id;
+    } else {
+      userId = map['user_id'] ?? '';
+    }
+
+    String categorieId = '';
+    if (map['categorie_id'] is DocumentReference) {
+      categorieId = (map['categorie_id'] as DocumentReference).id;
+    } else {
+      categorieId = map['categorie_id'] ?? '';
+    }
+
     return ProjetModel(
-      titre: map['titre'],
-      description: map['description'],
-      montantTotal: map['montant_total'],
-      dateDebutCollecte: (map['date_debut_collecte'] as Timestamp).toDate(),
-      dateFinCollecte: (map['date_fin_collecte'] as Timestamp).toDate(),
-      histoire: map['histoire'],
-      montantObtenu: map['montant_obtenu'],
-      categorieId: map['categorie_id'],
-      userId: map['user_id'],
-      createdAt: (map['created_at'] as Timestamp).toDate(),
-      imageUrls: List<String>.from(map['imageUrls']),
-      proposalDocumentUrl: map['proposalDocumentUrl'],
-      medicalDocumentUrl: map['medicalDocumentUrl'],
+      id: map['id'] ?? '',
+      titre: map['titre'] ?? '',
+      description: map['description'] ?? '',
+      montantTotal: map['montant_total'] ?? 0,
+      dateDebutCollecte: (map['date_debut_collecte'] != null)
+          ? (map['date_debut_collecte'] as Timestamp).toDate()
+          : DateTime.now(), // ou une autre valeur par défaut appropriée
+      dateFinCollecte: (map['date_fin_collecte'] != null)
+          ? (map['date_fin_collecte'] as Timestamp).toDate()
+          : DateTime.now(), // ou une autre valeur par défaut appropriée
+      histoire: map['histoire'] ?? '',
+      montantObtenu: map['montant_obtenu'] ?? 0,
+      categorieId: categorieId,
+      userId: userId,
+      createdAt: (map['created_at'] != null)
+          ? (map['created_at'] as Timestamp).toDate()
+          : DateTime.now(), // ou une autre valeur par défaut appropriée
+      imageUrls: List<String>.from(map['imageUrls'] ?? []),
+      businessModelDocumentUrl: map['businessModelDocumentUrl'],
+      businessPlanDocumentUrl: map['businessPlanDocumentUrl'],
+      videoUrl: map['videoUrl'],
     );
   }
+
 }
+
