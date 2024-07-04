@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/views/home/page.dart';
-import '../../generalLayouts/ContainerBottom.dart';
+import '../generalLayouts/ContainerBottom.dart';
 import 'SearchPageNotFound.dart';
+import '../homepage/HomePage.dart';
 
 
 

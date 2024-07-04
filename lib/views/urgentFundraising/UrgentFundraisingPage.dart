@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/views/home/page.dart';
-import '../../generalLayouts/ContainerBottom.dart';
+import '../generalLayouts/ContainerBottom.dart';
 import 'UrgentFundraisingContaint.dart';
+import '../homepage/HomePage.dart';
+
 
 
 class UrgentFundraisingPage extends StatelessWidget{

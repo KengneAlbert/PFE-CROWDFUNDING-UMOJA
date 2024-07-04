@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../generalLayouts/LineCathegoryButton.dart';
+import '../generalLayouts/LineCathegoryButton.dart';
 
 class BookmarkPageNotFound extends StatelessWidget{
   const BookmarkPageNotFound({Key? key}) : super(key: key);

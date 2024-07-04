@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/views/home/page.dart';
-import '../../generalLayouts/ContainerBottom.dart';
+import '../generalLayouts/ContainerBottom.dart';
 import 'BookmarkPageNotFound.dart';
 import 'BookmarkPageContaint.dart';
 import '../homepage/HomePage.dart';

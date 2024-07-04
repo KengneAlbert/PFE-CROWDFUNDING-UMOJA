@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:umoja/generalLayouts/LineCathegoryButton.dart';
+import '../../generalLayouts/LineCathegoryButton.dart';
 import '../SectionBookmarkFundingCard.dart';
 import 'BookmarkFundingCard.dart';
 

@@ -1,9 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:umoja/models/projet_model.dart';
 
 class ProjetService extends ChangeNotifier {
-  final SupabaseClient _supabase = Supabase.instance.client;
 
   // Future<List<Projet>> fetchProjets() async {
   //

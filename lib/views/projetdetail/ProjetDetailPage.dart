@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:another_carousel_pro/another_carousel_pro.dart';
-import 'package:umoja/views/home/page.dart';
 import 'package:umoja/views/homepage/HomePage.dart';
 import 'package:umoja/views/projetdetail/ProjetDetailPageContaint.dart';
+import '../generalLayouts/ContainerBottom.dart';
 
 
 
@@ -134,6 +134,8 @@ class ProjetDetailPage extends StatelessWidget{
           ),
           
           body: ProjetDetailPageContaint(),
+          
+          bottomNavigationBar: ContainerBottom(),
         );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/views/home/page.dart';
-import '../../generalLayouts/ContainerBottom.dart';
+import '../generalLayouts/ContainerBottom.dart';
 import 'NotifcationPageNotFound.dart';
+import 'NotificationPageContaint.dart';
+import '../homepage/HomePage.dart';
 
 class NotificationPage extends StatelessWidget{
   const NotificationPage({Key? key}) : super(key: key);
@@ -61,8 +62,9 @@ class NotificationPage extends StatelessWidget{
         ],
       ),
       
-      body: NotifcationPageNotFound(),
-      //NotificationPageContaint() ,
+      body: NotificationPageContaint() ,
+      //NotifcationPageNotFound(),
+      
       
 
       bottomNavigationBar: ContainerBottom(),

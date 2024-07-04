@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/views/homepage/SectionIncommingCard.dart';
+import 'package:umoja/views/homepage/layouts/LineCathegoryButtonIncomming.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 import 'layouts/WalletCard.dart';
 import 'layouts/SlideCard.dart';
 import 'layouts/CardVideo.dart';
 import 'layouts/PrayerCard.dart';
 import 'layouts/LineInfos.dart';
-import '../../generalLayouts/LineCathegoryButton.dart';
+import 'layouts/LineCathegoryButton.dart';
+import 'layouts/LineCathegoryButtonFunding.dart';
 import 'layouts/FundingCard.dart';
+import 'layouts/FundingCardVote.dart';
 import 'SectionFundingCard.dart';
+import 'SectionVoteCard.dart';
 import 'SectionCardVideo.dart';
-import '../urgentFundraising/UrgentFundraisingPage.dart';
+import '../projectundervote/ProjectUnderVotePage.dart';
 import '../Comingtoanend/ComingToAnEndPage.dart';
 import '../watchImpact/WatchImpact.dart';
+import '../projectfundraising/ProjectFundraisingPage.dart';
 
 class ContainerBody extends StatelessWidget {
   const ContainerBody({super.key});
@@ -37,9 +43,9 @@ class ContainerBody extends StatelessWidget {
               SizedBox(height: 20),
 
               LineInfos(
-                label: "Urgent Fundraising",
+                label: "Project Under Vote",
                 label2: "See all",
-                page: UrgentFundraisingPage(),
+                page: ProjectUnderVotePage(),
               ),
 
               SizedBox(height: 20),
@@ -48,63 +54,47 @@ class ContainerBody extends StatelessWidget {
 
               SizedBox(height: 20),
 
-              SectionFundingCard(
-                fundCard: [
-                  FundingCard(
-                    ImagePath:"assets/images/3.jpg",
-                    Title: "Help Orphanage Children to...",
-                    TitleFunding:"\$2,379 fund raised from \$4,200" ,
-                    ValueFunding:0.56 ,
-                    NumberDonation: "1,280 Donators",
-                    Day: "19 days left",
-                  ),
-                  FundingCard(
-                    ImagePath:"assets/images/3.jpg",
-                    Title: "Help Orphanage Children to...",
-                    TitleFunding:"\$2,379 fund raised from \$4,200" ,
-                    ValueFunding:0.56 ,
-                    NumberDonation: "1,280 Donators",
-                    Day: "19 days left",
-                  ),
-                ]
-              ),
+              SectionVoteCard(),
 
 
 
               SizedBox(height: 20),
 
              LineInfos(
-                label: "Coming to an end",
+                label: "Project Under Funding",
                 label2: "See all",
                 page: ComingToAnEndPage(),
               ),
 
+              SizedBox(height: 20),
+
+              LineCathegoryButtonFunding(),
+
 
               SizedBox(height: 20,),
 
-              SectionFundingCard(
-                  fundCard: [
-                    FundingCard(
-                      ImagePath:"assets/images/3.jpg",
-                      Title: "Help Orphanage Children to...",
-                      TitleFunding:"\$2,379 fund raised from \$4,200" ,
-                      ValueFunding:0.50 ,
-                      NumberDonation: "1,280 Donators",
-                      Day: "19 days left",
-                    ),
-                    FundingCard(
-                      ImagePath:"assets/images/3.jpg",
-                      Title: "Help Orphanage Children to...",
-                      TitleFunding:"\$2,379 fund raised from \$4,200" ,
-                      ValueFunding:0.50 ,
-                      NumberDonation: "1,280 Donators",
-                      Day: "19 days left",
-                    ),
-                  ],
-              ),
-
+ 
+              SectionFundingCard(),
              
               
+              SizedBox(height: 20,),
+
+              LineInfos(
+                label: "Project Incomming",
+                label2: "See all",
+                page: ProjectFundraisingPage(),
+              ),
+
+              SizedBox(height: 20,),
+
+              LineCathegoryButtonIncomming(),
+
+
+              SizedBox(height: 20,),
+
+ 
+              SectionIncommingCard(),
+
               SizedBox(height: 20,),
 
               LineInfos(
@@ -119,13 +109,19 @@ class ContainerBody extends StatelessWidget {
                 cardVideo: [
 
                   CardVideo(
-                    pathMiniature:'assets/images/téléchargement (5).jfif',
+                    pathMiniature:'assets/images/Group.png',
                   ),
 
                   SizedBox(width: 20,),
 
                   CardVideo(
-                    pathMiniature:'assets/images/téléchargement (5).jfif',
+                    pathMiniature:'assets/images/Group.png',
+                  ),
+
+                  SizedBox(width: 20,),
+
+                  CardVideo(
+                    pathMiniature:'assets/images/Group.png',
                   )
 
                 ],

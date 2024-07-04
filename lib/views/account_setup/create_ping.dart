@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/viewmodels/registration_notifier.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
 import 'package:umoja/viewmodels/user_viewModel.dart';
-import 'package:umoja/views/home/page.dart';
+import 'package:umoja/views/homepage/HomePage.dart';
 
 class SetPinCodePage extends ConsumerWidget {
    static UserService userService = UserService();

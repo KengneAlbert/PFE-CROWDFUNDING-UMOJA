@@ -1,6 +1,8 @@
 //import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:umoja/views/projetdetail/ProjetDetailPage.dart';
+import '../../bookmark/BookmarkPage.dart';
 
 class FundingCard extends StatelessWidget {
   final String ImagePath;
@@ -21,9 +23,18 @@ class FundingCard extends StatelessWidget {
      }
      );
 
-  @override
+  @override 
   Widget build(BuildContext context) {
-    return Card(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) =>   ProjetDetailPage(),
+          )
+        );
+      },
+      child: Card(
                             child: Container(
                                 width: 290,
                                 height: 300,
@@ -39,7 +50,7 @@ class FundingCard extends StatelessWidget {
                                           bottomLeft: Radius.zero,
                                           bottomRight: Radius.zero,
                                         ),
-                                        child:Image.asset(
+                                        child:Image.network(
                                           ImagePath,
                                           height: 160,
                                           width: 290,
@@ -47,21 +58,34 @@ class FundingCard extends StatelessWidget {
                                         ),
                                       ),
                                       Positioned(
-                                        top: 10,
-                                        right: 10,
-                                          child:ElevatedButton(
-                                            onPressed: () {},
-                                            child: Icon(
-                                              Icons.bookmark,
-                                              color: Colors.white,
-                                              size: 30,
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.green,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(12),
+                                          top: 10,
+                                          right: 8,
+                                          child:GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>   BookmarkPage(),
+                                                )
+                                              );
+                                            },
+                                            child:  Container(
+                                              padding: EdgeInsets.all(10),
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFF13B156).withOpacity(1), // Couleur de fond
+                                                borderRadius: BorderRadius.circular(12), // Bordure arrondie
                                               ),
-                                              padding: EdgeInsets.all(2.0),
+                                              child: Center(
+                                                child: SizedBox(
+                                                width: 24,
+                                                height: 24,
+                                                child: Icon(
+                                                  Icons.bookmark_border,
+                                                  color: Colors.white,
+                                                  size: 25,
+                                                  ), 
+                                                ),
+                                              )
                                             ),
                                           ),
                                       ),
@@ -120,6 +144,7 @@ class FundingCard extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          );
+                          ),
+    );
   } 
 }      

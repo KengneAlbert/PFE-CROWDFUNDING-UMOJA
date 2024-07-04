@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import '../../generalLayouts/LineCathegoryButton.dart';
+import '../generalLayouts/LineCathegoryButton.dart';
 import 'layouts/SearchBar.dart';
 import 'layouts/LineInfos.dart';
 

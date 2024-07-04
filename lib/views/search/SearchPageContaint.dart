@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:umoja/views/search/layouts/FundingCardSearch.dart';
-import '../../generalLayouts/LineCathegoryButton.dart';
+import 'package:umoja/views/generalLayouts/FundingCardSearch.dart';
+import '../generalLayouts/LineCathegoryButton.dart';
 import 'layouts/SearchBar.dart';
 import 'layouts/LineInfos.dart';
 import 'SectionFundingCardSearch.dart';

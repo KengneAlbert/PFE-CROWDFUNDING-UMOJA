@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
-import 'package:umoja/views/search/layouts/FundingCardSearch.dart';
-import '../../generalLayouts/LineCathegoryButton.dart';
-import '../../generalLayouts/SearchBar.dart';
-import '../../generalLayouts/LineInfos.dart';
-import '../../generalLayouts/SectionFundingCardSearch.dart';
+import 'package:umoja/views/generalLayouts/FundingCardSearch.dart';
+import '../generalLayouts/LineCathegoryButton.dart';
+import '../generalLayouts/SearchBar.dart';
+import '../generalLayouts/LineInfos.dart';
+import '../generalLayouts/SectionFundingCardSearch.dart';
 
 
 class ComingToAnEndContaint extends StatelessWidget {

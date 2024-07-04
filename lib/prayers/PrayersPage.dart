@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/prayers/PrayersPageContaint.dart';
-import 'package:umoja/views/home/page.dart';
 import 'package:umoja/views/homepage/HomePage.dart';
 import '../generalLayouts/ContainerBottom.dart';
 

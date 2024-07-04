@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umoja/custom_widgets/custom_bouton.dart';
-import 'package:umoja/views/home/page.dart';
+import 'package:umoja/views/homepage/HomePage.dart';
 
 class ResetPasswordSuccessful extends StatelessWidget {
   const ResetPasswordSuccessful({super.key});

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:umoja/generalLayouts/ContainerBottom.dart';
-import 'package:umoja/views/notification/NotificationPage.dart';
 import 'ContainerBody.dart';
-
+import '../generalLayouts/ContainerBottom.dart';
 import '../search/SearchPage.dart';
 import '../notification/NotificationPage.dart';
 import '../bookmark/BookmarkPage.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
 
   @override

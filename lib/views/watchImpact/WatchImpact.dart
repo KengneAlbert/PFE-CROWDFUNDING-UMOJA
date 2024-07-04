@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umoja/views/home/page.dart';
-import '../../generalLayouts/ContainerBottom.dart';
+import '../generalLayouts/ContainerBottom.dart';
 import 'WatchImpactContaint.dart';
 import '../homepage/HomePage.dart';
 //import 'UrgentFundraisingContaint.dart';

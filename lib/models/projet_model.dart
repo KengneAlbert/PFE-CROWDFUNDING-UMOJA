@@ -13,6 +13,7 @@ class ProjetModel {
   final String userId;
   final DateTime createdAt;
   final List<String> imageUrls;
+  // final List<String> likes;
   final String? businessModelDocumentUrl;
   final String? businessPlanDocumentUrl;
   final String? videoUrl;
@@ -30,6 +31,7 @@ class ProjetModel {
     required this.userId,
     required this.createdAt,
     required this.imageUrls,
+    // required this.likes,
     this.businessModelDocumentUrl,
     this.businessPlanDocumentUrl,
     this.videoUrl,
@@ -49,6 +51,7 @@ class ProjetModel {
       'user_id': userId,
       'created_at': createdAt.toIso8601String(),
       'imageUrls': imageUrls,
+      // 'likes': likes,
       'businessModelDocumentUrl': businessModelDocumentUrl,
       'businessPlanDocumentUrl': businessPlanDocumentUrl,
       'videoUrl': videoUrl,
@@ -93,6 +96,7 @@ class ProjetModel {
           ? (map['created_at'] as Timestamp).toDate()
           : DateTime.now(), // ou une autre valeur par défaut appropriée
       imageUrls: List<String>.from(map['imageUrls'] ?? []),
+      // likes: (map['likes'] != null) ? List<String>.from(map['likes']) : [],
       businessModelDocumentUrl: map['businessModelDocumentUrl'],
       businessPlanDocumentUrl: map['businessPlanDocumentUrl'],
       videoUrl: map['videoUrl'],
