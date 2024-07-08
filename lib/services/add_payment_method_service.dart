@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:umoja/models/payment_intent_model.dart';
 import 'package:umoja/models/payment_method_model.dart';
 
-class PaymentService {
+class PaymentstripeService {
   final String _baseUrl = 'https://api.stripe.com/v1';
   final String _secretKey = 'sk_test_YOUR_SECRET_KEY';
 

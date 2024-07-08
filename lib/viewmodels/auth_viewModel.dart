@@ -20,7 +20,7 @@ class AuthViewModel extends StateNotifier<UserModel?> {
     try {
       isLoading = true;
       final UserCredential credential = await _authService.signIn(email, password);
-      // state = UserModel(uid: _authService.currentUser!.uid, email:_authService.currentUser!.email!);
+      state = UserModel(uid: _authService.currentUser!.uid, email:_authService.currentUser!.email!);
       isLoading = false;
     } catch (e) {
       throw Exception('Failed to sign in: $e');

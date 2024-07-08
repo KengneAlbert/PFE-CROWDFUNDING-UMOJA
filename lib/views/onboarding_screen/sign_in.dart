@@ -143,7 +143,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                               Navigator.restorablePushReplacementNamed( context,'/home',);
                             }
                         } catch (e) {
-                          Navigator.pop(context); // Remove the loading indicator
+                          
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Erreur lors de la cconnexion: $e')),
                           );

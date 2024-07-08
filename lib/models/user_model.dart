@@ -2,13 +2,13 @@
 class UserModel {
   final String uid;
   final String email;
-  final String name;
+  final String? name;
   final String? phone;
   final String? country;
   final String? gender;
   final int? age;
   final String? location;
-  final String profile_picture;
+  final String? profile_picture;
   final List<String>? interests;
   final int? pin_code;
   final bool? isOnline;
@@ -17,14 +17,14 @@ class UserModel {
   UserModel({
     required this.uid,
     required this.email,
-    required this.name, 
+    this.name, 
     this.phone, 
     this.country, 
     this.gender, 
     this.age, 
     this.location, 
     this.isOnline,
-    required this.profile_picture, 
+    this.profile_picture, 
     this.interests = const [], 
     this.pin_code, 
     this.groupId,

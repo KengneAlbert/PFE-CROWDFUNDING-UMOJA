@@ -28,7 +28,33 @@ class TopUpViewModel extends StateNotifier<TopUpState> {
 
   void selectPaymentMethod(PaymentMethod paymentMethod) {
     state = state.copyWith(selectedPaymentMethod: paymentMethod);
+
+    // Si le paiement est avec CinetPay, générer les informations de paiement CinetPay
+    if (paymentMethod.id == 'cinetpay') {
+      generateCinetPayPaymentData();
+    }
   }
+
+   // Fonction pour générer les informations de paiement CinetPay
+  void generateCinetPayPaymentData() {
+    // Remplacez les valeurs par celles de votre application
+    final amount = state.selectedAmount!.toStringAsFixed(2); // Assurez-vous que le montant est un String
+    final currency = 'XOF'; // Ou la monnaie que vous utilisez
+    final description = 'Rechargement de votre porte-monnaie';
+
+    state = state.copyWith(
+      cinetPayPaymentData: CinetPayPaymentData(
+        amount: amount,
+        currency: currency,
+        description: description,
+        // ... autres informations facultatives
+      ),
+    );
+  }
+
+  
+
+  
 
   Future<void> createPaymentIntent() async {
     // try {
@@ -49,8 +75,8 @@ class TopUpViewModel extends StateNotifier<TopUpState> {
     try {
       state = state.copyWith(isLoading: true);
       if (state.selectedAmount != null) {
-        final paymentIntent = await _paymentService.createPaymentIntent(state.selectedAmount!);
-        state = state.copyWith(paymentIntent: paymentIntent);
+        // final paymentIntent = await _paymentService.createPaymentIntent(state.selectedAmount!);
+        // state = state.copyWith(paymentIntent: paymentIntent);
       } else {
         // Gérer le cas où selectedAmount est null
         state = state.copyWith(
@@ -69,47 +95,48 @@ class TopUpViewModel extends StateNotifier<TopUpState> {
     }
   }
 
-  Future<void> startPayment(String paymentMethodId) async {
-    try {
-      state = state.copyWith(isLoading: true);
+  // Future<void> startPayment(String paymentMethodId) async {
+  //   try {
+  //     state = state.copyWith(isLoading: true);
 
-      if (state.selectedAmount != null &&
-          state.paymentIntent != null &&
-          state.selectedPaymentMethod != null) {
-        final paymentResult = await _paymentService.pay(
-            state.paymentIntent!.clientSecret, paymentMethodId);
-        if (paymentResult) {
-          // Mettre à jour le solde du portefeuille
-          _walletViewModel.topUp(state.selectedAmount!);
-          // Gérer le succès du paiement
-          state = state.copyWith(isLoading: false, paymentSuccess: true);
-        } else {
-          // Gérer l'échec du paiement
-          state = state.copyWith(isLoading: false, paymentSuccess: false);
-        }
-      } else {
-        // Gérer le cas où selectedAmount, paymentIntent ou selectedPaymentMethod est null
-        state = state.copyWith(
-          isLoading: false,
-          errorMessage: 'Veuillez sélectionner un montant, une méthode de paiement et créer un PaymentIntent',
-        );
-      }
-    } catch (e) {
-      // Gérer les erreurs
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: e.toString(),
-      );
-    } finally {
-      state = state.copyWith(isLoading: false);
-    }
-  }
+  //     if (state.selectedAmount != null &&
+  //         state.paymentIntent != null &&
+  //         state.selectedPaymentMethod != null) {
+  //       final paymentResult = await _paymentService.pay(
+  //           state.paymentIntent!.clientSecret, paymentMethodId);
+  //       if (paymentResult) {
+  //         // Mettre à jour le solde du portefeuille
+  //         _walletViewModel.topUp(state.selectedAmount!);
+  //         // Gérer le succès du paiement
+  //         state = state.copyWith(isLoading: false, paymentSuccess: true);
+  //       } else {
+  //         // Gérer l'échec du paiement
+  //         state = state.copyWith(isLoading: false, paymentSuccess: false);
+  //       }
+  //     } else {
+  //       // Gérer le cas où selectedAmount, paymentIntent ou selectedPaymentMethod est null
+  //       state = state.copyWith(
+  //         isLoading: false,
+  //         errorMessage: 'Veuillez sélectionner un montant, une méthode de paiement et créer un PaymentIntent',
+  //       );
+  //     }
+  //   } catch (e) {
+  //     // Gérer les erreurs
+  //     state = state.copyWith(
+  //       isLoading: false,
+  //       errorMessage: e.toString(),
+  //     );
+  //   } finally {
+  //     state = state.copyWith(isLoading: false);
+  //   }
+  // }
 }
 
 class TopUpState {
   final double? selectedAmount;
   final PaymentMethod? selectedPaymentMethod;
   final PaymentIntent? paymentIntent;
+  final CinetPayPaymentData? cinetPayPaymentData; 
   final bool isLoading;
   final bool paymentSuccess; // Indique si le paiement a réussi
   final String? errorMessage; // Message d'erreur
@@ -117,6 +144,7 @@ class TopUpState {
   const TopUpState({
     this.selectedAmount,
     this.selectedPaymentMethod,
+    this.cinetPayPaymentData,
     this.paymentIntent,
     this.isLoading = false,
     this.paymentSuccess = false,
@@ -126,6 +154,7 @@ class TopUpState {
   TopUpState.initial()
       : selectedAmount = null,
         selectedPaymentMethod = null,
+        cinetPayPaymentData = null,
         paymentIntent = null,
         isLoading = false,
         paymentSuccess = false,
@@ -134,6 +163,7 @@ class TopUpState {
   TopUpState copyWith({
     double? selectedAmount,
     PaymentMethod? selectedPaymentMethod,
+    CinetPayPaymentData? cinetPayPaymentData,
     PaymentIntent? paymentIntent,
     bool? isLoading,
     bool? paymentSuccess,
@@ -143,6 +173,8 @@ class TopUpState {
       selectedAmount: selectedAmount ?? this.selectedAmount,
       selectedPaymentMethod:
           selectedPaymentMethod ?? this.selectedPaymentMethod,
+      cinetPayPaymentData:
+          cinetPayPaymentData ?? this.cinetPayPaymentData,
       paymentIntent: paymentIntent ?? this.paymentIntent,
       isLoading: isLoading ?? this.isLoading,
       paymentSuccess: paymentSuccess ?? this.paymentSuccess,
@@ -150,6 +182,25 @@ class TopUpState {
     );
   }
 }
+
+class CinetPayPaymentData {
+  final String amount; 
+  final String currency; 
+  final String? description; 
+  final String? orderRef; // Votre référence de commande (facultatif)
+  final String? notifyUrl; // URL pour recevoir les notifications de paiement
+  final String? apiToken; // Votre jeton API CinetPay
+
+  CinetPayPaymentData({
+    required this.amount,
+    required this.currency,
+    this.description,
+    this.orderRef,
+    this.notifyUrl,
+    this.apiToken,
+  });
+}
+
 
 // final paymentServiceProvider = Provider<PaymentService>((ref) => PaymentService()); 
 

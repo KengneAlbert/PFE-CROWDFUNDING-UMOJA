@@ -18,8 +18,8 @@ class StripePaymentViewModel extends StateNotifier<StripePaymentState> {
   Future<void> createPaymentIntent(double amount) async {
     try {
       state = state.copyWith(isLoading: true);
-      final paymentIntent = await _paymentService.createPaymentIntent(amount);
-      state = state.copyWith(paymentIntent: paymentIntent);
+      // final paymentIntent = await _paymentService.createPaymentIntent(amount);
+      // state = state.copyWith(paymentIntent: paymentIntent);
     } catch (e) {
       // Gérer les erreurs
       state = state.copyWith(
@@ -31,37 +31,37 @@ class StripePaymentViewModel extends StateNotifier<StripePaymentState> {
     }
   }
 
-  Future<void> startPayment(String paymentMethodId) async {
-    try {
-      state = state.copyWith(isLoading: true);
+  // Future<void> startPayment(String paymentMethodId) async {
+  //   try {
+  //     state = state.copyWith(isLoading: true);
 
-      if (state.paymentIntent != null) {
-        final paymentResult = await _paymentService.pay(
-            state.paymentIntent!.clientSecret, paymentMethodId);
-        if (paymentResult) {
-          // Gérer le succès du paiement
-          state = state.copyWith(isLoading: false, paymentSuccess: true);
-        } else {
-          // Gérer l'échec du paiement
-          state = state.copyWith(isLoading: false, paymentSuccess: false);
-        }
-      } else {
-        // Gérer le cas où paymentIntent est null
-        state = state.copyWith(
-          isLoading: false,
-          errorMessage: 'Veuillez créer un PaymentIntent',
-        );
-      }
-    } catch (e) {
-      // Gérer les erreurs
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: e.toString(),
-      );
-    } finally {
-      state = state.copyWith(isLoading: false);
-    }
-  }
+  //     if (state.paymentIntent != null) {
+  //       final paymentResult = await _paymentService.pay(
+  //           state.paymentIntent!.clientSecret, paymentMethodId);
+  //       if (paymentResult) {
+  //         // Gérer le succès du paiement
+  //         state = state.copyWith(isLoading: false, paymentSuccess: true);
+  //       } else {
+  //         // Gérer l'échec du paiement
+  //         state = state.copyWith(isLoading: false, paymentSuccess: false);
+  //       }
+  //     } else {
+  //       // Gérer le cas où paymentIntent est null
+  //       state = state.copyWith(
+  //         isLoading: false,
+  //         errorMessage: 'Veuillez créer un PaymentIntent',
+  //       );
+  //     }
+  //   } catch (e) {
+  //     // Gérer les erreurs
+  //     state = state.copyWith(
+  //       isLoading: false,
+  //       errorMessage: e.toString(),
+  //     );
+  //   } finally {
+  //     state = state.copyWith(isLoading: false);
+  //   }
+  // }
 }
 
 class StripePaymentState {

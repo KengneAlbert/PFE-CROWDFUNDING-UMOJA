@@ -79,13 +79,14 @@ class _TopUpPageState extends ConsumerState<TopUpPage> {
             CustomBouton(
               label: "Continue",
               onPressed: () async{
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage()));
                 // Créer l'intention de paiement ici
-                await topUpViewModel.createPaymentIntent();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TopUpMethodPage(
-                            topUpViewModel: topUpViewModel)));
+                // await topUpViewModel.createPaymentIntent();
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => TopUpMethodPage(
+                //             topUpViewModel: topUpViewModel)));
               },
             ),
             SizedBox(height: 16),
@@ -203,7 +204,8 @@ class _TopUpPageState extends ConsumerState<TopUpPage> {
 //             CustomBouton(
 //               label: "Continue",
 //               onPressed: () {
-//                 Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage(topUpViewModel: topUpViewModel)));
+//                 // Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage(topUpViewModel: topUpViewModel)));
+//                 Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage()));
 //               },
 //             ),
 //             SizedBox(height: 16),

@@ -1,5 +1,7 @@
 import 'package:umoja/views/account_setup/profile.dart';
+import 'package:umoja/views/home/page.dart';
 import 'package:umoja/views/homepage/HomePage.dart';
+import 'package:umoja/views/homepage/home.dart';
 import 'package:umoja/views/inbox/inbox_page.dart';
 import 'package:umoja/views/my_donation/60_Light_my_donation_ist.dart';
 import 'package:umoja/views/my_fundraising/62_Light_my_fundraising_ongoing.dart';
@@ -16,12 +18,11 @@ class AppRoutes{
   //  FirsRoute: (context) => PublishProjectPage(),
     FirsRoute: (context) => SignUpPage(),
     // FirsRoute: (context) => CreateNewFundraisingPage(),
-    '/profile': (context) => FillProfilePage(),
-    '/home': (context) => HomePage(),
+    // '/profile': (context) => FillProfilePage(),
+    '/home': (context) => Home(),
     '/calendar': (context) => MyDonationScreen2(),
     '/grid': (context) => MyFundraising62(),
     '/messages': (context) =>  InboxPage(),
-    '/profilepage': (context) => ProfilePage(),
-    
+    '/profilepage': (context) => ProfilePage(), 
     };
 }
