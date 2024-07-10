@@ -1,178 +1,208 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:readmore/readmore.dart';
+import 'package:umoja/models/projet_vote_model.dart';
+import 'package:umoja/services/ProjetVoteService.dart';
 import 'package:umoja/views/generalLayouts/PrayerCardN.dart';
-import 'package:umoja/views/projetdetail/layouts/CardProjet.dart';
-import 'package:umoja/views/projetdetail/layouts/CardProjetHome.dart';
 import 'package:umoja/views/projetdetail/layouts/LineInfos.dart';
-import 'package:umoja/views/projetdetail/layouts/LineInfosbutton.dart';
 import 'package:umoja/views/projetdetail/layouts/ProjetCard.dart';
+import 'package:umoja/views/projetdetailvote/layouts/LineInfosSimple.dart';
+import 'package:umoja/views/projetdocument/ProjectDocument.dart';
+import 'package:umoja/views/projetmedia/ProjectMedia.dart';
 
+class ProjetDetailPageContaint extends StatelessWidget {
+  final String projectId;
 
-class ProjetDetailPageContaint extends StatelessWidget{
-  const ProjetDetailPageContaint({Key? key}) : super(key: key);
+  ProjetDetailPageContaint({required this.projectId});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
+    final projectService = ProjetVoteService();
 
-            ProjetCard(
-              Title: "Help Siamese Twins Surgery",
-              TitleFunding: "\$6,679 fund raised from \$8,200",
-              ValueFunding: 0.5,
-              NumberDonation: "3,438 Donators",
-              Day: "11 days left",
-            ),
+    return FutureBuilder<ProjetVoteModel?>(
+      future: projectService.getProjetById(projectId),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error loading project'));
+        } else if (!snapshot.hasData) {
+          return Center(child: Text('No project found'));
+        } else {
+          final project = snapshot.data!;
+          final daysRemaining = project.dateFinCollecte.difference(project.dateDebutCollecte).inDays;
 
-            SizedBox(height: 20,),
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 
-            Text(
-              'Fundraiser',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+                ProjetCard(
+                  Title: project.titre + " " * 20,
+                  TitleFunding: "${project.montantObtenu} fund raised from ${project.montantTotal}",
+                  ValueFunding: project.montantObtenu / project.montantTotal,
+                  NumberDonation: "0 contributors",
+                  Day: "$daysRemaining days remaining",
+                  projectId: projectId,
+                ),
 
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: CardProjetHome(
-                imagePath: "assets/images/health.png",
-                title: 'Healthy Home',
-                smallTitle: 'Verified',
-              ),
-            ),
+                SizedBox(height: 20),
 
-            SizedBox(
-              height: 10,
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(
-                left: 15,
-              ),
-              child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                  'Patient',
+                Text(
+                  'Story Of Project',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-              ),
-            ),
 
-            SizedBox(
-              height: 10,
-            ),
+                SizedBox(height: 20),
 
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: CardProjet(
-                imagePath: "assets/images/health.png",
-                title: 'Alice Wilson',
-                smallTitle: 'Identity ',
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: CardProjet(
-                imagePath: "assets/images/health.png",
-                title: 'Post Craniotomy EDH + ICH',
-                smallTitle: 'Accompanied',
-              ),
-            ),
-
-            SizedBox(
-              height: 10,
-            ),
-
-            LineInfosbutton(
-              label: 'Fund Usage Plan',
-            ),
-
-            SizedBox(
-              height: 15,
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(
-                left: 15,
-              ),
-              child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                  'Story',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-
-            SizedBox(
-              height: 15,
-            ),
-
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut Read more...',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-
-            LineInfos(
-              label: 'Prayers',
-              label2: 'See all',
-            ),
-
-            SizedBox(
-              height: 15,
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(
-                left: 5,
-              ),
-
-              child: Stack(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          PrayerCardN(),
-                          PrayerCardN(),
-                        ],
-                      ),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: ReadMoreText(
+                    project.histoire,
+                    trimLines: 3,
+                    colorClickableText: Colors.blue,
+                    trimMode: TrimMode.Line,
+                    trimCollapsedText: 'Read more',
+                    trimExpandedText: 'Read less',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
-                  )
-                ],
+                    moreStyle: TextStyle(color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+                    lessStyle: TextStyle(color: Colors.blue, fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                Text(
+                  'Description Of Project',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: ReadMoreText(
+                    project.description,
+                    trimLines: 3,
+                    colorClickableText: Colors.blue,
+                    trimMode: TrimMode.Line,
+                    trimCollapsedText: 'Read more',
+                    trimExpandedText: 'Read less',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    moreStyle: TextStyle(color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+                    lessStyle: TextStyle(color: Colors.blue, fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: LineInfos(
+                    label: 'Authors',
+                    label2: 'See infos',
+                    page: ProjectDocument(projectId: project.id),
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: LineInfos(
+                  label: 'Documents',
+                  label2: 'See All',
+                  page: ProjectDocument(projectId: project.id),
+                ),
               ),
-            )
-             
 
+              SizedBox(height: 20),
 
-            
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: LineInfos(
+                  label: 'Media',
+                  label2: 'See All',
+                  page: ProjectMedia(projectId: project.id),
+                ),
+              ),
 
-                                        
-          ],
-        ),
-      ),
+              SizedBox(height: 20),
+
+               Padding(
+                padding: EdgeInsets.all(3),
+                child: LineInfosSimple(
+                  label: 'Create The',
+                  label2: '${project.createdAt.day}/' + '${project.createdAt.month}/' + '${project.createdAt.year}',
+                 
+                ),
+              ),
+
+              SizedBox(height: 20),
+
+              Padding(
+                padding: EdgeInsets.all(3),
+                child: LineInfosSimple(
+                  label: 'Start of collection',
+                  label2: '${project.dateDebutCollecte.day}/' + '${project.dateDebutCollecte.month}/' + '${project.dateDebutCollecte.year}',
+                  
+                ),
+              ),
+
+              SizedBox(height: 20),
+
+              Padding(
+                padding: EdgeInsets.all(3),
+                child: LineInfosSimple(
+                  label: 'End of collection',
+                  label2: '${project.dateFinCollecte.day}/' + '${project.dateFinCollecte.month}/' + '${project.dateFinCollecte.year}',
+                  
+                ),
+              ),
+
+              SizedBox(height: 20),
+
+              Padding(
+                padding: EdgeInsets.all(3),
+                child: LineInfosSimple(
+                  label: 'Total Amount To Finance',
+                  label2: '${project.montantTotal} FCFA',
+                 
+                ),
+              ),
+               
+                SizedBox(height: 15),
+
+                Padding(
+                  padding: EdgeInsets.only(left: 5),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        PrayerCardN(),
+                        PrayerCardN(),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }

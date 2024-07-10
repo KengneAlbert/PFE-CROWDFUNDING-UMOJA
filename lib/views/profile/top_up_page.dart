@@ -5,13 +5,11 @@ import 'package:umoja/viewmodels/finance/top_up_method_payment_viewModel.dart';
 import 'package:umoja/views/profile/top_up_method_page.dart';
 
 class TopUpPage extends ConsumerStatefulWidget {
-
   @override
   _TopUpPageState createState() => _TopUpPageState();
 }
 
 class _TopUpPageState extends ConsumerState<TopUpPage> {
-
   @override
   Widget build(BuildContext context) {
     final topUpState = ref.watch(topUpViewModelProvider);
@@ -78,15 +76,13 @@ class _TopUpPageState extends ConsumerState<TopUpPage> {
             Spacer(),
             CustomBouton(
               label: "Continue",
-              onPressed: () async{
-                Navigator.push(context, MaterialPageRoute(builder: (context) => TopUpMethodPage()));
-                // Créer l'intention de paiement ici
-                // await topUpViewModel.createPaymentIntent();
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => TopUpMethodPage(
-                //             topUpViewModel: topUpViewModel)));
+              onPressed: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TopUpMethodPage(amount: topUpState.selectedAmount ?? 100),
+                  ),
+                );
               },
             ),
             SizedBox(height: 16),
@@ -94,8 +90,6 @@ class _TopUpPageState extends ConsumerState<TopUpPage> {
         ),
       ),
     );
-  }
-
   }
 
   Widget buildAmountButton(WidgetRef ref, TopUpState topUpState, int amount) {
@@ -122,7 +116,12 @@ class _TopUpPageState extends ConsumerState<TopUpPage> {
       child: Text("\$$amount"),
     );
   }
+}
 
+
+
+
+////////////////////////////////////////////vh
 
 // class TopUpPage extends ConsumerStatefulWidget {
 //   @override

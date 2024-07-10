@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/generalLayouts/ContainerBottom.dart';
 import 'package:umoja/views/homepage/HomePage.dart';
+import 'package:umoja/views/inbox/homeS.dart';
 import 'package:umoja/views/inbox/inbox_page.dart';
 import 'package:umoja/views/my_donation/60_Light_my_donation_ist.dart';
 import 'package:umoja/views/profile/profile_page.dart';
@@ -19,7 +21,8 @@ class _HomeState extends State<Home> {
     HomePage(),
     MyDonationScreen2(),
     MyFundraising62(),
-    InboxPage(),
+    // InboxPage(),
+    HomeChat(),
     ProfilePage(),
   ];
 

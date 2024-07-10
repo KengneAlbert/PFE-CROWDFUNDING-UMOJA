@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:umoja/views/search/state/FundingCardSearchState.dart';
 
-class SectionFundingCardSearch extends StatelessWidget{
-  final List<Widget>  fundingCardSearch;
 
-    const SectionFundingCardSearch({
-      required this.fundingCardSearch,
-  });
-
+class SectionFundingCardSearch extends ConsumerWidget{
+ 
+  const SectionFundingCardSearch({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final fundingCardSearch = ref.watch(FundingCardSearchStateProvider);
     return  Column(
         children: fundingCardSearch,
       );

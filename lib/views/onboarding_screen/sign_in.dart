@@ -120,8 +120,8 @@ class _SignInPageState extends ConsumerState<SignInPage> {
                 ),
                 const SizedBox(height: 20),
                 // Bouton "Sign up"
-                isLoading
-                ? CircularProgressIndicator():
+                // isLoading
+                // ? CircularProgressIndicator():
                 CustomBouton(
                   label: 'Sign In',
                   onPressed: () async{

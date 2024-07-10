@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import '../generalLayouts/LineCathegoryButton.dart';
+import 'package:umoja/views/bookmark/layouts/LineCathegoryButton.dart';
 import 'SectionBookmarkFundingCard.dart';
-import 'layouts/BookmarkFundingCard.dart';
+
 
 class BookmarkPageContaint extends StatelessWidget {
     const BookmarkPageContaint({Key? key}) : super(key: key);
@@ -22,27 +22,7 @@ class BookmarkPageContaint extends StatelessWidget {
 
                 SizedBox(height: 25,),
 
-                SectionBookmarkFundingCard(
-                  fundCard: [
-                    BookmarkFundingCard(
-                      ImagePath:"assets/images/3.jpg",
-                      Title: "Help Orphanage Children to...",
-                      TitleFunding:"\$2,379 fund raised from \$4,200" ,
-                      ValueFunding:0.56 ,
-                      NumberDonation: "1,280 Donators",
-                      Day: "19 days left",
-                    ),
-
-                    BookmarkFundingCard(
-                      ImagePath:"assets/images/3.jpg",
-                      Title: "Help Orphanage Children to...",
-                      TitleFunding:"\$2,379 fund raised from \$4,200" ,
-                      ValueFunding:0.56 ,
-                      NumberDonation: "1,280 Donators",
-                      Day: "19 days left",
-                    ),
-                  ],
-                ),
+                SectionBookmarkFundingCard(),
 
             
               ],

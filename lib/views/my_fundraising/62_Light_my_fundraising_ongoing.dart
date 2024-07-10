@@ -254,12 +254,12 @@ class FundraisingCard extends ConsumerWidget {
               children: [
                 TextButton.icon(
                   onPressed: () {
-                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditFundraisingPage(projectId: projet.id),
-                      ),
-                    );
+                    //  Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => EditFundraisingPage(projectId: projet.id),
+                    //   ),
+                    // );
                   },
                   icon: Icon(Icons.edit, color: Colors.green),
                   label: Text('Edit', style: TextStyle(color: Colors.green)),

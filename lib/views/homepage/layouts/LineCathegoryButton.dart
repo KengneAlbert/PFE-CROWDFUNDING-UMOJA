@@ -26,7 +26,6 @@ class LineCathegoryButton extends ConsumerWidget {
                 _buildButton(ref, 'All', selectedButton),
                 _buildButton(ref, 'Agriculture', selectedButton),
                 _buildButton(ref, 'Education', selectedButton),
-                _buildButton(ref, 'Cause Sociale', selectedButton),
                 _buildButton(ref, 'Medical', selectedButton),
                 _buildButton(ref, 'Technologie', selectedButton),
               ],

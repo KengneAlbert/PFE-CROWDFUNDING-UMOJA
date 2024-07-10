@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/views/homepage/layouts/BookmarkButton.dart';
+import 'package:umoja/views/homepage/state/FavoryButtonState.dart';
 import 'package:umoja/views/homepage/state/LikeButtonState.dart';
 import 'package:umoja/views/projetdetailvote/ProjetDetailVotePage.dart';
 import '../../bookmark/BookmarkPage.dart';
@@ -53,6 +54,34 @@ class FundingCardVote extends ConsumerWidget {
 
   }
 
+    Future<void> _addFavorite(BuildContext context, WidgetRef ref) async {
+    final userId = 'bkqNhz3pigQFm05XMIOLutyivEx1'; // Remplacez par l'ID utilisateur approprié
+    final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+
+    try {
+      final userSnapshot = await userDoc.get();
+      final userData = userSnapshot.data() as Map<String, dynamic>;
+      List<dynamic> favory = userData['favory'] ?? [];
+
+      if (favory.contains(projectId)) {
+        // Remove like
+        ref.read(favoryProvider.notifier).firstFavory(projectId);
+        favory.remove(projectId);
+      } else {
+        // Add like
+        favory.add(projectId);
+      }
+
+      await userDoc.update({'favory': favory});
+
+      // Toggle the icon state
+      ref.read(favoryProvider.notifier).toggleFavory(projectId);
+    } catch (e) {
+      print('Error updating likes: $e');
+    }
+
+  }
+
   Future<void> _getlikes(BuildContext context, WidgetRef ref) async {
     final userId = 'bkqNhz3pigQFm05XMIOLutyivEx1';
     final projectDoc = FirebaseFirestore.instance.collection('Projets').doc(projectId);
@@ -63,6 +92,22 @@ class FundingCardVote extends ConsumerWidget {
     if (likes.contains(userId)) {
         // Remove like
         ref.read(likeProvider.notifier).setLike(projectId,true);
+      } else {
+        // Add like
+        //ref.read(likeProvider.notifier).setLike(projectId,false);
+      }
+  }
+
+  Future<void> _getfavories(BuildContext context, WidgetRef ref) async {
+    final userId = 'bkqNhz3pigQFm05XMIOLutyivEx1';
+    final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+    final userSnapshot = await userDoc.get();
+    final userData = userSnapshot.data() as Map<String, dynamic>;
+    List<dynamic> favory = userData['favory'] ?? [];
+
+    if (favory.contains(projectId)) {
+        // Remove like
+        ref.read(favoryProvider.notifier).setFavory(projectId,true);
       } else {
         // Add like
         //ref.read(likeProvider.notifier).setLike(projectId,false);
@@ -82,7 +127,9 @@ class FundingCardVote extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isLiked = ref.watch(likeProvider).containsKey(projectId) && ref.watch(likeProvider)[projectId]!;
+    final isFavorised = ref.watch(favoryProvider).containsKey(projectId) && ref.watch(favoryProvider)[projectId]!;
     _getlikes(context, ref);
+    _getfavories(context, ref);
     
     
     return GestureDetector(
@@ -90,7 +137,7 @@ class FundingCardVote extends ConsumerWidget {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (_, __, ___) => ProjetDetailVotePage(),
+            pageBuilder: (_, __, ___) => ProjetDetailVotePage(projectId: projectId,),
           ),
         );
       },
@@ -115,9 +162,43 @@ class FundingCardVote extends ConsumerWidget {
                       height: 160,
                       width: 290,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/images/notfoundimage.png', // Chemin vers votre image par défaut
+                          height: 160,
+                          width: 290,
+                          fit: BoxFit.cover,
+                        );
+                      },
                     ),
                   ),
-                  BookmarkButton()
+
+                  Positioned(
+                    top: 10,
+                    right: 8,
+                    child: GestureDetector(
+                      onTap: () => _addFavorite(context, ref),
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color:  isFavorised ? Color(0xFF13B156).withOpacity(1) : Color(0xFF13B156).withOpacity(1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: Icon(
+                               isFavorised ? Icons.bookmark : Icons.bookmark_border,
+                              color:  isFavorised ? Colors.white : Colors.white,
+                              size: 25,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+
                 ],
               ),
               Padding(
@@ -161,7 +242,7 @@ class FundingCardVote extends ConsumerWidget {
                             Navigator.push(
                               context,
                               PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => ProjetDetailVotePage(),
+                                pageBuilder: (_, __, ___) => ProjetDetailVotePage(projectId: projectId,),
                               ),
                             );
                           },

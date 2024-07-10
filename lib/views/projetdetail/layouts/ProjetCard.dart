@@ -8,6 +8,7 @@ class ProjetCard extends StatelessWidget {
   final double ValueFunding;
   final String NumberDonation;
   final String Day;
+  final String projectId;
 
      const ProjetCard(
       {
@@ -16,6 +17,7 @@ class ProjetCard extends StatelessWidget {
          required this.ValueFunding, 
          required this.NumberDonation, 
          required this.Day, 
+         required this.projectId, 
      }
      );
 

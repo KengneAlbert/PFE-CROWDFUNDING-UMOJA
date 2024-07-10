@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatelessWidget{
-  const SearchBar({Key? key}) : super(key: key);
+class SearchBar extends StatelessWidget {
+  final Function(String) onSearch;
 
-   @override
+  const SearchBar({Key? key, required this.onSearch}) : super(key: key);
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: 350,
@@ -21,13 +23,8 @@ class SearchBar extends StatelessWidget{
           ),
           contentPadding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
         ),
-
-        onChanged: (query) {
-          // Handle search query change
-          print('Search query: $query');
-        }
+        onChanged: onSearch,
       ),
     );
   }
 }
-  

@@ -1,6 +1,8 @@
 // lib/services/firestore_service.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:umoja/models/document_projet_model.dart';
 import 'package:umoja/models/projet_vote_model.dart';
+import 'package:umoja/models/user_model.dart';
 
 class ProjetVoteService {
 
@@ -39,7 +41,7 @@ Future<List<ProjetVoteModel>> getProjetsWithFewLikes(int maxLikes) async {
     for (var doc in snapshot.docs) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       ProjetVoteModel projet = ProjetVoteModel.fromMap(doc.id, data);
-      if (projet.likes.length <= maxLikes) {
+      if (projet.likes.isNotEmpty && projet.likes.length <= maxLikes) {
         projets.add(projet);
       }
     }
@@ -109,4 +111,91 @@ Future<int> getTotalLikes(String projectId) async {
     }
   }
 
+  //recupere les favory d'un users
+
+  Future<List<String>> getUserFavorites(String userId) async {
+    try {
+      // Récupérer le document utilisateur de Firestore
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
+
+      if (userDoc.exists) {
+        // Convertir le document en instance de UserModel
+        UserModel user = UserModel.fromMap(userDoc.data() as Map<String, dynamic>);
+
+        // Retourner la liste des favory
+        return user.favory ?? [];
+      } else {
+        print('User not found');
+        return [];
+      }
+    } catch (e) {
+      print('Error fetching user favorites: $e');
+      return [];
+    }
+  }
+
+  //recupere tous les projets en fonction de leurs ID
+
+  Future<List<ProjetVoteModel>> getProjetsByIds(List<String> ids) async {
+  List<ProjetVoteModel> projets = [];
+
+  try {
+    for (String id in ids) {
+      DocumentSnapshot docSnapshot = await FirebaseFirestore.instance.collection('Projets').doc(id).get();
+
+      if (docSnapshot.exists) {
+        projets.add(ProjetVoteModel.fromMap(docSnapshot.id, docSnapshot.data() as Map<String, dynamic>));
+      }
+    }
+  } catch (e) {
+    print('Error fetching projects: $e');
+  }
+
+  return projets;
 }
+
+//recupere un projet a partir de son ID
+
+Future<ProjetVoteModel?> getProjetById(String id) async {
+  final CollectionReference projetsCollection = FirebaseFirestore.instance.collection('Projets');
+    try {
+      DocumentSnapshot doc = await projetsCollection.doc(id).get();
+
+      if (doc.exists) {
+        return ProjetVoteModel.fromMap(doc.id, doc.data() as Map<String, dynamic>);
+      } else {
+        print('No project found for the given ID');
+        return null;
+      }
+    } catch (e) {
+      print('Error getting project by ID: $e');
+      return null;
+    }
+  }
+
+  //listes des documents 
+
+  Future<List<DocumentProjetModel>> getDocumentsByProjectId(String projectId) async {
+  try {
+    // Accédez à la collection "projets" et à la sous-collection "documentProjets"
+    final snapshot = await FirebaseFirestore.instance
+        .collection('projets')
+        .doc(projectId)
+        .collection('DocumentProjet')
+        .get();
+
+    // Transformez chaque document en un objet DocumentProjetModel
+    List<DocumentProjetModel> documents = snapshot.docs.map((doc) {
+      return DocumentProjetModel.fromMap(doc.data());
+    }).toList();
+
+    return documents;
+  } catch (e) {
+    print('Error fetching documents: $e');
+    return [];
+  }
+}
+
+}
+
+

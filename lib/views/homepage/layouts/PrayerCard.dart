@@ -28,7 +28,7 @@ class PrayerCard extends StatelessWidget {
                               Row(
                                 children: [
                                   CircleAvatar(
-                                    backgroundImage: AssetImage('assets/images/téléchargement (5).png'),
+                                    backgroundImage: AssetImage('assets/images/téléchargement (5).jfif'),
                                     
                                   ),
                                   SizedBox(width: 16),
@@ -142,7 +142,7 @@ class PrayerCard extends StatelessWidget {
                               Row(
                                 children: [
                                   CircleAvatar(
-                                    backgroundImage: AssetImage('assets/images/téléchargement (5).png'),
+                                    backgroundImage: AssetImage('assets/images/téléchargement (5).jfif'),
                                     
                                   ),
                                   SizedBox(width: 16),

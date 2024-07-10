@@ -11,8 +11,8 @@ class UserModel {
   final String? profile_picture;
   final List<String>? interests;
   final int? pin_code;
-  final bool? isOnline;
-  final List<String>? groupId;
+ 
+  
 
   UserModel({
     required this.uid,
@@ -23,11 +23,9 @@ class UserModel {
     this.gender, 
     this.age, 
     this.location, 
-    this.isOnline,
     this.profile_picture, 
     this.interests = const [], 
     this.pin_code, 
-    this.groupId,
     
   });
 
@@ -44,10 +42,12 @@ class UserModel {
       profile_picture: map['profile_picture'],
       interests: map.containsKey('interests')? map['interests'].map<String>((value) => value.toString()).toList() : <String>[],
       pin_code: map['pin_code'],
-      isOnline: map['isOnline'] ?? false,
-      groupId: List<String>.from(map['groupId']),
     );
   }
+
+  get favory => null;
+
+  get state => null;
 
   Map<String, dynamic> toMap() {
     return {
@@ -58,9 +58,7 @@ class UserModel {
       'country': country,
       'gender': gender,
       'age': age,
-      'isOnline': isOnline,
       'location': location,
-      'groupId': groupId,
       'profile_picture': profile_picture,
       'interests': interests,
       'pin_code': pin_code,

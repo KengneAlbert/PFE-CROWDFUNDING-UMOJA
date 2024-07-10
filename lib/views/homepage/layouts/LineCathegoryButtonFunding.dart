@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/models/projet_vote_model.dart';
+import 'package:umoja/services/CategoryService.dart';
+import 'package:umoja/services/ProjetVoteService.dart';
 import 'package:umoja/views/homepage/layouts/FundingCard.dart';
 import '../state/ButtonStateFunding.dart';
 import '../state/FundingCardStateFunding.dart';
-import "package:umoja/services/ProjetVoteService.dart";
-import "package:umoja/services/CategoryService.dart";
 
 class LineCathegoryButtonFunding extends ConsumerWidget {
   const LineCathegoryButtonFunding({Key? key}) : super(key: key);
@@ -25,7 +25,6 @@ class LineCathegoryButtonFunding extends ConsumerWidget {
                 _buildButton(ref, 'All', selectedButton),
                 _buildButton(ref, 'Agriculture', selectedButton),
                 _buildButton(ref, 'Education', selectedButton),
-                _buildButton(ref, 'Cause Sociale', selectedButton),
                 _buildButton(ref, 'Medical', selectedButton),
                 _buildButton(ref, 'Technologie', selectedButton),
               ],
@@ -78,7 +77,7 @@ class LineCathegoryButtonFunding extends ConsumerWidget {
   List<ProjetVoteModel> filteredProjects = [];
 
   try {
-    // Récupérer les projets avec moins de 3 likes
+    // Récupérer les projets avec plus de 3 likes
     List<ProjetVoteModel> projetsAvecPeuDeLikes = await projectService.getProjetsWithMoreThanLikes(3);
 
     if (category == 'All') {
@@ -100,13 +99,13 @@ class LineCathegoryButtonFunding extends ConsumerWidget {
 
     return displayProjects.map((project) {
       return FundingCard(
-        //projectId: project.id,
+        projectId: project.id,
         ImagePath: project.imageUrls[0],
         Title: project.titre,
         TitleFunding: '\$ ${project.montantObtenu} fund raised from \$ ${project.montantTotal}',
         ValueFunding: project.montantObtenu / project.montantTotal,
-        NumberDonation: 'Unknown Donators', // Ajustez selon votre structure de données
-        Day: '18 jun',
+        NumberDonation: '0 contributors', // Ajustez selon votre structure de données
+        Day: "${project.dateFinCollecte.difference(project.dateDebutCollecte).inDays} Day Missing",
         //LikeProjet: "Votes",
       );
     }).toList();

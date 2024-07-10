@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:umoja/models/document_projet_model.dart';
 
-class ProjetVoteModel{
+class ProjetVoteModel {
   final String id;
   final String titre;
   final String description;
@@ -14,6 +15,9 @@ class ProjetVoteModel{
   final DateTime createdAt;
   final List<String> imageUrls;
   final List<String> likes;
+  final List<String> documents;
+  final List<String> videos;
+  //final List<DocumentProjetVoteModel> documentProjet;
   //final String? proposalDocumentUrl;
   //final String? medicalDocumentUrl;
 
@@ -31,6 +35,9 @@ class ProjetVoteModel{
     required this.createdAt,
     required this.imageUrls,
     required this.likes,
+    required this.documents,
+    required this.videos,
+    //this.documentProjet = const [],
     //this.proposalDocumentUrl,
     //this.medicalDocumentUrl,
   });
@@ -49,6 +56,9 @@ class ProjetVoteModel{
       'created_at': Timestamp.fromDate(createdAt),
       'imageUrls': imageUrls,
       'likes': likes,
+      'documents': documents,
+      'videos': videos,
+      //'DocumentProjet': documentProjet.map((doc) => doc.toMap()).toList(),
       //'proposalDocumentUrl': proposalDocumentUrl,
       //'medicalDocumentUrl': medicalDocumentUrl,
       'date_debut_collecte': Timestamp.fromDate(dateDebutCollecte), // Conversion DateTime -> Timestamp
@@ -70,6 +80,8 @@ class ProjetVoteModel{
       createdAt: (map['created_at'] as Timestamp).toDate(),
       imageUrls: (map['imageUrls'] != null) ? List<String>.from(map['imageUrls']) : [],
       likes: (map['likes'] != null) ? List<String>.from(map['likes']) : [],
+      documents: (map['documents'] != null) ? List<String>.from(map['documents']) : [],
+      videos: (map['videos'] != null) ? List<String>.from(map['videos']) : [],
       //proposalDocumentUrl: map['proposalDocumentUrl'],
       //medicalDocumentUrl: map['medicalDocumentUrl'],
       dateDebutCollecte: (map['date_debut_collecte'] as Timestamp).toDate(), // Conversion Timestamp -> DateTime

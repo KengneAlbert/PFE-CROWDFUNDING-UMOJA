@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/models/projet_vote_model.dart';
+import 'package:umoja/services/CategoryService.dart';
+import 'package:umoja/services/ProjetVoteService.dart';
 import 'package:umoja/views/homepage/layouts/FundingCard.dart';
 import 'package:umoja/views/homepage/layouts/FundingCardVote.dart';
-import "package:umoja/services/ProjetVoteService.dart";
-import "package:umoja/services/CategoryService.dart";
 import '../state/ButtonStateIncomming.dart';
 import '../state/IncommingCardState.dart';
 
@@ -27,7 +27,6 @@ class LineCathegoryButtonIncomming extends ConsumerWidget {
                 _buildButton(ref, 'All', selectedButton),
                 _buildButton(ref, 'Agriculture', selectedButton),
                 _buildButton(ref, 'Education', selectedButton),
-                _buildButton(ref, 'Cause Sociale', selectedButton),
                 _buildButton(ref, 'Medical', selectedButton),
                 _buildButton(ref, 'Technologie', selectedButton),
               ],
@@ -107,7 +106,7 @@ Future<List<Widget>> _getCardsForCategory(String category) async {
         TitleFunding: '\$ ${project.montantObtenu} fund raised from \$ ${project.montantTotal}',
         ValueFunding: project.montantObtenu / project.montantTotal,
         NumberDonation: 'Unknown Donators', // Ajustez selon votre structure de données
-        LikeProjet: "Votes",
+        LikeProjet: "0 Votes",
       );
     }).toList();
   } catch (e) {

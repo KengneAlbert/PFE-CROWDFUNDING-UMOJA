@@ -17,7 +17,7 @@ class SearchPageNotFound extends StatelessWidget {
                 SizedBox(height: 20,),
 
 
-                SearchBar(),
+                //SearchBar(),
 
                 SizedBox(height: 25,),
 

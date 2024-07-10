@@ -30,70 +30,70 @@ class SlideCard extends StatelessWidget{
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/téléchargement (1).png',
+                              'assets/images/sc6.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/téléchargement (2).png',
+                              'assets/images/techn4.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/téléchargement (3).png',
+                              'assets/images/med1.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/proje.png',
+                              'assets/images/agri1.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/téléchargement (4).png',
+                              'assets/images/agri5.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/téléchargement (5).png',
+                              'assets/images/agri7.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/téléchargement (6).png',
+                              'assets/images/med4.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/téléchargement (7).png',
+                              'assets/images/agri6.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/téléchargement (8).png',
+                              'assets/images/educ10.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              'assets/images/téléchargement (9).png',
+                              'assets/images/agri8.jfif',
                               fit: BoxFit.cover,
                             ),
                           ),

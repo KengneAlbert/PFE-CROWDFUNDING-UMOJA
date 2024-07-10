@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/views/search/SearchPageContaint.dart';
 import '../generalLayouts/ContainerBottom.dart';
 import 'SearchPageNotFound.dart';
 import '../homepage/HomePage.dart';
@@ -63,7 +64,7 @@ class SearchPage extends StatelessWidget{
         ],
       ),
       
-      body: SearchPageNotFound() ,
+      body: SearchPageContaint(),
       //SearchPageContaint(),
             
       

@@ -14,13 +14,13 @@ class FundingCardStateFunding extends StateNotifier<List<Widget>> {
     try {
       List<ProjetVoteModel> projects = await projectService.getProjetsWithMoreThanLikes(3); // Récupérez tous les projets depuis votre service
       state = projects.map((project) => FundingCard(
-        //projectId: project.id,
+        projectId: project.id,
         ImagePath: project.imageUrls[0],
         Title: project.titre,
         TitleFunding: '\$ ${project.montantObtenu} fund raised from \$ ${project.montantTotal}',
         ValueFunding: project.montantObtenu / project.montantTotal,
-        NumberDonation: 'Unknown Donators', // À ajuster selon votre structure de données
-        Day: "12 day",
+        NumberDonation: '0 contributors', // À ajuster selon votre structure de données
+        Day: "${project.dateFinCollecte.difference(project.dateDebutCollecte).inDays} Day Missing",
         //LikeProjet: "Votes",
       )).toList();
     } catch (e) {

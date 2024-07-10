@@ -1,10 +1,14 @@
 //import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:umoja/views/homepage/state/FavoryButtonState.dart';
 import 'package:umoja/views/projetdetail/ProjetDetailPage.dart';
 import '../../bookmark/BookmarkPage.dart';
 
-class FundingCard extends StatelessWidget {
+class FundingCard extends ConsumerWidget {
+  final String projectId;
   final String ImagePath;
   final String Title;
   final String TitleFunding;
@@ -20,17 +24,66 @@ class FundingCard extends StatelessWidget {
          required this.ValueFunding, 
          required this.NumberDonation, 
          required this.Day, 
+         required this.projectId
      }
      );
 
+  Future<void> _addFavorite(BuildContext context, WidgetRef ref) async {
+    final userId = 'bkqNhz3pigQFm05XMIOLutyivEx1'; // Remplacez par l'ID utilisateur approprié
+    final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+
+    try {
+      final userSnapshot = await userDoc.get();
+      final userData = userSnapshot.data() as Map<String, dynamic>;
+      List<dynamic> favory = userData['favory'] ?? [];
+
+      if (favory.contains(projectId)) {
+        // Remove like
+        ref.read(favoryProvider.notifier).firstFavory(projectId);
+        favory.remove(projectId);
+      } else {
+        // Add like
+        favory.add(projectId);
+      }
+
+      await userDoc.update({'favory': favory});
+
+      // Toggle the icon state
+      ref.read(favoryProvider.notifier).toggleFavory(projectId);
+    } catch (e) {
+      print('Error updating likes: $e');
+    }
+
+  }
+
+  Future<void> _getfavories(BuildContext context, WidgetRef ref) async {
+    final userId = 'bkqNhz3pigQFm05XMIOLutyivEx1';
+    final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+    final userSnapshot = await userDoc.get();
+    final userData = userSnapshot.data() as Map<String, dynamic>;
+    List<dynamic> favory = userData['favory'] ?? [];
+
+    if (favory.contains(projectId)) {
+        // Remove like
+        ref.read(favoryProvider.notifier).setFavory(projectId,true);
+      } else {
+        // Add like
+        //ref.read(likeProvider.notifier).setLike(projectId,false);
+      }
+  }
+   
+
   @override 
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isFavorised = ref.watch(favoryProvider).containsKey(projectId) && ref.watch(favoryProvider)[projectId]!;
+    _getfavories(context, ref);
+    
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           PageRouteBuilder(
-            pageBuilder: (_, __, ___) =>   ProjetDetailPage(),
+            pageBuilder: (_, __, ___) =>   ProjetDetailPage(projectId:projectId),
           )
         );
       },
@@ -55,20 +108,21 @@ class FundingCard extends StatelessWidget {
                                           height: 160,
                                           width: 290,
                                           fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return Image.asset(
+                                              'assets/images/notfoundimage.png', // Chemin vers votre image par défaut
+                                              height: 160,
+                                              width: 290,
+                                              fit: BoxFit.cover,
+                                            );
+                                          },
                                         ),
                                       ),
                                       Positioned(
                                           top: 10,
                                           right: 8,
                                           child:GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                PageRouteBuilder(
-                                                  pageBuilder: (_, __, ___) =>   BookmarkPage(),
-                                                )
-                                              );
-                                            },
+                                            onTap: () => _addFavorite(context, ref),
                                             child:  Container(
                                               padding: EdgeInsets.all(10),
                                               decoration: BoxDecoration(
@@ -80,10 +134,10 @@ class FundingCard extends StatelessWidget {
                                                 width: 24,
                                                 height: 24,
                                                 child: Icon(
-                                                  Icons.bookmark_border,
-                                                  color: Colors.white,
-                                                  size: 25,
-                                                  ), 
+                                                    isFavorised ? Icons.bookmark : Icons.bookmark_border,
+                                                    color:  isFavorised ? Colors.white : Colors.white,
+                                                    size: 25,
+                                                  ),
                                                 ),
                                               )
                                             ),

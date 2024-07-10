@@ -52,7 +52,7 @@ class BookmarkFundingCard extends StatelessWidget {
                                           right: 8,
                                           child:GestureDetector(
                                             onTap: () {
-                                              showModalBottomSheet(context: context, builder: (ctx) => ShowBookmark());
+                                              //showModalBottomSheet(context: context, builder: (ctx) => ShowBookmark());
                                             },
                                             child:  Container(
                                               padding: EdgeInsets.all(10),

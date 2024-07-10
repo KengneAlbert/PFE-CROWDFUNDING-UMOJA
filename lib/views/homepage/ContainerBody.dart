@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/views/causesocial/CauseSocialPage.dart';
+import 'package:umoja/views/homepage/SectionCauseSocial.dart';
 import 'package:umoja/views/homepage/SectionIncommingCard.dart';
 import 'package:umoja/views/homepage/layouts/LineCathegoryButtonIncomming.dart';
+import 'package:umoja/views/projectfundraising/ProjectFundraisingPage.dart';
+import 'package:umoja/views/projectunderfunding/ProjectUnderFundingPage.dart';
+import 'package:umoja/views/projectundervote/ProjectUnderVotePage.dart';
+import 'package:umoja/views/watchImpact/WatchImpact.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 import 'layouts/WalletCard.dart';
 import 'layouts/SlideCard.dart';
@@ -9,15 +15,12 @@ import 'layouts/PrayerCard.dart';
 import 'layouts/LineInfos.dart';
 import 'layouts/LineCathegoryButton.dart';
 import 'layouts/LineCathegoryButtonFunding.dart';
-import 'layouts/FundingCard.dart';
-import 'layouts/FundingCardVote.dart';
 import 'SectionFundingCard.dart';
 import 'SectionVoteCard.dart';
 import 'SectionCardVideo.dart';
-import '../projectundervote/ProjectUnderVotePage.dart';
-import '../Comingtoanend/ComingToAnEndPage.dart';
-import '../watchImpact/WatchImpact.dart';
-import '../projectfundraising/ProjectFundraisingPage.dart';
+
+
+
 
 class ContainerBody extends StatelessWidget {
   const ContainerBody({super.key});
@@ -34,7 +37,7 @@ class ContainerBody extends StatelessWidget {
           margin: EdgeInsets.all(5),
           child: Column(
             children: [
-              WalletCard(),
+              WalletCard(userId: "0CbjSW98ghNATgBPn1ZQqDHF6yi2"),
 
               SizedBox(height: 20),
               
@@ -43,7 +46,7 @@ class ContainerBody extends StatelessWidget {
               SizedBox(height: 20),
 
               LineInfos(
-                label: "Project Under Vote",
+                label: "Projects Votes",
                 label2: "See all",
                 page: ProjectUnderVotePage(),
               ),
@@ -61,9 +64,9 @@ class ContainerBody extends StatelessWidget {
               SizedBox(height: 20),
 
              LineInfos(
-                label: "Project Under Funding",
+                label: "Projects Funding",
                 label2: "See all",
-                page: ComingToAnEndPage(),
+                page: ProjectUnderFundingPage(),
               ),
 
               SizedBox(height: 20),
@@ -75,6 +78,20 @@ class ContainerBody extends StatelessWidget {
 
  
               SectionFundingCard(),
+
+              SizedBox(height: 20),
+
+              LineInfos(
+                  label: "Social Projects",
+                  label2: "See all",
+                  page: CauseSocialPage(),
+                ),
+
+
+              SizedBox(height: 20,),
+
+              
+              SectionCauseSocial(),  
              
               
               SizedBox(height: 20,),
@@ -105,27 +122,7 @@ class ContainerBody extends StatelessWidget {
 
               SizedBox(height: 20,),
 
-              SectionCardVideo(
-                cardVideo: [
-
-                  CardVideo(
-                    pathMiniature:'assets/images/Group.png',
-                  ),
-
-                  SizedBox(width: 20,),
-
-                  CardVideo(
-                    pathMiniature:'assets/images/Group.png',
-                  ),
-
-                  SizedBox(width: 20,),
-
-                  CardVideo(
-                    pathMiniature:'assets/images/Group.png',
-                  )
-
-                ],
-              ),
+              SectionCardVideo(),
 
               SizedBox(height: 20,),
             

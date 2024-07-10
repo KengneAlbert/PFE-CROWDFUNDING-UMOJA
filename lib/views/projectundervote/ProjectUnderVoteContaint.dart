@@ -1,9 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:umoja/views/generalLayouts/FundingCardSearch.dart';
-import '../generalLayouts/LineCathegoryButton.dart';
+import 'package:umoja/views/projectundervote/SectionFundingCardSearch.dart';
+import 'package:umoja/views/projectundervote/layouts/FundingCardSearchVote.dart';
+import 'package:umoja/views/projectundervote/layouts/LineCathegoryButton.dart';
 import '../generalLayouts/SearchBar.dart';
 import '../generalLayouts/LineInfos.dart';
-import '../generalLayouts/SectionFundingCardSearch.dart';
 
 
 class ProjectUnderVoteContaint extends StatelessWidget {
@@ -40,43 +41,7 @@ class ProjectUnderVoteContaint extends StatelessWidget {
            
                 Padding(
                   padding: EdgeInsets.all(5),
-                  child: SectionFundingCardSearch(
-                    fundingCardSearch: [
-                      FundingCardSearch(
-                        ImagePath: "assets/images/3.jpg",
-                        Title: "Lorem Ipsum Dolor Sit Amet",
-                        MontFunding: "\$2,379",
-                        TotalMontFunding: "\$4,000",
-                        ValueFunding: 0.50,
-                        NumberDonation: "4,143",
-                        Day: "21",
-                      ),
-
-                      SizedBox(height: 10,),
-
-                      FundingCardSearch(
-                        ImagePath: "assets/images/3.jpg",
-                        Title: "Lorem Ipsum Dolor Sit Amet",
-                        MontFunding: "\$2,379",
-                        TotalMontFunding: "\$4,000",
-                        ValueFunding: 0.50,
-                        NumberDonation: "4,143",
-                        Day: "21",
-                      ),
-
-                      SizedBox(height: 10,),
-
-                      FundingCardSearch(
-                        ImagePath: "assets/images/3.jpg",
-                        Title: "Lorem Ipsum Dolor Sit Amet",
-                        MontFunding: "\$2,379",
-                        TotalMontFunding: "\$4,000",
-                        ValueFunding: 0.50,
-                        NumberDonation: "4,143",
-                        Day: "21",
-                      ),
-                    ],
-                  ),
+                  child: SectionFundingCardSearch(),
 
                 ),
 

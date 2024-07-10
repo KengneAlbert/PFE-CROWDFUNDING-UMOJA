@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
 
       body: ContainerBody(),
 
-      bottomNavigationBar: ContainerBottom(),
+      // bottomNavigationBar: ContainerBottom(),
 
     );
   }

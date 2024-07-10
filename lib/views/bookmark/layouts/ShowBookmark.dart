@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:umoja/views/bookmark/layouts/ActionButton.dart';
 import 'package:umoja/views/bookmark/layouts/BookmarkFundingCard.dart';
+import 'package:umoja/views/bookmark/layouts/FundingCardVote.dart';
+import 'package:umoja/views/bookmark/layouts/FundingCardVoteD.dart';
 
-class ShowBookmark extends StatelessWidget {
+class ShowBookmark extends ConsumerWidget{
 
-  const ShowBookmark ({Key? key}) : super(key: key);
+  final String projectId;
+  final String ImagePath;
+  final String Title;
+  final String TitleFunding;
+  final double ValueFunding;
+  final String NumberDonation;
+  final String LikeProjet;
+
+  const ShowBookmark({
+    required this.projectId,
+    required this.ImagePath,
+    required this.Title,
+    required this.TitleFunding,
+    required this.ValueFunding,
+    required this.NumberDonation,
+    required this.LikeProjet,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: 500,
       decoration: BoxDecoration(
@@ -29,13 +48,14 @@ class ShowBookmark extends StatelessWidget {
       child: Column(
         children: [
 
-          BookmarkFundingCard(
-            ImagePath:"assets/images/3.jpg",
-            Title: "Help Orphanage Children to...",
-            TitleFunding:"\$2,379 fund raised from \$4,200" ,
-            ValueFunding:0.56 ,
-            NumberDonation: "1,280 Donators",
-            Day: "19 days left",
+          FundingCardVoteD(
+            ImagePath: ImagePath,
+            Title: Title,
+            TitleFunding: TitleFunding ,
+            ValueFunding: ValueFunding,
+            NumberDonation: NumberDonation,
+            LikeProjet: LikeProjet,
+            projectId: projectId,
           ) ,
 
           SizedBox(height: 20,),

@@ -40,11 +40,19 @@ class FundingCardSearch extends StatelessWidget{
                   bottomLeft: Radius.circular(16),
                   bottomRight: Radius.zero,
                 ),
-                child: Image.asset(
+                child: Image.network(
                   ImagePath,
                   width: 120,
                   height: 131.53846740722656,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                                            return Image.asset(
+                                              'assets/images/notfoundimage.png', // Chemin vers votre image par défaut
+                                              height: 160,
+                                              width: 290,
+                                              fit: BoxFit.cover,
+                                            );
+                                          },
                 ),
               ),
             ),
@@ -131,7 +139,7 @@ class FundingCardSearch extends StatelessWidget{
                                 text: " "
                               ),
                               TextSpan(
-                                text: "Donators",
+                                text: "contributors",
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -160,7 +168,7 @@ class FundingCardSearch extends StatelessWidget{
                               ),
 
                               TextSpan(
-                                text: "days left",
+                                text: " Day Missing",
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400

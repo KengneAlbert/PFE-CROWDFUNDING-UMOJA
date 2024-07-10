@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/views/watchImpact/VideoPlayerPage.dart';
 
 class CardVideo extends StatelessWidget{
   
   final String pathMiniature;
+  final String video;
 
   const CardVideo({
     required this.pathMiniature,
+    required this.video,
   });
 
 
@@ -29,7 +32,7 @@ class CardVideo extends StatelessWidget{
                           ],
                         ),
                         image: DecorationImage(
-                          image: AssetImage(pathMiniature),
+                          image: NetworkImage(pathMiniature),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -41,7 +44,12 @@ class CardVideo extends StatelessWidget{
                           child: InkWell(
                             borderRadius: BorderRadius.circular(50),
                             onTap: () {
-                              // Action du bouton
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VideoPlayerPage(url: video,),
+                                ),
+                              );
                             },
                             child: Container(
                               padding: EdgeInsets.all(12),

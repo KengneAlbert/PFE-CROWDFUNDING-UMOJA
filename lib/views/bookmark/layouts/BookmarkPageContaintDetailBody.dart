@@ -25,25 +25,25 @@ class BookmarkPageContaintDetailBody extends StatelessWidget {
                 const SizedBox(height: 25,),
 
                 const SectionBookmarkFundingCard(
-                  fundCard: [
-                    BookmarkFundingCard(
-                      ImagePath:"assets/images/3.jpg",
-                      Title: "Help Orphanage Children to...",
-                      TitleFunding:"\$2,379 fund raised from \$4,200" ,
-                      ValueFunding:0.56 ,
-                      NumberDonation: "1,280 Donators",
-                      Day: "19 days left",
-                    ),
+                  // fundCard: [
+                  //   BookmarkFundingCard(
+                  //     ImagePath:"assets/images/3.jpg",
+                  //     Title: "Help Orphanage Children to...",
+                  //     TitleFunding:"\$2,379 fund raised from \$4,200" ,
+                  //     ValueFunding:0.56 ,
+                  //     NumberDonation: "1,280 Donators",
+                  //     Day: "19 days left",
+                  //   ),
 
-                    BookmarkFundingCard(
-                      ImagePath:"assets/images/3.jpg",
-                      Title: "Help Orphanage Children to...",
-                      TitleFunding:"\$2,379 fund raised from \$4,200" ,
-                      ValueFunding:0.56 ,
-                      NumberDonation: "1,280 Donators",
-                      Day: "19 days left",
-                    ),
-                  ],
+                  //   BookmarkFundingCard(
+                  //     ImagePath:"assets/images/3.jpg",
+                  //     Title: "Help Orphanage Children to...",
+                  //     TitleFunding:"\$2,379 fund raised from \$4,200" ,
+                  //     ValueFunding:0.56 ,
+                  //     NumberDonation: "1,280 Donators",
+                  //     Day: "19 days left",
+                  //   ),
+                  // ],
                 ),
 
             

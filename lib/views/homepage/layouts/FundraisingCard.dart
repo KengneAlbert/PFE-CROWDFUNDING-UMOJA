@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../bookmark/BookmarkPage.dart';
 
 class FundraisingCard extends StatelessWidget {
+  final String projectId;
   final String ImagePath;
   final String Title;
   final String TitleFunding;
@@ -17,6 +18,7 @@ class FundraisingCard extends StatelessWidget {
           required this.TitleFunding, 
           required this.ValueFunding, 
           required this.NumberDonation, 
+          required this.projectId
       }
      );
 
@@ -43,6 +45,14 @@ class FundraisingCard extends StatelessWidget {
                                           height: 160,
                                           width: 290,
                                           fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return Image.asset(
+                                              'assets/images/notfoundimage.png', // Chemin vers votre image par défaut
+                                              width: 160,
+                                              height: 290,
+                                              fit: BoxFit.cover,
+                                            );
+                                          },
                                         ),
                                       ),
                                       Positioned(
