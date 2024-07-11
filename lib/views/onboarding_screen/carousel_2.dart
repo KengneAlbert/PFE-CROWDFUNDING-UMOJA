@@ -38,7 +38,7 @@ class _OnboardingPageState extends State<OnboardingPageTwo> {
               ),
               const SizedBox(height: 15),
               const Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
+                "Donnez vie à vos rêves. Le financement participatif est là.",
                 textAlign: TextAlign.center,
               ),
 

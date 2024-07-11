@@ -85,6 +85,7 @@ class FundraisingList extends ConsumerWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Tout (25)'),

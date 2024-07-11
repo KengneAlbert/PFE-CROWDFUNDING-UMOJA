@@ -10,11 +10,11 @@ class AuthViewModel extends StateNotifier<UserModel?> {
 
    AuthViewModel() : super(null) {
    _authService.userStream.listen((user) =>
-    user !=null ? _databaseService.fetchOne("users/${user.uid}").then((value) => state = value !=null? UserModel.fromMap(value) : null ): state = null);
+    user !=null ? _databaseService.fetchOne("users/${user.uid}").then((value) => state = value !=null? UserModel.fromMap(value,user.uid) : null ): state = null);
   }
 
   bool isLoading = false;
-  bool get isAuthenticated => state != null;
+  // bool get isAuthenticated => state != null;
 
   Future<void> signIn(String email, String password) async {
     try {
@@ -44,12 +44,12 @@ class AuthViewModel extends StateNotifier<UserModel?> {
 
   Future<UserModel?> fetchOneUser(String uid)async{
     final userMap = await _databaseService.fetchOne("users/$uid");
-    return userMap != null ? UserModel.fromMap(userMap) : null ;
+    return userMap != null ? UserModel.fromMap(userMap,uid) : null ;
   }
 
   Future<List<UserModel?>> fetchAllUser() async{
     final userMapList = await _databaseService.fetchAll("users");
-    final UserModelList = userMapList.map((map) => map != null ? UserModel.fromMap(map) : null).toList();
+    final UserModelList = userMapList.map((map) => map != null ? UserModel.fromMap(map, map['id']) : null).toList();
     return UserModelList;
   }
 

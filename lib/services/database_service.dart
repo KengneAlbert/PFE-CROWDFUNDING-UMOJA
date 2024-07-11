@@ -30,7 +30,10 @@ class DatabaseService {
   Future<List<Map<String,dynamic>?>> fetchAll(String collectionPath) async{
     final collection = instance.collection(collectionPath);
     final snapshot = await collection.get();
-    return snapshot.docs.map((e) => e.data()).toList();
+    return snapshot.docs.map((e){
+      final map= e.data();
+      map['id'] = e.id;
+       }).toList();
   }
 
   Future<List<Map<String, dynamic>?>> fetchByCategorie(String collectionPath, int categorieId) async {

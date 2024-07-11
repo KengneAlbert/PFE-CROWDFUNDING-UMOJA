@@ -107,7 +107,7 @@ class LineCathegoryButton extends ConsumerWidget {
           Title: project.titre,
           TitleFunding: '\$ ${project.montantObtenu} fund raised from \$ ${project.montantTotal}',
           ValueFunding: project.montantObtenu / project.montantTotal,
-          NumberDonation: 'Unknown Donators', // Ajustez selon votre structure de données
+          NumberDonation: '0 Donators', // Ajustez selon votre structure de données
           LikeProjet: "$votes Votes",
         );
       }).toList());

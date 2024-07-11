@@ -11,19 +11,25 @@ class HomeChat extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authViewModel = ref.watch(authViewModelProvider);
-    final currentUser = authViewModel?.state!;
+    final currentUser = authViewModel?.state;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Umoja'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              ref.read(authViewModelProvider.notifier).signOut();
-            },
-            icon: const Icon(Icons.logout),
-          ),
-        ],
+        leading: IconButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Color(0xFF13B156)),
+        ),
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       ref.read(authViewModelProvider.notifier).signOut();
+        //     },
+        //     icon: const Icon(Icons.logout),
+        //   ),
+        // ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('users').snapshots(),
@@ -36,8 +42,8 @@ class HomeChat extends ConsumerWidget {
           }
 
           final users = snapshot.data!.docs
-              .map((doc) => UserModel.fromMap(doc.data() as Map<String, dynamic>))
-              .where((user) => user.uid != currentUser.uid)
+              .map((doc) => UserModel.fromMap(doc.data() as Map<String, dynamic>, doc.id))
+              .where((user) => user.uid != currentUser?.uid)
               .toList();
 
           return ListView.builder(

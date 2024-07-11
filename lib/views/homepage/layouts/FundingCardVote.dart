@@ -91,7 +91,7 @@ class FundingCardVote extends ConsumerWidget {
 
     if (likes.contains(userId)) {
         // Remove like
-        ref.read(likeProvider.notifier).setLike(projectId,true);
+        // ref.read(likeProvider.notifier).setLike(projectId,true);
       } else {
         // Add like
         //ref.read(likeProvider.notifier).setLike(projectId,false);
@@ -107,7 +107,7 @@ class FundingCardVote extends ConsumerWidget {
 
     if (favory.contains(projectId)) {
         // Remove like
-        ref.read(favoryProvider.notifier).setFavory(projectId,true);
+        // ref.read(favoryProvider.notifier).setFavory(projectId,true);
       } else {
         // Add like
         //ref.read(likeProvider.notifier).setLike(projectId,false);

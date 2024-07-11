@@ -29,7 +29,7 @@ class UserService {
       }
 
       // Create user model from registrationData
-      UserModel userModel = UserModel.fromMap({...registrationData, 'uid': uid});
+      UserModel userModel = UserModel.fromMap({...registrationData, 'uid': uid}, uid);
 
       // Save userModel to Firestore
       await _firestore

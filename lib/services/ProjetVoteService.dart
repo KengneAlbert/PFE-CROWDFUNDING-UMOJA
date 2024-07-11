@@ -120,7 +120,7 @@ Future<int> getTotalLikes(String projectId) async {
 
       if (userDoc.exists) {
         // Convertir le document en instance de UserModel
-        UserModel user = UserModel.fromMap(userDoc.data() as Map<String, dynamic>);
+        UserModel user = UserModel.fromMap(userDoc.data() as Map<String, dynamic>, userId);
 
         // Retourner la liste des favory
         return user.favory ?? [];

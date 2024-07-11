@@ -22,7 +22,7 @@ class FundingCardStateNotifier extends StateNotifier<List<Widget>> {
             Title: project.titre,
             TitleFunding: '\$ ${project.montantObtenu} fund raised from \$ ${project.montantTotal}',
             ValueFunding: project.montantObtenu / project.montantTotal,
-            NumberDonation: 'Unknown Donators', // À ajuster selon votre structure de données
+            NumberDonation: '0 Donators', // À ajuster selon votre structure de données
             LikeProjet: "$votes",
          );
       }));

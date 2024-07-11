@@ -54,7 +54,8 @@ class Umoja extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ProviderScope(child:
+     MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
@@ -62,7 +63,7 @@ class Umoja extends StatelessWidget {
       // home: SignUpPage(),
       initialRoute: AppRoutes.FirsRoute,
       routes: AppRoutes.routes,
-    );
+    ),);
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umoja/main.dart';
 import 'package:umoja/views/causesocial/CauseSocialPage.dart';
 import 'package:umoja/views/homepage/SectionCauseSocial.dart';
 import 'package:umoja/views/homepage/SectionIncommingCard.dart';
@@ -17,16 +18,23 @@ import 'layouts/LineCathegoryButton.dart';
 import 'layouts/LineCathegoryButtonFunding.dart';
 import 'SectionFundingCard.dart';
 import 'SectionVoteCard.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'SectionCardVideo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
-
-
-class ContainerBody extends StatelessWidget {
+class ContainerBody extends ConsumerStatefulWidget {
   const ContainerBody({super.key});
 
   @override
+  _ContainerBodyState createState() => _ContainerBodyState();
+}
+
+class _ContainerBodyState extends ConsumerState<ContainerBody> {
+  @override
   Widget build(BuildContext context) {
+    final user = ref.watch(authViewModelProvider);
+    String uid = FirebaseAuth.instance.currentUser!.uid;
 
     return Container(
     color: Colors.white,  
@@ -37,7 +45,7 @@ class ContainerBody extends StatelessWidget {
           margin: EdgeInsets.all(5),
           child: Column(
             children: [
-              WalletCard(userId: "0CbjSW98ghNATgBPn1ZQqDHF6yi2"),
+              WalletCard(userId: uid),
 
               SizedBox(height: 20),
               

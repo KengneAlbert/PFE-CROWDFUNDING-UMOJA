@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
+import 'package:umoja/views/profile/top_up_page.dart';
 
 
 class ProjetCard extends StatelessWidget {
@@ -207,7 +208,12 @@ class ProjetCard extends StatelessWidget {
 
                                         Center(
                                           child: ElevatedButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => TopUpPage()));
+                                            },
                                             child: Text(
                                               'Donate Now',
                                               style: TextStyle(
