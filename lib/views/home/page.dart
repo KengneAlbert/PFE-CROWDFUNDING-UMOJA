@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_today,),
-              label: 'Calendar',
+              label: 'projets',
               // Background color for selected item
               backgroundColor: const Color(0xFF13B156), 
             ),

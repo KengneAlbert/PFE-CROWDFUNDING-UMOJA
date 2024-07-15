@@ -12,20 +12,11 @@ class BookmarkPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) =>  HomePage()
-                )
-              );
-            },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.green,
-            size: 24,
-          ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF13B156),),
         ),
         title: Text(
           'Bookmark',
@@ -68,7 +59,7 @@ class BookmarkPage extends StatelessWidget{
       
       
 
-      bottomNavigationBar: ContainerBottom(),
+      // bottomNavigationBar: ContainerBottom(),
       
     );
   }

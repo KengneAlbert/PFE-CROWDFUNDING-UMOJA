@@ -60,7 +60,6 @@ class Umoja extends StatelessWidget {
         primarySwatch: Colors.blue
       ),
       debugShowCheckedModeBanner: false,
-      // home: SignUpPage(),
       initialRoute: AppRoutes.FirsRoute,
       routes: AppRoutes.routes,
     ),);
